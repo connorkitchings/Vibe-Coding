@@ -1,0 +1,9 @@
+[project]
+name = "vibe-coding"
+version = "0.1.0"
+description = "Vibe Coding Project"
+authors = ["Your Name <connor.kitchings@gmail.com>"]
+dependencies = []
+
+[tool.uv]
+# uv-specific config can go here if needed

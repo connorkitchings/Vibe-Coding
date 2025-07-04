@@ -1,6 +1,7 @@
 # Unified Vibe‑Coding Project Blueprint
 
-A flexible, structured workflow to take any idea from spark to delivery, while preserving creative momentum and AI‑powered efficiency.
+A flexible, structured workflow to take any idea from spark to delivery,
+while preserving creative momentum and AI-powered efficiency.
 
 ---
 
@@ -22,13 +23,15 @@ A flexible, structured workflow to take any idea from spark to delivery, while p
    - Clear MVP defined (1–2 sentences)
    - Can list at least 2 ways to pivot if stuck
    - No "unknown-unknowns" in risk list
-   - *Exit Criteria: You can state why you are building this, what success looks like, and why now is the right time.*
+   - *Exit Criteria: You can state why you are building this, what success looks like,
+     and why now is the right time.*
 
 ---
 
 ## Phase 1: High‑Level Planning (Core Docs System)
 
-Use three living files to capture decisions, tasks, and learnings. Store them in your repo’s `/docs` or root folder. (Consider naming: `prd.md`, `backlog.md`, `dev_log.md`.)
+Use three living files to capture decisions, tasks, and learnings.
+Store them in your repo's `/docs` or root folder. (Consider naming: `prd.md`, `backlog.md`, `dev_log.md`.)
 
 ### 1. PRODUCT REQUIREMENTS (`prd.md`)
 
@@ -80,23 +83,13 @@ DECISIONS:
   - Chose [library] over [alternative] because… (link commit hash)
 NEXT UP:
   - ...
-```
-
-**Context Feeding:** At each session start, paste last 2–3 entries into your AI assistant.
-
----
-
-## Phase 2: Conversational Requirements
-
-- **User Journeys:** Ask AI: “Write 3 user stories for my PRD.”
-- **Risk Workshop:** “Name 5 ways this could break or be misused.”
-- **Constraint Map:** List what must stay vs. what can flex.
-
-**Exit Criteria:**
 
 - User stories written for each main persona
 - Top 3 risks and mitigations listed
+- [ ] Data privacy/PII handling requirements documented in 
+data_dictionary/README.md
 - Constraints and flexibilities documented
+```
 
 ---
 
@@ -127,7 +120,8 @@ For each task:
    - Run static analysis (ruff/flake8/eslint)
    - Add/update minimal unit test
    - Ensure pre-commit hooks pass
-3. **Test & Tweak:** Break it—invalid inputs, edge cases. Ask AI: “Create tests covering happy path + 3 edge cases for [module].”
+3. **Test & Tweak:** Break it—invalid inputs, edge cases. Ask AI:
+   “Create tests covering happy path + 3 edge cases for [module].”
 4. **Log Learnings:** Update dev_log.md with insights.
 
 **Multi-AI Tip:** If stuck, swap models (GPT, Claude, Perplexity) on the same prompt and compare.
@@ -140,7 +134,8 @@ For each task:
 - **AI-Enhanced Testing:** “Generate 10 test cases for [module].”
 - **Deployment Lite:** Local or free hosting (Heroku, Vercel, Colab)
 - **Sustain Plan:** List monthly health-check tasks
-- **CI/CD:** Set up free GitHub Actions template (`python.yml`/`node.yml`) running tests + linter on every push
+- [ ] Deployment automated (GitHub Actions) template (`python.yml`/`node.yml`)
+      running tests + linter on every push
 
 **MVP Checklist:**
 
@@ -159,7 +154,8 @@ For each task:
 - **Context Discipline:** Copy/paste only what’s relevant
 - **AI as Co-Pilot, Not Dictator:** Always validate hallucinations
 
-Use this blueprint as your adaptable backbone—tweak phases, names, and deliverables to match your personal rhythm and project scale. Happy vibe-coding! 🚀
+Use this blueprint as your adaptable backbone—tweak phases, names, and deliverables to match your personal
+rhythm and project scale. Happy vibe-coding! 🚀
 
 ---
 

@@ -28,7 +28,6 @@ project_root/
 │   └── dev_log.md      # Implementation log
 ├── src/                # Source code
 ├── tests/              # Test files
-├── requirements.txt    # Dependencies
 ├── .pre-commit-config.yaml
 ├── pyproject.toml      # Project config
 └── README.md
@@ -66,10 +65,11 @@ repos:
     rev: master
     hooks:
       - id: safety
-  - repo: https://github.com/trailofbits/pip-audit
-    rev: v2.6.1
-    hooks:
-      - id: pip-audit
+  # pip-audit replaced by uv audit (https://github.com/astral-sh/uv)
+  # To audit dependencies, use:
+  #   uv audit
+  # Optionally, add a custom script or pre-commit hook for uv audit if desired.
+
 ```
 
 ### 2. Testing Requirements
@@ -87,7 +87,12 @@ repos:
 - **Classes:** Max 200 lines, clear purpose documented
 - **Files:** Max 500 lines, split if larger
 - **Line Length:** PEP 8 ≤ 100 chars (ruff default)
-- **Dependencies:** Pin major versions, document why each is needed
+- **Dependencies:** Use [uv](https://github.com/astral-sh/uv) for dependency management. Pin major versions,
+  document why each is needed.
+  - Install dependencies: `uv pip install -r pyproject.toml`
+  - Create virtual environment: `uv venv .venv`
+  - Audit dependencies: `uv audit`
+  - (If you don't have uv: `pip install uv` or see uv install instructions)
 
 ---
 
@@ -243,4 +248,6 @@ repos:
 
 ---
 
-*Remember: These rules are guidelines to maintain quality and momentum. Adapt them based on project needs, but always maintain the core principle of balancing creativity with sustainability.*
+*Remember: These rules are guidelines to maintain quality and momentum. Adapt them based on project
+needs, but always maintain the core principle of balancing creativity with sustainability.
+This ensures a healthy project and a happy developer.*
