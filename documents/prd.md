@@ -27,10 +27,41 @@
 - [Usage criteria]
 - [Performance targets]
 
+## SYSTEM DIAGRAM
+
+```ascii
+# Insert ASCII diagram of system components here
+# Example:
++-------------+      +------------+     +------------+
+| Web UI      | ---> | API Server | --> | Database   |
++-------------+      +------------+     +------------+
+```
+
+## DATA FLOW
+
+```ascii
+# Insert data flow diagram here
+# Example:
+[User Input] --> [Validation] --> [Processing] --> [Storage]
+```
+
 ## EDGE CASES & RISKS
 
 - [Describe edge cases and risks identified]
 
+## DEPENDENCY GRAPH
+
+- Feature A depends on: [components/libraries]
+- Feature B depends on: [components/libraries]
+
 ## DECISION LOG
 
-- [Link to dev_log.md for rationale]
+| Date | Decision | Alternatives | Rationale | Commit/PR | Reversible? |
+|------|----------|--------------|-----------|-----------|-------------|
+| YYYY-MM-DD | [Decision made] | [Other options] | [Why] | [Link] | Yes/No |
+
+## VERSION HISTORY
+
+| Version | Date | Summary of Changes | Author |
+|---------|------|---------------------|--------|
+| v0.1 | YYYY-MM-DD | Initial draft | [Name] |
