@@ -30,8 +30,8 @@ while preserving creative momentum and AI-powered efficiency.
 
 ## Phase 1: High‑Level Planning (Core Docs System)
 
-Use three living files to capture decisions, tasks, and learnings.
-Store them in your repo's `/docs` or root folder. (Consider naming: `prd.md`, `backlog.md`, `dev_log.md`.)
+Use three living files—PRD, implementation schedule, and dev log—to capture decisions, tasks, and learnings.
+Place them in `/docs` or the repo root (`prd.md`, `implementation_schedule.md`, `dev_log.md`).
 
 ### 1. PRODUCT REQUIREMENTS (`prd.md`)
 
@@ -50,20 +50,15 @@ SUCCESS METRICS:
   - Performance targets
 ```
 
-### 2. TASK BREAKDOWN (`backlog.md`)
+### 2. IMPLEMENTATION SCHEDULE (`implementation_schedule.md`)
 
 ```markdown
-SPRINT (1 week):
-  [ ] Task 1 (2h)
-  [ ] Task 2 (4h)
-BACKLOG:
-  - ...
-DONE:
-  - [DATE] Completed Task 1: Notes…
-BLOCKERS:
-  - Task X blocked by [issue]
-PARKING LOT:
-  - [DATE] Discarded idea: [short note]
+| ID | Deliverable | Owner | Est (h) | Start | End | Status |
+|----|-------------|-------|---------|-------|-----|--------|
+| 1  | MVP endpoint | @dev | 4 | 2025-07-15 | 2025-07-15 | ⬜ Todo |
+| 2  | UI stub      | @dev | 6 | 2025-07-15 | 2025-07-16 | ⬜ Todo |
+
+Legend: ⬜ Todo · 🔄 In-Progress · ✅ Done · ⏸ Blocked
 ```
 
 **Definition of Done:** Each task must have: tests pass, lint clean, docs touched if needed.

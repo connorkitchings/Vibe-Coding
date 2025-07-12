@@ -1,3 +1,0 @@
-Field,Type,Description,Example
-user_id,int,Unique identifier for user,42
-created_at,datetime,Timestamp when record was created,2022-01-01 12:00:00

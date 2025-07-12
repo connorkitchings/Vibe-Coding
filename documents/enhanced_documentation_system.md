@@ -1,6 +1,6 @@
 # Enhanced Documentation System
 
-This document proposes improvements to the current three-document system (PRD, backlog,
+This document proposes improvements to the current three-document system (PRD, implementation schedule,
 dev_log) to create a more integrated, contextual approach to project documentation.
 
 ## Current System Overview
@@ -8,7 +8,7 @@ dev_log) to create a more integrated, contextual approach to project documentati
 The existing three-document system provides a solid foundation:
 
 - **PRD**: Product requirements and high-level goals
-- **Backlog**: Task tracking and sprint management
+- **Implementation Schedule**: Task tracking and milestone management
 - **Dev Log**: Session records and implementation notes
 
 ## Enhanced System Architecture
@@ -21,8 +21,8 @@ The existing three-document system provides a solid foundation:
    - Decision tracking table
    - Version history
 
-2. **Backlog** - Execution & Planning
-   - Sprint planning and tracking
+2. **Implementation Schedule** (`implementation_schedule.md`) – Execution & Planning
+   - Deliverable planning, ownership, and tracking
    - Task breakdown with estimates
    - Session continuity notes
    - Retrospective data
@@ -109,7 +109,7 @@ Consider these lightweight tools to enhance document connectivity:
 
 1. Open `index.md` dashboard
 2. Review last session handoff in `dev_log.md`
-3. Check active sprint in `backlog.md`
+3. Check active sprint in `implementation_schedule.md`
 4. Verify quality metrics in `quality_gates.md`
 5. Set session goals based on priorities
 
@@ -119,12 +119,12 @@ When switching context during a session:
 
 1. Add quick handoff note in `dev_log.md` with `[BL-task:CurrentTask]`
 2. Document any insights in `knowledge_base.md` if applicable
-3. Update task status in `backlog.md`
+3. Update task status in `implementation_schedule.md`
 
 ### Session End Protocol
 
 1. Complete `dev_log.md` entry with full handoff notes
-2. Update `backlog.md` with progress and next steps
+2. Update `implementation_schedule.md` with progress and next steps
 3. If completing a feature, verify quality gates in `quality_gates.md`
 4. If applicable, update `knowledge_base.md` with patterns
 5. If needed, update `PRD.md` with any decision changes
@@ -134,7 +134,7 @@ When switching context during a session:
 ```ascii
 ┌─────────────────────────┐       ┌─────────────────────────┐
 │                         │       │                         │
-│        PRD.md           │◄─────►│       backlog.md        │
+│        PRD.md           │◄─────►│ implementation_schedule.md │
 │    (What & Why)         │       │     (When & Who)        │
 │                         │       │                         │
 └───────────┬─────────────┘       └───────────┬─────────────┘
@@ -187,7 +187,7 @@ def extract_last_dev_log_entry():
 
 def extract_sprint_tasks():
     """Extract current sprint tasks from backlog."""
-    with open('documents/backlog.md', 'r') as f:
+    with open('documents/implementation_schedule.md', 'r') as f:
         content = f.read()
 
     sprint_match = re.search(r'## ACTIVE SPRINT:.*?## ', content, re.DOTALL)
@@ -286,7 +286,7 @@ def validate_references():
     """Validate all cross-document references."""
     doc_paths = {
         'prd': 'documents/prd.md',
-        'backlog': 'documents/backlog.md',
+        'backlog': 'documents/implementation_schedule.md',
         'devlog': 'documents/dev_log.md',
         'kb': 'documents/knowledge_base.md',
         'qg': 'documents/quality_gates.md'
@@ -318,7 +318,7 @@ def validate_references():
                 if date not in [d for d, _ in prd_decisions]:
                     invalid_refs[doc_type].append(f"PRD-decision:{date}")
 
-    # Backlog tasks referenced should exist in backlog
+    # Implementation Schedule tasks referenced should exist in backlog
     backlog_tasks = set(re.findall(r'- \[ \] \*\*\[.*?\]\*\*: (.*?) \(', docs['backlog']))
     for doc_type, refs in references.items():
         if doc_type != 'backlog':

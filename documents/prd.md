@@ -8,6 +8,8 @@
 
 (1–2 sentences summarizing the purpose and outcome)
 
+*For architecture, tech stack, and setup details, see [`project_context.md`](project_context.md).*
+
 ## USERS
 
 - [Primary persona(s)]
@@ -23,6 +25,8 @@
 - [Items/features not included]
 
 ## SUCCESS METRICS
+
+- Deliverables tracked and up-to-date in `implementation_schedule.md`
 
 - [Usage criteria]
 - [Performance targets]

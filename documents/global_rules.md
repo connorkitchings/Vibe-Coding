@@ -24,7 +24,7 @@ Every project must have:
 project_root/
 ├── docs/
 │   ├── prd.md          # Product Requirements Document
-│   ├── backlog.md      # Task management
+│   ├── implementation_schedule.md # Task management
 │   └── dev_log.md      # Implementation log
 ├── src/                # Source code
 ├── tests/              # Test files
@@ -36,7 +36,7 @@ project_root/
 ### 2. Documentation Standards
 
 - **PRD:** Must fit on one screen, update before any major pivot
-- **Backlog:** Weekly sprint cycles, tasks estimated in hours (≤8h each)
+- **Implementation Schedule:** Weekly updates; deliverables estimated in hours (≤8h each)
 - **Dev Log:** Update after every coding session, include AI prompts that worked
 - **README:** Include setup instructions, core features, and contribution guidelines
 
@@ -101,7 +101,7 @@ repos:
 ### 1. Session Startup Protocol
 
 1. Load last 2 dev_log entries
-2. Review current sprint in backlog.md
+2. Review current deliverables in implementation_schedule.md
 3. Set 2-hour focus blocks with 15-min breaks
 4. Update dev_log before ending session
 
@@ -155,14 +155,14 @@ repos:
 ### Phase 1: Setup (2 hours max)
 
 - [ ] Project structure created
-- [ ] Core docs (PRD, backlog, dev_log) initialized
+- [ ] Core docs (PRD, implementation schedule, dev_log) initialized
 - [ ] Development environment configured
 - [ ] First commit pushed with project skeleton
 
 ### Phase 2-4: Development Sprints (weekly cycles)
 
 - [ ] Sprint planning: tasks ≤8h each
-- [ ] Daily progress: update backlog status
+- [ ] Daily progress: update implementation schedule status
 - [ ] Sprint review: what worked/didn't work
 - [ ] Sprint retrospective: update dev_log with learnings
 
@@ -187,14 +187,14 @@ repos:
 
 ### Technical Debt Spike
 
-1. Identify and document the debt item in dev_log and backlog
+1. Identify and document the debt item in dev_log and implementation schedule
 2. Time-box the fix (e.g., 2 hours max)
-3. If not resolved, log a ticket in backlog and revisit next sprint
+3. If not resolved, log a ticket in implementation schedule and revisit next sprint
 
 ### When Losing Motivation
 
 1. Review original PRD - why did you start?
-2. Celebrate completed tasks in backlog
+2. Celebrate completed tasks recorded in implementation schedule
 3. Reduce scope to regain momentum
 4. Take a longer break (1-2 days)
 5. Consider pivoting if passion is gone
@@ -203,7 +203,7 @@ repos:
 
 1. Update PRD immediately
 2. Assess impact on current sprint
-3. Re-prioritize backlog
+3. Re-prioritize implementation schedule
 4. Document decision rationale
 5. Communicate changes if team project
 
