@@ -1,4 +1,3 @@
-
 ## Developer Session Entry Template
 
 ### [YYYY-MM-DD]
@@ -79,6 +78,72 @@
 
 - Environment setup commands.
 - How to install dependencies and run the project.
+
+## Version Control Best Practices
+
+### Branch Naming Convention
+
+```bash
+# Feature development
+feature/user-auth
+feature/payment-integration
+
+# Bug fixes
+bugfix/login-validation
+bugfix/memory-leak-fix
+
+# Hotfixes for production
+hotfix/security-patch
+hotfix/critical-bug
+
+# Release preparation
+release/v1.2.0
+```
+
+### Commit Message Format
+
+```bash
+# Format: <type>: <description>
+feat: add user authentication endpoint
+fix: resolve login validation bug
+docs: update API documentation
+test: add user registration tests
+refactor: simplify database connection logic
+style: fix code formatting issues
+chore: update dependencies
+```
+
+### Code Review Process (Solo Projects)
+
+#### AI-Assisted Review Checklist
+
+- [ ] **Security Review:** "Review this code for security vulnerabilities"
+- [ ] **Performance Review:** "Identify potential performance bottlenecks"
+- [ ] **Code Quality:** "Review for bugs, readability, and maintainability"
+- [ ] **Test Coverage:** "Suggest additional test cases for this code"
+
+#### Manual Review Checklist
+
+- [ ] Error handling implemented
+- [ ] Input validation present
+- [ ] Code follows project style guide
+- [ ] Documentation updated
+- [ ] No hardcoded secrets or credentials
+- [ ] Edge cases considered
+
+#### Review Prompts
+
+```markdown
+# Security Review
+"Review this [language] code for security vulnerabilities, focusing on input validation,
+authentication, and data sanitization: [code]"
+
+# Performance Review
+"Analyze this code for performance issues and suggest optimizations: [code]"
+
+# Code Quality Review
+"Review this code for bugs, readability issues, and suggest improvements: [code]"
+```
 
 ## Coding Standards
 

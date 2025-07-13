@@ -1,253 +1,295 @@
-# Global Windsurf Rules for Vibe-Coding Projects
+# Enhanced Vibe‑Coding Project Blueprint
 
-## Core Development Philosophy
-
-**Primary Goal:** Maintain creative momentum while ensuring code quality and project sustainability.
-
-**Stack Preferences:**
-
-- **Backend/Scripts:** Python 3.9+ (prefer 3.11+ for performance)
-- **Web Apps:** Streamlit for rapid prototypes, React for production-ready UIs
-- **Data:** Pandas, SQLite for local, PostgreSQL for production
-- **Testing:** pytest with coverage reporting
-- **Linting:** ruff (replaces black + flake8 + isort)
+A flexible, structured workflow to take any idea from spark to delivery,
+while preserving creative momentum and AI-powered efficiency.
 
 ---
 
-## Project Structure Rules
+## Phase 0: Idea Validation & Scope Check
 
-### 1. Mandatory File Structure
+1. **Rapid Feasibility Audit** (5–10 min)
+   - **Problem Fit**: Does it solve something you genuinely care about?
+   - **MVP Window**: Can you deliver a usable prototype in 2–4 weeks (part‑time)?
+   - **Sustained Engagement**: Will you stay excited after week 2?
+   - **Learning Benefit**: Does it stretch your skills just enough?
 
-Every project must have:
+2. **AI‑Driven Stress Test**
+   - Prompt AI:
+     - "What are the hardest parts of building [idea]?"
+     - "What simpler alternatives or pivots exist?"
+     - "Name 3 reasons this might fail."
 
-```plaintext
-project_root/
-├── docs/
-│   ├── prd.md          # Product Requirements Document
-│   ├── implementation_schedule.md # Task management
-│   └── dev_log.md      # Implementation log
-├── src/                # Source code
-├── tests/              # Test files
-├── .pre-commit-config.yaml
-├── pyproject.toml      # Project config
-└── README.md
+3. **Go/No‑Go Checklist**
+   - Clear MVP defined (1–2 sentences)
+   - Can list at least 2 ways to pivot if stuck
+   - No "unknown-unknowns" in risk list
+   - *Exit Criteria: You can state why you are building this, what success looks like,
+     and why now is the right time.*
+
+---
+
+## Phase 1: High‑Level Planning (Core Docs System)
+
+Use three living files—PRD, implementation schedule, and dev log—to capture decisions, tasks, and learnings.
+Place them in `/docs` or the repo root (`prd.md`, `implementation_schedule.md`, `dev_log.md`).
+
+### 1. PRODUCT REQUIREMENTS (`prd.md`)
+
+```markdown
+PROJECT: [Name]
+GOAL: (1–2 sentences)
+USERS: [primary persona]
+CORE FEATURES:
+  - Feature A (must-have)
+  - Feature B (must-have)
+  - Feature C (nice-to-have)
+OUT OF SCOPE:
+  - ...
+SUCCESS METRICS:
+  - Usage criteria
+  - Performance targets
 ```
 
-### 2. Documentation Standards
+### 2. ENHANCED IMPLEMENTATION SCHEDULE (`implementation_schedule.md`)
 
-- **PRD:** Must fit on one screen, update before any major pivot
-- **Implementation Schedule:** Weekly updates; deliverables estimated in hours (≤8h each)
-- **Dev Log:** Update after every coding session, include AI prompts that worked
-- **README:** Include setup instructions, core features, and contribution guidelines
+```markdown
+| ID | Deliverable | Owner | Est (h) | Dependencies | Risk | Start | End | Status | DoD | Rollback |
+|----|-------------|-------|---------|--------------|------|-------|-----|--------|-----|----------|
+| 1  | MVP endpoint | @dev | 4 | - | L | 2025-07-15 | 2025-07-15 | ⬜ Todo | Tests pass, API docs updated | Use mock data |
+| 2  | UI stub      | @dev | 6 | ID:1 | M | 2025-07-15 | 2025-07-16 | ⬜ Todo | Components render, basic interactions work | Static mockup |
+| 3  | User test 1  | @dev | 2 | ID:2 | L | 2025-07-16 | 2025-07-16 | ⬜ Todo | 3 users test core flow, feedback documented | Skip if timeline tight |
 
----
-
-## Code Quality Gates
-
-### 1. Pre-Commit Hooks (Non-Negotiable)
-
-```yaml
-# .pre-commit-config.yaml
-repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.6
-    hooks:
-      - id: ruff
-        args: [--fix]
-      - id: ruff-format
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
-    hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-yaml
-  - repo: https://github.com/pyupio/safety-db
-    rev: master
-    hooks:
-      - id: safety
-  # pip-audit replaced by uv audit (https://github.com/astral-sh/uv)
-  # To audit dependencies, use:
-  #   uv audit
-  # Optionally, add a custom script or pre-commit hook for uv audit if desired.
-
+Legend: ⬜ Todo · 🔄 In-Progress · ✅ Done · ⏸ Blocked
+Risk: H(igh) · M(edium) · L(ow)
 ```
 
-### 2. Testing Requirements
+**Definition of Done (Global):** Tests pass, lint clean, docs touched if needed, security checklist reviewed.
+**Tip:** Estimate in hours; keep sprints ≤ 1 week.
 
-- **Minimum:** One test per public function/method
-- **Coverage:** Aim for 80%+ on core modules
-- **Test Types:** Unit tests (fast), integration tests (realistic data)
-- **Property-Based:** Use Hypothesis for critical logic
-- **Mutation Testing:** mutmut score ≥ 75% for core modules
-- **AI Assistance:** Use "Generate tests for [function] covering happy path + 3 edge cases"
+### 3. ENHANCED IMPLEMENTATION LOG (`dev_log.md`)
 
-### 3. Code Organization
+```markdown
+[YYYY-MM-DD]
 
-- **Functions:** Max 50 lines, single responsibility
-- **Classes:** Max 200 lines, clear purpose documented
-- **Files:** Max 500 lines, split if larger
-- **Line Length:** PEP 8 ≤ 100 chars (ruff default)
-- **Dependencies:** Use [uv](https://github.com/astral-sh/uv) for dependency management. Pin major versions,
-  document why each is needed.
-  - Install dependencies: `uv pip install -r pyproject.toml`
-  - Create virtual environment: `uv venv .venv`
-  - Audit dependencies: `uv audit`
-  - (If you don't have uv: `pip install uv` or see uv install instructions)
+#### 🔄 STATE OF CODEBASE
+- **Active Branch:** [branch name]
+- **Current Focus:** [module/component name]
+- **Pending PRs/Issues:** [list or links]
+- **Test Status:** [passing/failing, coverage %]
+- **Key Files Modified:** [list with paths]
 
----
+#### ✅ WHAT WORKED
+- [Notes on what went well]
 
-## Development Workflow Rules
+#### ❌ WHAT DIDN'T
+- [Notes on what didn't work]
 
-### 1. Session Startup Protocol
+#### 🤖 AI TRICKS
+- Prompt: "[Prompt used]" → [Result/insight]
 
-1. Load last 2 dev_log entries
-2. Review current deliverables in implementation_schedule.md
-3. Set 2-hour focus blocks with 15-min breaks
-4. Update dev_log before ending session
+#### 🔀 DECISIONS
+- Chose [library/tool] over [alternative] because... (link commit hash or PR)
 
-### 2. Feature Development Cycle
+#### 📊 CODE HEALTH
+- **Ruff Warnings:** [count]
+- **Test Coverage:** [percentage]
+- **Technical Debt Added:** [description if any]
+- **Technical Debt Resolved:** [description if any]
 
-1. **Plan:** Break feature into ≤4h tasks
-2. **Code:** Write tests first or alongside code
-3. **Review:** Run full test suite + linting
-4. **Document:** Update relevant docs
-5. **Commit:** Use Conventional Commits (e.g., `feat:`, `fix:`, `docs:`), link to issues
+#### 📘 LEARNINGS & PATTERNS
+- [Reusable pattern discovered]
+- [Useful technique to remember]
 
-### 3. AI Collaboration Guidelines
+#### 🏁 SESSION HANDOFF
+- **Stopping Point:** [exact description of where work stopped]
+- **Next Immediate Task:** [concrete next step with enough detail to start immediately]
+- **Known Issues:** [bugs or problems to be aware of]
+- **Context Links:** [links to relevant docs, discussions, or resources]
 
-- **Context Feeding:** Always include PRD + current task + recent dev_log
-- **Prompt Templates:** Use standardized prompts from appendix
-- **Validation:** Always test AI-generated code before committing
+#### 📝 NEXT UP
+- [Planned next steps with priority]
+```
 
----
+**Checkpoints:**
 
-## Tech Stack Decision Matrix
-
-### Web Framework Selection
-
-| Requirement | Use Streamlit | Use React |
-|-------------|---------------|-----------|
-| Quick prototype | ✅ | ❌ |
-| Complex UI/UX | ❌ | ✅ |
-| Real-time features | ❌ | ✅ |
-| Data visualization | ✅ | ⚠️ |
-| Mobile responsive | ❌ | ✅ |
-| Team collaboration | ❌ | ✅ |
-
-### Database Selection
-
-- **SQLite:** Prototypes, single-user apps
-- **PostgreSQL:** Multi-user, production apps
-- **JSON files:** Configuration, small datasets (<1MB)
+- User stories written for each main persona
+- Top 3 risks and mitigations listed
+- Data privacy/PII handling requirements documented
+- Constraints and flexibilities documented
 
 ---
 
-## Project Lifecycle Checkpoints
+## Phase 2: User Story Validation (30-60 min)
 
-### Phase 0: Idea Validation (30 minutes max)
+1. **Story Generation** (AI-assisted)
+   - "Write 3-5 user stories for [primary persona] using [core features]"
+   - Include acceptance criteria for each story
+   - Prioritize by user impact and development effort
 
-- [ ] MVP fits in 2-4 weeks part-time
-- [ ] Clear problem statement exists
-- [ ] Tech stack decision made using matrix above
-- [ ] Success criteria defined (measurable)
-- [ ] Data privacy/PII handling requirements documented in data_dictionary/README.md
+2. **Assumption Testing**
+   - List 3 biggest assumptions about user behavior
+   - Design quick validation methods (surveys, conversations, mockups)
+   - Document findings in PRD
 
-### Phase 1: Setup (2 hours max)
-
-- [ ] Project structure created
-- [ ] Core docs (PRD, implementation schedule, dev_log) initialized
-- [ ] Development environment configured
-- [ ] First commit pushed with project skeleton
-
-### Phase 2-4: Development Sprints (weekly cycles)
-
-- [ ] Sprint planning: tasks ≤8h each
-- [ ] Daily progress: update implementation schedule status
-- [ ] Sprint review: what worked/didn't work
-- [ ] Sprint retrospective: update dev_log with learnings
-
-### Phase 5: MVP Release
-
-- [ ] All core features tested and working
-- [ ] Documentation updated for users
-- [ ] Deployment automated (GitHub Actions)
-- [ ] Maintenance plan documented
+3. **Validation Checkpoints**
+   - At least 2 potential users have seen the concept
+   - Core user flow validated (even with paper prototypes)
+   - Major assumptions tested or documented as risks
 
 ---
 
-## Emergency Protocols
+## Phase 3: Lightweight Architecture & Tech Stack (1-2 hours)
 
-### When Stuck (>2 hours on one issue)
+### **Version Control Setup** (15 min)
 
-1. Document the problem in dev_log
-2. Try different AI model/prompt approach
-3. Break problem into smaller pieces
-4. Ask for help (Stack Overflow, Discord, etc.)
-5. Consider simplifying requirements
+```bash
+# Branch naming convention
+feature/user-auth
+bugfix/login-validation
+hotfix/security-patch
 
-### Technical Debt Spike
+# Commit message format
+feat: add user authentication endpoint
+fix: resolve login validation bug
+docs: update API documentation
+test: add user registration tests
+```
 
-1. Identify and document the debt item in dev_log and implementation schedule
-2. Time-box the fix (e.g., 2 hours max)
-3. If not resolved, log a ticket in implementation schedule and revisit next sprint
+### **Architecture & Stack Selection** (45-60 min)
 
-### When Losing Motivation
+1. **Stack Rapid-Fire:** Ask AI: "Simplest stack to build [core feature] in Python/JS?"
+2. **Component Sketch:** Draft ASCII or text diagram via AI.
+3. **Decision Log:**
+   - Option A vs. B → Chosen C → Why? (link commit hash)
+   - Note reversibility for future pivot
 
-1. Review original PRD - why did you start?
-2. Celebrate completed tasks recorded in implementation schedule
-3. Reduce scope to regain momentum
-4. Take a longer break (1-2 days)
-5. Consider pivoting if passion is gone
+### **Code Review Process Setup** (15 min)
 
-### When Requirements Change
+Even for solo projects:
 
-1. Update PRD immediately
-2. Assess impact on current sprint
-3. Re-prioritize implementation schedule
-4. Document decision rationale
-5. Communicate changes if team project
+- **AI-Assisted Review:** "Review this code for bugs, performance issues, and style"
+- **Checklist Review:** Security, error handling, test coverage
+- **Future Self Review:** Comment unclear code immediately
 
----
+**Security/Ethics Quick Check:** PII handling, license compliance, misuse risk assessment
 
-## Success Metrics
+**Checkpoints:**
 
-### Project Health Indicators
-
-- **Green:** Tests passing, docs current, regular commits, ruff warnings < 10, test coverage > 80%
-- **Yellow:** 1-2 weeks since last commit, docs slightly stale, ruff warnings < 30, test coverage 60-80%
-- **Red:** Broken tests, outdated docs, no commits >3 weeks, ruff warnings ≥ 30, test coverage < 60%
-
-### Personal Productivity Metrics
-
-- **Sprint Velocity:** Average tasks completed per week
-- **Code Quality:** Test coverage %, ruff warnings, mutation score
-- **Learning Velocity:** New techniques documented in dev_log
+- Architecture diagram created
+- Stack and key libraries chosen and justified
+- Security/ethics checklist reviewed
+- Git workflow established
+- Code review process defined
 
 ---
 
-## AI Prompt Templates (Quick Reference)
+## Phase 4: Iterative AI-Powered Development with User Testing
 
-### Planning Phase
+### **Development Cycle** (per task)
 
-- "Draft a PRD for [idea] aimed at a solo developer MVP in Python"
-- "Break down [feature] into tasks taking 2-4 hours each"
-- "What are 5 potential risks for this project and how to mitigate them?"
+1. **Session Kickoff:** Feed PRD + last dev_log + current backlog.
+2. **Generate & Review:**
+   - "Write a testable module for [feature], include comments and error checks."
+   - Run static analysis (ruff/flake8/eslint)
+   - Add/update minimal unit test
+   - AI code review: "Review this code for bugs, performance issues, and style"
+   - Ensure pre-commit hooks pass
+3. **Test & Tweak:** Break it—invalid inputs, edge cases. Ask AI:
+   "Create tests covering happy path + 3 edge cases for [module]."
+4. **Log Learnings:** Update dev_log.md with insights.
 
-### Development Phase
+### **User Testing Checkpoints**
 
-- "Write a testable Python function for [feature] with docstrings and error handling"
-- "Create pytest tests for [function] covering happy path + 3 edge cases"
-- "Review this code for Python best practices and suggest improvements"
-- "Refactor this 200-line file into smaller modules without breaking tests"
+**After Core Features (Week 1):**
 
-### Debugging Phase
+- **Quick User Test:** 2-3 users try core flow
+- **Feedback Collection:** What's confusing? What's missing?
+- **Iteration:** Fix critical usability issues
 
-- "Help debug this Python error: [paste error + relevant code]"
-- "Suggest 3 ways to optimize this slow function: [paste code]"
-- "What edge cases am I missing for this input validation?"
+**Mid-Development (Week 2):**
+
+- **Feature Validation:** Test new features with 3-5 users
+- **A/B Test Key Decisions:** UI layouts, feature priorities
+- **Pivot Assessment:** Are we building the right thing?
+
+**Pre-Launch (Week 3):**
+
+- **End-to-End User Testing:** Full user journey
+- **Edge Case Testing:** Error scenarios, edge cases
+- **Polish Based on Feedback:** Final UX improvements
+
+### **Testing Integration**
+
+```markdown
+# Add to implementation_schedule.md
+| ID | Deliverable | Type | Users | Success Criteria |
+|----|-------------|------|-------|------------------|
+| 3  | Core flow test | Usability | 3 | Users complete signup→action in <2 min |
+| 7  | Feature validation | A/B Test | 5 | 80% prefer new UI layout |
+| 12 | Pre-launch test | End-to-end | 5 | <1 critical bug per user session |
+```
+
+**Multi-AI Tip:** If stuck, swap models (GPT, Claude, Perplexity) on the same prompt and compare.
 
 ---
 
-*Remember: These rules are guidelines to maintain quality and momentum. Adapt them based on project
-needs, but always maintain the core principle of balancing creativity with sustainability.
-This ensures a healthy project and a happy developer.*
+## Phase 5: MVP Delivery & Maintenance
+
+- **MVP Definition:** Core use-case works smoothly
+- **AI-Enhanced Testing:** "Generate 10 test cases for [module]."
+- **Deployment Lite:** Local or free hosting (Heroku, Vercel, Colab)
+- **Sustain Plan:** List monthly health-check tasks
+- **CI/CD Pipeline:** GitHub Actions template (`python.yml`/`node.yml`) running tests + linter on
+every push
+
+**MVP Checklist:**
+
+- All core features implemented and tested
+- User testing feedback incorporated
+- CI pipeline green
+- Security/ethics checklist reviewed
+- Monthly maintenance plan in place
+
+---
+
+### Operating Principles for Vibe-Coding
+
+- **Keep Files Lean:** Only 3 core docs—update them constantly
+- **Definition of Done:** Tests pass, lint clean, docs touched, user-tested
+- **Short Sprints:** Weekly cycles keep momentum
+- **Context Discipline:** Copy/paste only what's relevant
+- **AI as Co-Pilot, Not Dictator:** Always validate hallucinations
+- **User-Centric:** Test early, test often, pivot when needed
+
+Use this blueprint as your adaptable backbone—tweak phases, names, and deliverables to match your personal
+rhythm and project scale. Happy vibe-coding! 🚀
+
+---
+
+### Appendix: AI Prompt Library
+
+**Planning:**
+
+- "Draft a PRD for [idea] aimed at a solo developer MVP."
+- "What edge cases belong in this PRD?"
+- "Write 3 user stories for my PRD."
+- "Name 5 ways this could break or be misused."
+
+**Development:**
+
+- "Simplest stack to build [core feature] in Python/JS?"
+- "Create tests covering happy path + 3 edge cases for [module]."
+- "Generate 10 test cases for [module]."
+- "Review this code for bugs, performance issues, and style."
+
+**User Testing:**
+
+- "Design 3 quick user tests for [feature]."
+- "What questions should I ask users testing [workflow]?"
+- "How can I validate [assumption] with minimal effort?"
+
+**Code Review:**
+
+- "Review this code for security vulnerabilities."
+- "Suggest improvements for code readability and maintainability."
+- "Identify potential performance bottlenecks in this code."
