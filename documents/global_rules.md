@@ -1,295 +1,92 @@
-# Enhanced Vibe‑Coding Project Blueprint
-
-A flexible, structured workflow to take any idea from spark to delivery,
-while preserving creative momentum and AI-powered efficiency.
-
----
-
-## Phase 0: Idea Validation & Scope Check
-
-1. **Rapid Feasibility Audit** (5–10 min)
-   - **Problem Fit**: Does it solve something you genuinely care about?
-   - **MVP Window**: Can you deliver a usable prototype in 2–4 weeks (part‑time)?
-   - **Sustained Engagement**: Will you stay excited after week 2?
-   - **Learning Benefit**: Does it stretch your skills just enough?
-
-2. **AI‑Driven Stress Test**
-   - Prompt AI:
-     - "What are the hardest parts of building [idea]?"
-     - "What simpler alternatives or pivots exist?"
-     - "Name 3 reasons this might fail."
-
-3. **Go/No‑Go Checklist**
-   - Clear MVP defined (1–2 sentences)
-   - Can list at least 2 ways to pivot if stuck
-   - No "unknown-unknowns" in risk list
-   - *Exit Criteria: You can state why you are building this, what success looks like,
-     and why now is the right time.*
-
----
-
-## Phase 1: High‑Level Planning (Core Docs System)
-
-Use three living files—PRD, implementation schedule, and dev log—to capture decisions, tasks, and learnings.
-Place them in `/docs` or the repo root (`prd.md`, `implementation_schedule.md`, `dev_log.md`).
-
-### 1. PRODUCT REQUIREMENTS (`prd.md`)
-
-```markdown
-PROJECT: [Name]
-GOAL: (1–2 sentences)
-USERS: [primary persona]
-CORE FEATURES:
-  - Feature A (must-have)
-  - Feature B (must-have)
-  - Feature C (nice-to-have)
-OUT OF SCOPE:
-  - ...
-SUCCESS METRICS:
-  - Usage criteria
-  - Performance targets
-```
+AI Operational Directives
+Preamble: Your primary function is to act as an expert co-pilot for software development within the
+Vibe Coding System. Your actions must always align with the principles and documents of this system.
+ You will assist in generating code, maintaining documentation, and providing strategic advice,
+ always deferring to the user as the project lead.
 
-### 2. ENHANCED IMPLEMENTATION SCHEDULE (`implementation_schedule.md`)
-
-```markdown
-| ID | Deliverable | Owner | Est (h) | Dependencies | Risk | Start | End | Status | DoD | Rollback |
-|----|-------------|-------|---------|--------------|------|-------|-----|--------|-----|----------|
-| 1  | MVP endpoint | @dev | 4 | - | L | 2025-07-15 | 2025-07-15 | ⬜ Todo | Tests pass, API docs updated | Use mock data |
-| 2  | UI stub      | @dev | 6 | ID:1 | M | 2025-07-15 | 2025-07-16 | ⬜ Todo | Components render, basic interactions work | Static mockup |
-| 3  | User test 1  | @dev | 2 | ID:2 | L | 2025-07-16 | 2025-07-16 | ⬜ Todo | 3 users test core flow, feedback documented | Skip if timeline tight |
+1. Core Directives
+These are your non-negotiable operating parameters.
 
-Legend: ⬜ Todo · 🔄 In-Progress · ✅ Done · ⏸ Blocked
-Risk: H(igh) · M(edium) · L(ow)
-```
-
-**Definition of Done (Global):** Tests pass, lint clean, docs touched if needed, security checklist reviewed.
-**Tip:** Estimate in hours; keep sprints ≤ 1 week.
+Prioritize Provided Context: Before responding to any query, your first step is to analyze the
+provided context documents (prd.md, session_logs/, etc.). You must base your responses on the
+information within these documents. If a user's request conflicts with the documentation, you will
+note the discrepancy and ask for clarification.
 
-### 3. ENHANCED IMPLEMENTATION LOG (`dev_log.md`)
+Adhere to the System: All your outputs—code, documentation, or advice—must conform to the structures
+and standards defined in the Vibe Coding System documents. You will reference project_context.md
+for technical standards and quality_gates.md for quality checklists.
 
-```markdown
-[YYYY-MM-DD]
+Link, Don't Duplicate: When referencing a concept that is defined in a document (like a feature,
+decision, or task), you will use the established linking syntax (e.g., [PRD-feat:A],
+[LOG:YYYY-MM-DD]) instead of restating the information. This keeps your responses concise and
+reinforces the documentation system.
 
-#### 🔄 STATE OF CODEBASE
-- **Active Branch:** [branch name]
-- **Current Focus:** [module/component name]
-- **Pending PRs/Issues:** [list or links]
-- **Test Status:** [passing/failing, coverage %]
-- **Key Files Modified:** [list with paths]
+1. Operational Protocols
+On Receiving a Request
+Identify Intent: Determine if the user is asking for code generation, documentation help, a code
+review, or strategic advice.
 
-#### ✅ WHAT WORKED
-- [Notes on what went well]
+Gather Context: Identify the most relevant documents for the task. For a new feature, you will
+reference prd.md and project_context.md. For a bug fix, you will reference the latest session_logs/
+entry and the implementation_schedule.md.
 
-#### ❌ WHAT DIDN'T
-- [Notes on what didn't work]
+Ask for Clarification: If the request is ambiguous or lacks necessary detail, you will ask clarifying
+questions before proceeding with generation.
 
-#### 🤖 AI TRICKS
-- Prompt: "[Prompt used]" → [Result/insight]
+On Generating Code
+Adhere to Standards: All generated code must follow the formatting, linting, and naming conventions
+defined in project_context.md.
 
-#### 🔀 DECISIONS
-- Chose [library/tool] over [alternative] because... (link commit hash or PR)
+Generate with Quality: Your code should be clean, well-commented, and include robust error handling.
 
-#### 📊 CODE HEALTH
-- **Ruff Warnings:** [count]
-- **Test Coverage:** [percentage]
-- **Technical Debt Added:** [description if any]
-- **Technical Debt Resolved:** [description if any]
+Propose Tests: For any new functions or logic, you will proactively suggest or generate
+corresponding unit tests that cover both the happy path and relevant edge cases, adhering to the
+testing strategy in project_context.md.
 
-#### 📘 LEARNINGS & PATTERNS
-- [Reusable pattern discovered]
-- [Useful technique to remember]
+Python-Specific Directives
+Use Modern Python: You will generate code compatible with Python 3.9+ and use modern features where
+appropriate (e.g., := operator, structural pattern matching).
 
-#### 🏁 SESSION HANDOFF
-- **Stopping Point:** [exact description of where work stopped]
-- **Next Immediate Task:** [concrete next step with enough detail to start immediately]
-- **Known Issues:** [bugs or problems to be aware of]
-- **Context Links:** [links to relevant docs, discussions, or resources]
+Enforce Type Hinting: All function signatures, including arguments and return values, must have type
+hints from the typing module. For complex types, you will use TypeAlias.
 
-#### 📝 NEXT UP
-- [Planned next steps with priority]
-```
+Write Clear Docstrings: You will write Google-style docstrings for all public modules, classes, and
+functions. The docstring must describe the purpose, arguments (Args:), and return value (Returns:).
 
-**Checkpoints:**
+Prioritize Readability: You will follow the "Zen of Python." Code should be explicit, simple, and
+readable. Avoid overly complex one-liners.
 
-- User stories written for each main persona
-- Top 3 risks and mitigations listed
-- Data privacy/PII handling requirements documented
-- Constraints and flexibilities documented
+Structure Modules Logically: Python files should be structured in the following order:
 
----
+Shebang (if applicable)
 
-## Phase 2: User Story Validation (30-60 min)
+Module-level docstring
 
-1. **Story Generation** (AI-assisted)
-   - "Write 3-5 user stories for [primary persona] using [core features]"
-   - Include acceptance criteria for each story
-   - Prioritize by user impact and development effort
+Imports (Standard Library, Third-Party, Local Application)
 
-2. **Assumption Testing**
-   - List 3 biggest assumptions about user behavior
-   - Design quick validation methods (surveys, conversations, mockups)
-   - Document findings in PRD
+Constants
 
-3. **Validation Checkpoints**
-   - At least 2 potential users have seen the concept
-   - Core user flow validated (even with paper prototypes)
-   - Major assumptions tested or documented as risks
+Functions and classes
 
----
+if __name__ == "__main__": block for executable scripts.
 
-## Phase 3: Lightweight Architecture & Tech Stack (1-2 hours)
+On Assisting with Documentation
+Be a Scribe: When the user makes a significant decision in conversation, you will prompt them to add
+ it to the prd.md DECISION LOG.
 
-### **Version Control Setup** (15 min)
+Enforce Links: You will remind the user to link artifacts. For example, after discussing a new
+pattern, you will say, "Let's add this to knowledge_base.md and reference it from today's session log."
 
-```bash
-# Branch naming convention
-feature/user-auth
-bugfix/login-validation
-hotfix/security-patch
+Maintain Session Logs: At the end of a session, you will help the user summarize the key events and
+fill out the "Session Handoff" section for the new session_logs/ entry.
 
-# Commit message format
-feat: add user authentication endpoint
-fix: resolve login validation bug
-docs: update API documentation
-test: add user registration tests
-```
+1. Interaction Model
+Act as a Pair Programmer: Your tone should be collaborative and helpful. Offer suggestions, but
+implement the user's final decision.
 
-### **Architecture & Stack Selection** (45-60 min)
+Be Transparent: If you are making an assumption, state it clearly. For example, "Assuming we are
+using the user model from project_context.md, here is the function..."
 
-1. **Stack Rapid-Fire:** Ask AI: "Simplest stack to build [core feature] in Python/JS?"
-2. **Component Sketch:** Draft ASCII or text diagram via AI.
-3. **Decision Log:**
-   - Option A vs. B → Chosen C → Why? (link commit hash)
-   - Note reversibility for future pivot
-
-### **Code Review Process Setup** (15 min)
-
-Even for solo projects:
-
-- **AI-Assisted Review:** "Review this code for bugs, performance issues, and style"
-- **Checklist Review:** Security, error handling, test coverage
-- **Future Self Review:** Comment unclear code immediately
-
-**Security/Ethics Quick Check:** PII handling, license compliance, misuse risk assessment
-
-**Checkpoints:**
-
-- Architecture diagram created
-- Stack and key libraries chosen and justified
-- Security/ethics checklist reviewed
-- Git workflow established
-- Code review process defined
-
----
-
-## Phase 4: Iterative AI-Powered Development with User Testing
-
-### **Development Cycle** (per task)
-
-1. **Session Kickoff:** Feed PRD + last dev_log + current backlog.
-2. **Generate & Review:**
-   - "Write a testable module for [feature], include comments and error checks."
-   - Run static analysis (ruff/flake8/eslint)
-   - Add/update minimal unit test
-   - AI code review: "Review this code for bugs, performance issues, and style"
-   - Ensure pre-commit hooks pass
-3. **Test & Tweak:** Break it—invalid inputs, edge cases. Ask AI:
-   "Create tests covering happy path + 3 edge cases for [module]."
-4. **Log Learnings:** Update dev_log.md with insights.
-
-### **User Testing Checkpoints**
-
-**After Core Features (Week 1):**
-
-- **Quick User Test:** 2-3 users try core flow
-- **Feedback Collection:** What's confusing? What's missing?
-- **Iteration:** Fix critical usability issues
-
-**Mid-Development (Week 2):**
-
-- **Feature Validation:** Test new features with 3-5 users
-- **A/B Test Key Decisions:** UI layouts, feature priorities
-- **Pivot Assessment:** Are we building the right thing?
-
-**Pre-Launch (Week 3):**
-
-- **End-to-End User Testing:** Full user journey
-- **Edge Case Testing:** Error scenarios, edge cases
-- **Polish Based on Feedback:** Final UX improvements
-
-### **Testing Integration**
-
-```markdown
-# Add to implementation_schedule.md
-| ID | Deliverable | Type | Users | Success Criteria |
-|----|-------------|------|-------|------------------|
-| 3  | Core flow test | Usability | 3 | Users complete signup→action in <2 min |
-| 7  | Feature validation | A/B Test | 5 | 80% prefer new UI layout |
-| 12 | Pre-launch test | End-to-end | 5 | <1 critical bug per user session |
-```
-
-**Multi-AI Tip:** If stuck, swap models (GPT, Claude, Perplexity) on the same prompt and compare.
-
----
-
-## Phase 5: MVP Delivery & Maintenance
-
-- **MVP Definition:** Core use-case works smoothly
-- **AI-Enhanced Testing:** "Generate 10 test cases for [module]."
-- **Deployment Lite:** Local or free hosting (Heroku, Vercel, Colab)
-- **Sustain Plan:** List monthly health-check tasks
-- **CI/CD Pipeline:** GitHub Actions template (`python.yml`/`node.yml`) running tests + linter on
-every push
-
-**MVP Checklist:**
-
-- All core features implemented and tested
-- User testing feedback incorporated
-- CI pipeline green
-- Security/ethics checklist reviewed
-- Monthly maintenance plan in place
-
----
-
-### Operating Principles for Vibe-Coding
-
-- **Keep Files Lean:** Only 3 core docs—update them constantly
-- **Definition of Done:** Tests pass, lint clean, docs touched, user-tested
-- **Short Sprints:** Weekly cycles keep momentum
-- **Context Discipline:** Copy/paste only what's relevant
-- **AI as Co-Pilot, Not Dictator:** Always validate hallucinations
-- **User-Centric:** Test early, test often, pivot when needed
-
-Use this blueprint as your adaptable backbone—tweak phases, names, and deliverables to match your personal
-rhythm and project scale. Happy vibe-coding! 🚀
-
----
-
-### Appendix: AI Prompt Library
-
-**Planning:**
-
-- "Draft a PRD for [idea] aimed at a solo developer MVP."
-- "What edge cases belong in this PRD?"
-- "Write 3 user stories for my PRD."
-- "Name 5 ways this could break or be misused."
-
-**Development:**
-
-- "Simplest stack to build [core feature] in Python/JS?"
-- "Create tests covering happy path + 3 edge cases for [module]."
-- "Generate 10 test cases for [module]."
-- "Review this code for bugs, performance issues, and style."
-
-**User Testing:**
-
-- "Design 3 quick user tests for [feature]."
-- "What questions should I ask users testing [workflow]?"
-- "How can I validate [assumption] with minimal effort?"
-
-**Code Review:**
-
-- "Review this code for security vulnerabilities."
-- "Suggest improvements for code readability and maintainability."
-- "Identify potential performance bottlenecks in this code."
+Handle Errors Gracefully: If you generate code that is incorrect, analyze the error message provided
+ by the user, apologize for the mistake, and provide a corrected version with an explanation of what
+  was fixed.
