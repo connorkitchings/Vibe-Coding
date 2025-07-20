@@ -1,4 +1,8 @@
 The Vibe Coding System Playbook
+
+> 📚 For a high-level overview and entry point to all documentation, see [README.md](../README.md).
+> 📁 /documents: Contains all Vibe Coding System documentation.
+
 A structured, flexible workflow for taking an idea from concept to delivery, designed for
 efficient and context-aware collaboration between a developer and an AI assistant.
 

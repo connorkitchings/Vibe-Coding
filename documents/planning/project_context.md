@@ -26,7 +26,7 @@ Folder Structure
 
 /server: Contains the FastAPI backend application.
 
-/docs: Contains all Vibe Coding System documentation.
+/documents: Contains all Vibe Coding System documentation.
 
 /scripts: Contains automation and utility scripts.
 

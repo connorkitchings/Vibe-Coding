@@ -1,4 +1,7 @@
 Quality Gates
+
+> 📚 For the entry point to all documentation and standards, see [README.md](../../README.md).
+
 This document contains the checklists and standards that ensure every piece of work is high-quality,
 consistent, and secure before it's integrated.
 
@@ -35,7 +38,7 @@ necessary.
 
 [ ] No "TODO" comments remain: All temporary todos have been resolved or converted to tasks in implementation_schedule.md.
 
-1. Security Review Checklist
+2. Security Review Checklist
 A mandatory review for any feature handling user input, authentication, or data.
 
 Input & Data Validation
@@ -57,7 +60,7 @@ Error Handling & Logging
 
 [ ] Sensitive information (passwords, API keys) is not present in logs.
 
-1. Definition of Done (DoD)
+3. Definition of Done (DoD)
 This is the global standard for any task to be marked as "Done" in the implementation_schedule.md.
 
 A task is considered Done only when:

@@ -1,0 +1,7 @@
+# Example Windsurf AI Flows
+- name: New-Feature
+  steps:
+    - load: documents/execution/session_logs/
+    - load: documents/_current_context.md
+    - prompt: .windsurf/prompts/scaff_feature_dev.md
+    - launch: cascade_chat

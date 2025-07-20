@@ -10,6 +10,8 @@ GOAL
 
 For architecture, tech stack, and setup details, see project_context.md.
 
+> 📚 For a high-level entry point and links to all documentation, see [README.md](../../README.md).
+
 USERS & USER STORIES
 Primary Persona
 Name: [Persona name]
