@@ -69,16 +69,31 @@ uv venv
 uv sync
 ```
 
-All Python dependency management is now handled by [UV](https://github.com/astral-sh/uv). See `/pyproject.toml` for dependencies.
+All Python dependency management is now handled by [UV](https://github.com/astral-sh/uv).
+See `/pyproject.toml` for dependencies.
 
-> **Note:** All editor and CI configuration is now centralized under `/config` (see `/config/editor`, `/config/ci`, `/config/github`).
+> **Note:** All editor and CI configuration is now centralized under `/config`
+(see `/config/editor`, `/config/ci`, `/config/github`).
 
 ### Linting
 
+This project uses [Ruff](https://docs.astral.sh/ruff/) for Python linting and [cSpell]
+(<https://cspell.org/>) for spelling and language linting.
+
+#### Run Ruff (Python linter)
+
 ```bash
-make lint
+ruff check documents/ server/ client/ scripts/
 ```
 
+#### Run cSpell (spelling linter)
+
+```bash
+cspell "documents/**/*.md" "server/**/*.py" "client/**/*.js" "scripts/**/*.py"
+```
+
+> **Note:** See `/config/editor/settings.json` for editor integration and recommended VS Code extensions.
+>
 ### Documentation
 
 ```bash
@@ -103,7 +118,8 @@ Subcommands:
 
 - Node.js v18+
 - Python 3.11+
-- [uv](https://github.com/astral-sh/uv) (for Python dependency management, replacing Poetry; see [Adopting UV and Cleaning Up Editor_CI Config Redun.md])
+- [uv](https://github.com/astral-sh/uv) (for Python dependency management, replacing Poetry;
+  see [Adopting UV and Cleaning Up Editor_CI Config Redun.md])
 - [Other dependencies as listed in `pyproject.toml` and `project_context.md`]
 
 ### Setup
