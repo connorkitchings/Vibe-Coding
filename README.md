@@ -22,20 +22,31 @@ documentation-driven workflow for efficient, high-quality software development w
 
 ---
 
-## 📑 Documentation System
+## 📑 Documentation Navigation
 
-This project uses a set of high-signal documents for clarity and context:
+All project documentation is organized and navigable via the sidebar structure in
+[`documents/docs_sidebar.json`](documents/docs_sidebar.json). This sidebar is used by VS Code,
+Windsurf, and other tools for hierarchical navigation and onboarding.
 
-- **Product Requirements**: [`documents/planning/prd.md`](documents/planning/prd.md)
+<details>
+<summary>Key Documents</summary>
+
+- **Playbook**: [`documents/playbook.md`](documents/playbook.md)
+- **PRD**: [`documents/planning/prd.md`](documents/planning/prd.md)
+- **Scope Appendix**: [`documents/planning/scope_appendix.md`](documents/planning/scope_appendix.md)
 - **Implementation Schedule**: [`documents/planning/implementation_schedule.md`](documents/planning/implementation_schedule.md)
 - **Project Context**: [`documents/planning/project_context.md`](documents/planning/project_context.md)
-- **Session Logs**: [`documents/execution/dev_log.md`](documents/execution/dev_log.md)
+- **Dev Log**: [`documents/execution/dev_log.md`](documents/execution/dev_log.md)
 - **Knowledge Base**: [`documents/execution/knowledge_base.md`](documents/execution/knowledge_base.md)
 - **Quality Gates**: [`documents/execution/quality_gates.md`](documents/execution/quality_gates.md)
-- **Global Rules**: [`documents/global_rules.md`](documents/global_rules.md)
-- **Vibe Coding Playbook**: [`documents/Vibe Coding Playbook.md`](documents/Vibe%20Coding%20Playbook.md)
+- **Guides**: [`documents/guides/`](documents/guides/)
+- **Current Context**: [`documents/_current_context.md`](documents/_current_context.md)
 
-> 📎 All documents are cross-linked using a standardized reference system (see Playbook for details).
+</details>
+
+For the full documentation tree and navigation, see [`documents/docs_sidebar.json`]
+(documents/docs_sidebar.json). All documents are cross-linked using a standardized reference system
+(see Playbook for details).
 
 ---
 

@@ -6,20 +6,16 @@ The Vibe Coding System Playbook
 A structured, flexible workflow for taking an idea from concept to delivery, designed for
 efficient and context-aware collaboration between a developer and an AI assistant.
 
-1. Core Philosophy
-Keep It Lean: Focus on a few core, high-signal documents.
+## Core Principles
 
-Short Sprints: Maintain momentum with weekly or bi-weekly cycles.
+- **Keep It Lean:** Focus on a few core, high-signal documents.
+- **Short Sprints:** Maintain momentum with weekly or bi-weekly cycles.
+- **Context Discipline:** Only provide relevant documents to focus AI collaboration.
+- **User-Centric:** Test with real users early and often.
+- **AI as Co-Pilot:** Use AI for generation, review, and ideation, but always validate its output.
+- **Continuous Documentation:** Documentation is a continuous process that preserves context and decisions.
 
-Context Discipline: Provide only the relevant documents for the task at hand to ensure focused AI collaboration.
-
-User-Centric: Test with real users early and often.
-
-AI as Co-Pilot: Use AI as a powerful tool for generation, review, and ideation, but always
-validate its output.
-
-Continuous Documentation: Documentation is not an afterthought; it's a continuous process that
-preserves context and decisions.
+---
 
 1. The Documentation Ecosystem
 This system is built on a set of specialized Markdown documents designed to separate concerns

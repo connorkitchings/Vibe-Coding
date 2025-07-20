@@ -4,6 +4,8 @@ import datetime
 import pathlib
 import textwrap
 
+import yaml
+
 doc = pathlib.Path("documents/execution/dev_log.md")
 last_entry = "Unknown"
 try:
@@ -13,9 +15,17 @@ try:
 except Exception as e:
     last_entry = f"Error reading dev_log.md: {e}"
 
+handoff_data = {
+    "date": str(datetime.date.today()),
+    "last_session": last_entry,
+    "next_task": "see implementation_schedule.md",
+}
+
 print(
     textwrap.dedent(f"""
-🕒 {datetime.date.today()} | Last session: {last_entry}
-Next task → see implementation_schedule.md
+ {handoff_data["date"]} | Last session: {handoff_data["last_session"]}
+Next task → {handoff_data["next_task"]}
 """)
 )
+print("---\nYAML Handoff:")
+print(yaml.dump(handoff_data, sort_keys=False))

@@ -1,52 +1,27 @@
-Developer Session Log
-Instructions: Create a new file with this template for each session (e.g., YYYY-MM-DD.md).
-This log is a high-level summary that links to other documents for details.
+---
+date: YYYY-MM-DD
+branch: [branch-name]
+task: [IMPL-task:ID] - [Brief description]
+---
 
-[YYYY-MM-DD]
-🔄 Session State
-Active Branch: [branch-name]
+## Wins
 
-Current Focus: Working on task [IMPL-task:ID] - [Brief description of task]
+- [Brief successes, breakthroughs, or things that went well]
 
-Pending PRs/Issues: [Link to PR or #issue]
+## Blockers
 
-✅ What Went Well
-A brief note on successes, breakthroughs, or things that were easier than expected.
+- [Bugs, blockers, or challenges encountered]
 
-❌ What Didn't Go Well
-A brief note on blockers, bugs, or challenges encountered.
+## Artifacts & Links
 
-🔗 Session Artifacts & Links
-🤖 AI Tricks:
+- AI Tricks: [KB:GenerateTestsPrompt] or similar
+- Decisions: [PRD-decision:YYYY-MM-DD] or similar
+- Learnings: [KB:SafeDictAccess] or similar
+- Code Health: See [QG:PreCommit] checklist
 
-Used a clever prompt to generate test cases. See [KB:GenerateTestsPrompt].
+## Handoff
 
-🔀 Decisions Made:
-
-Decided to use PostgreSQL for the database. See [PRD-decision:YYYY-MM-DD] for the full rationale.
-
-📘 Learnings & Patterns:
-
-Discovered a reusable pattern for safely accessing nested dictionary keys. Added to [KB:SafeDictAccess].
-
-📊 Code Health & Quality:
-
-All quality checks passed before committing. See [QG:PreCommit] checklist for details.
-
-🏁 Session Handoff (Most Important Section)
-Stopping Point:
-
-Finished implementing the POST /users endpoint. All unit tests are passing locally.
-
-Next Immediate Task:
-
-Start work on the GET /users/{id} endpoint. Need to add authentication middleware first.
-
-Known Issues or Blockers:
-
-The third-party payment API is rate-limiting requests in the test environment. Need to find a
-workaround or mock the service.
-
-Context for Next Session:
-
-Remember to pull the latest changes from the main branch, as the new logging configuration was just merged.
+- Stopping Point: [Summary]
+- Next Immediate Task: [Summary]
+- Known Issues: [Summary]
+- Next Session Context: [Summary]

@@ -1,4 +1,4 @@
-The Vibe Coding System Playbook
+The Vibe Coding System playbook
 A structured, flexible workflow for taking an idea from concept to delivery, designed for efficient
 and context-aware collaboration between a developer and an AI assistant.
 

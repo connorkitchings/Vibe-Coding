@@ -51,15 +51,7 @@ Implementation: [IMPL-task:ID]
 
 User Impact: Medium
 
-Should-Have (Post-MVP)
-Feature C: [Description]
-
-Implementation: [IMPL-task:ID]
-
-Out of Scope
-[Feature/functionality definitively not included]
-
-[Integration that won't be built]
+See [Scope Appendix](./scope_appendix.md) for Post-MVP features and Out of Scope items.
 
 RISKS & ASSUMPTIONS
 Key Assumptions
