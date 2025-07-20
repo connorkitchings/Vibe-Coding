@@ -145,7 +145,19 @@ Retrospective: Review the dev_log.md and implementation_schedule.md to analyze t
 1. Automation & Tooling
 To enhance efficiency, we can develop helper scripts:
 
-session_context.py: A script that runs at the start of a session to pull the latest handoff
-notes, current sprint tasks, and recent decisions into the terminal.
+init_session.py: Initializes a new session and pulls the latest handoff notes, current sprint tasks,
+recent decisions, and recent knowledge into the terminal (now accessible via `python scripts/cli.py init-session`).
 
-validate_links.py: A pre-commit hook or CI check to ensure that all cross-document references are valid.
+check_links.py: A pre-commit hook or CI check to ensure that all cross-document references are valid
+(now accessible via `python scripts/cli.py check-links`).
+
+init_template.py: Used for repository introspection and template initialization (now accessible via
+`python scripts/cli.py init-template`).
+
+All scripts are now managed via a single CLI (`scripts/cli.py`) using Typer.
+
+Configuration folders `.vscode`, `.windsurf`, and `.github` are now consolidated under `config/`
+(`config/editor`, `config/ci`, `config/github`).
+
+See the new Getting Started guide at `documents/guides/getting_started.md` for onboarding and
+workflow automation.

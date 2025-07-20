@@ -27,7 +27,9 @@
   },
   {
     "title": "Guides",
-    "path": "guides/"
+    "children": [
+      { "title": "Getting Started", "path": "guides/getting_started.md" }
+    ]
   },
   {
     "title": "Current Context",

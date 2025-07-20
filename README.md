@@ -19,6 +19,10 @@ documentation-driven workflow for efficient, high-quality software development w
 - `/server`: FastAPI backend
 - `/documents`: All project documentation (see below)
 - `/scripts`: Automation and utility scripts
+- `/config`: Centralized configuration for editor, CI, and GitHub workflows (see subfolders)
+  - `config/editor`: Editor settings (formerly `.vscode`)
+  - `config/ci`: CI configuration (formerly `.windsurf`)
+  - `config/github`: GitHub workflows and templates (formerly `.github`)
 
 ---
 
@@ -28,9 +32,13 @@ All project documentation is organized and navigable via the sidebar structure i
 [`documents/docs_sidebar.json`](documents/docs_sidebar.json). This sidebar is used by VS Code,
 Windsurf, and other tools for hierarchical navigation and onboarding.
 
+- **Getting Started Guide**: [`documents/guides/getting_started.md`]
+(documents/guides/getting_started.md) provides an AI-driven onboarding workflow.
+
 <details>
 <summary>Key Documents</summary>
 
+- **CHANGELOG.md**: [`docs/CHANGELOG.md`](docs/CHANGELOG.md)
 - **Playbook**: [`documents/playbook.md`](documents/playbook.md)
 - **PRD**: [`documents/planning/prd.md`](documents/planning/prd.md)
 - **Scope Appendix**: [`documents/planning/scope_appendix.md`](documents/planning/scope_appendix.md)
@@ -40,6 +48,7 @@ Windsurf, and other tools for hierarchical navigation and onboarding.
 - **Knowledge Base**: [`documents/execution/knowledge_base.md`](documents/execution/knowledge_base.md)
 - **Quality Gates**: [`documents/execution/quality_gates.md`](documents/execution/quality_gates.md)
 - **Guides**: [`documents/guides/`](documents/guides/)
+  - **Getting Started**: [`documents/guides/getting_started.md`](documents/guides/getting_started.md)
 - **Current Context**: [`documents/_current_context.md`](documents/_current_context.md)
 
 </details>
@@ -52,10 +61,44 @@ For the full documentation tree and navigation, see [`documents/docs_sidebar.jso
 
 ## 🛠️ Getting Started
 
+### Installation
+
+```bash
+# Install Python dependencies and set up environment
+make install
+```
+
+### Linting
+
+```bash
+make lint
+```
+
+### Documentation
+
+```bash
+make docs
+```
+
+### Scripts
+
+- All utility scripts are accessible via a unified CLI:
+
+```bash
+python scripts/cli.py --help
+```
+
+Subcommands:
+
+- `init-session`: Initialize a new session
+- `init-template`: Initialize a new template
+- `check-links`: Validate documentation links
+
 ### Prerequisites
 
 - Node.js v18+
 - Python 3.11+
+- [uv](https://github.com/astral-sh/uv) (for Python dependency management, Poetry-compatible)
 - [Other dependencies as listed in `pyproject.toml` and `project_context.md`]
 
 ### Setup
@@ -68,7 +111,11 @@ cd Vibe-Coding
 # (Optional) Set up Python environment
 python -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt  # Or use poetry/uv as appropriate
+uv venv
+uv pip install -r pyproject.toml  # Or use 'uv pip install -e .' if using editable mode
+
+# Or, to install all dependencies and activate the venv in one step:
+uv venv && uv pip install -r pyproject.toml
 
 # (Optional) Set up Node environment for frontend
 cd client
