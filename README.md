@@ -38,7 +38,7 @@ Windsurf, and other tools for hierarchical navigation and onboarding.
 <details>
 <summary>Key Documents</summary>
 
-- **CHANGELOG.md**: [`docs/CHANGELOG.md`](docs/CHANGELOG.md)
+- **CHANGELOG.md**: [`documents/execution/CHANGELOG.md`](documents/execution/CHANGELOG.md)
 - **Playbook**: [`documents/playbook.md`](documents/playbook.md)
 - **PRD**: [`documents/planning/prd.md`](documents/planning/prd.md)
 - **Scope Appendix**: [`documents/planning/scope_appendix.md`](documents/planning/scope_appendix.md)
@@ -64,9 +64,14 @@ For the full documentation tree and navigation, see [`documents/docs_sidebar.jso
 ### Installation
 
 ```bash
-# Install Python dependencies and set up environment
-make install
+# Set up Python environment and install dependencies
+uv venv
+uv sync
 ```
+
+All Python dependency management is now handled by [UV](https://github.com/astral-sh/uv). See `/pyproject.toml` for dependencies.
+
+> **Note:** All editor and CI configuration is now centralized under `/config` (see `/config/editor`, `/config/ci`, `/config/github`).
 
 ### Linting
 
@@ -98,7 +103,7 @@ Subcommands:
 
 - Node.js v18+
 - Python 3.11+
-- [uv](https://github.com/astral-sh/uv) (for Python dependency management, Poetry-compatible)
+- [uv](https://github.com/astral-sh/uv) (for Python dependency management, replacing Poetry; see [Adopting UV and Cleaning Up Editor_CI Config Redun.md])
 - [Other dependencies as listed in `pyproject.toml` and `project_context.md`]
 
 ### Setup
