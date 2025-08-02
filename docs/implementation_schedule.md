@@ -5,12 +5,11 @@ track tasks, and manage risks. It answers the questions "Who, when, and on what?
 Sprint Overview
 Current Sprint: Sprint 1 (MVP)
 
-Sprint Goal: [A one-sentence goal for the current sprint, e.g., "Build and test the core user
-authentication flow."]
+Sprint Goal: {{ sprint_goal }}
 
-Dates: [YYYY-MM-DD] to [YYYY-MM-DD]
+Dates: {{ start_date }} to {{ end_date }}
 
-Velocity: [Completed Story Points] / [Planned Story Points]
+Velocity: {{ completed_story_points }} / {{ planned_story_points }}
 
 Task Board
 Active Sprint
