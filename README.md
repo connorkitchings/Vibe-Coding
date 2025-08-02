@@ -1,174 +1,67 @@
-# Vibe Coding Project
+# Vibe Coding Data Science Template
 
-Welcome to the Vibe Coding Project! This repository leverages the Vibe Coding System—a
-documentation-driven workflow for efficient, high-quality software development with AI-assisted collaboration.
+Welcome to the Vibe Coding Data Science Template! This repository provides a
+production-ready, highly automated foundation for data science and machine
+learning projects. It is built on the principles of the Vibe Coding System,
+emphasizing observability, reproducibility, and efficient AI-assisted
+collaboration.
 
----
+This template is not just another collection of files; it's a **system** designed to accelerate
+data science projects by solving common pain points out-of-the-box. It enforces best practices
+in a lightweight, automated way so you can focus on building, not boilerplate.
 
-## 🚀 Project Overview
-
-- **Goal**: [Summarize your project’s purpose and outcome. See `documents/planning/prd.md` → GOAL section.]
-- **Tech Stack**: Python 3.11+, FastAPI, React 18.x, PostgreSQL, Tailwind CSS (see `documents/planning/project_context.md`)
-- **Current Status**: [Reference active sprint and status from `implementation_schedule.md`]
-
----
-
-## 📂 Repository Structure
-
-- `/client`: React frontend
-- `/server`: FastAPI backend
-- `/documents`: All project documentation (see below)
-- `/scripts`: Automation and utility scripts
-- `/config`: Centralized configuration for editor, CI, and GitHub workflows (see subfolders)
-  - `config/editor`: Editor settings (formerly `.vscode`)
-  - `config/ci`: CI configuration (formerly `.windsurf`)
-  - `config/github`: GitHub workflows and templates (formerly `.github`)
+For a deep dive into the methodology and guides, please see our
+[full documentation site](./docs/index.md).
 
 ---
 
-## 📑 Documentation Navigation
+## 🚀 Getting Started
 
-All project documentation is organized and navigable via the sidebar structure in
-[`documents/docs_sidebar.json`](documents/docs_sidebar.json). This sidebar is used by VS Code,
-Windsurf, and other tools for hierarchical navigation and onboarding.
+For a complete guide on setting up your local development environment, please see the
+[Getting Started Guide](./docs/getting_started.md).
 
-- **Getting Started Guide**: [`documents/guides/getting_started.md`]
-(documents/guides/getting_started.md) provides an AI-driven onboarding workflow.
-
-<details>
-<summary>Key Documents</summary>
-
-- **CHANGELOG.md**: [`documents/execution/CHANGELOG.md`](documents/execution/CHANGELOG.md)
-- **Playbook**: [`documents/playbook.md`](documents/playbook.md)
-- **PRD**: [`documents/planning/prd.md`](documents/planning/prd.md)
-- **Scope Appendix**: [`documents/planning/scope_appendix.md`](documents/planning/scope_appendix.md)
-- **Implementation Schedule**: [`documents/planning/implementation_schedule.md`](documents/planning/implementation_schedule.md)
-- **Project Context**: [`documents/planning/project_context.md`](documents/planning/project_context.md)
-- **Dev Log**: [`documents/execution/dev_log.md`](documents/execution/dev_log.md)
-- **Knowledge Base**: [`documents/execution/knowledge_base.md`](documents/execution/knowledge_base.md)
-- **Quality Gates**: [`documents/execution/quality_gates.md`](documents/execution/quality_gates.md)
-- **Guides**: [`documents/guides/`](documents/guides/)
-  - **Getting Started**: [`documents/guides/getting_started.md`](documents/guides/getting_started.md)
-- **Current Context**: [`documents/_current_context.md`](documents/_current_context.md)
-
-</details>
-
-For the full documentation tree and navigation, see [`documents/docs_sidebar.json`]
-(documents/docs_sidebar.json). All documents are cross-linked using a standardized reference system
-(see Playbook for details).
+For detailed usage guides (running tests, docs, pipelines), please see our
+[full documentation site](./docs/index.md).
 
 ---
 
-## 🛠️ Getting Started
+## 📂 Project Structure
 
-### Installation
-
-```bash
-# Set up Python environment and install dependencies
-uv venv
-uv sync
+```text
+.vibe-coding-template/
+├── .github/              # GitHub Actions workflows and templates
+├── data/                 # Raw and processed data (not committed)
+├── docs/                 # Simplified project documentation
+├── models/               # Trained model artifacts (not committed)
+├── notebooks/            # Jupyter notebooks for exploration and analysis
+├── reports/              # Generated reports and figures
+├── scripts/              # Utility and automation scripts
+├── session_logs/         # Chronological development session logs
+├── src/                  # Project source code
+│   ├── flows/            # Prefect orchestration flows
+│   └── utils/            # Shared utility modules
+├── .dockerignore         # Files to ignore in Docker builds
+├── .gitignore            # Files to ignore in Git
+├── .pre-commit-config.yaml # Configuration for pre-commit hooks
+├── Dockerfile            # Multi-stage Dockerfile for containerization
+├── mkdocs.yml            # Configuration for MkDocs
+├── prefect.yaml          # Configuration for Prefect deployments
+├── pyproject.toml        # Project metadata and dependencies
+└── README.md             # This file
 ```
-
-All Python dependency management is now handled by [UV](https://github.com/astral-sh/uv).
-See `/pyproject.toml` for dependencies.
-
-> **Note:** All editor and CI configuration is now centralized under `/config`
-(see `/config/editor`, `/config/ci`, `/config/github`).
-
-### Linting
-
-This project uses [Ruff](https://docs.astral.sh/ruff/) for Python linting and [cSpell]
-(<https://cspell.org/>) for spelling and language linting.
-
-#### Run Ruff (Python linter)
-
-```bash
-ruff check documents/ server/ client/ scripts/
-```
-
-#### Run cSpell (spelling linter)
-
-```bash
-cspell "documents/**/*.md" "server/**/*.py" "client/**/*.js" "scripts/**/*.py"
-```
-
-> **Note:** See `/config/editor/settings.json` for editor integration and recommended VS Code extensions.
->
-### Documentation
-
-```bash
-make docs
-```
-
-### Scripts
-
-- All utility scripts are accessible via a unified CLI:
-
-```bash
-python scripts/cli.py --help
-```
-
-Subcommands:
-
-- `init-session`: Initialize a new session
-- `init-template`: Initialize a new template
-- `check-links`: Validate documentation links
-
-### Prerequisites
-
-- Node.js v18+
-- Python 3.11+
-- [uv](https://github.com/astral-sh/uv) (for Python dependency management, replacing Poetry;
-  see [Adopting UV and Cleaning Up Editor_CI Config Redun.md])
-- [Other dependencies as listed in `pyproject.toml` and `project_context.md`]
-
-### Setup
-
-```bash
-# Clone the repo
-git clone https://github.com/connorkitchings/Vibe-Coding.git
-cd Vibe-Coding
-
-# (Optional) Set up Python environment
-python -m venv venv
-source venv/bin/activate
-uv venv
-uv pip install -r pyproject.toml  # Or use 'uv pip install -e .' if using editable mode
-
-# Or, to install all dependencies and activate the venv in one step:
-uv venv && uv pip install -r pyproject.toml
-
-# (Optional) Set up Node environment for frontend
-cd client
-npm install
-```
-
----
-
-## 🧭 Development Workflow
-
-- Follow the Vibe Coding System: update session logs, reference the playbook, and link all
-  decisions and artifacts.
-- Use the checklists in `quality_gates.md` before committing or merging code.
-- Document all reusable patterns in the knowledge base.
 
 ---
 
 ## 🤝 Contributing
 
-Please read the [global_rules.md](documents/global_rules.md) and
-[quality_gates.md](documents/execution/quality_gates.md) before contributing. All contributions
-should follow the standards and workflow described in the playbook.
+Contributions are welcome! Please follow the guidelines below:
 
----
-
-## 📬 Contact
-
-- Author: Connor Kitchings (<connor.kitchings@gmail.com>)
-- For more details, see the [Vibe Coding Playbook](documents/Vibe%20Coding%20Playbook.md).
+- All contributions must be submitted via a pull request.
+- Please use the [pull request template](./.github/pull_request_template.md).
+- For a detailed guide on our review standards, see the [Development Standards & Workflow](./docs/development_standards.md).
 
 ---
 
 ## 📄 License
 
-[Specify your license here]
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
