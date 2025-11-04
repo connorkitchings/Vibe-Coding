@@ -1,28 +1,21 @@
----
-title: Documentation Changelog
-created: 2025-07-20
----
+# Changelog
 
-## Documentation Changelog
+All notable changes to this project will be documented in this file.
 
-This changelog tracks significant changes to the documentation set, templates, and automation
-scripts for the Vibe Coding System. For codebase changes, see the project repository commit history.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### [2025-07-20]
+## [Unreleased]
 
-- Major documentation consolidation: merged, renamed, and condensed core docs.
+### Added
+- Initial project setup.
 
-- Sidebar navigation added via docs_sidebar.json; README navigation updated.
+### Changed
 
-- AI flows and prompt templates consolidated in .windsurf.
+### Deprecated
 
-- Automation scripts enhanced: session_setup.py (YAML output), template_init.py (--clean flag),
-  validate_links.py (anchor type filtering).
+### Removed
 
-- Removed legacy/duplicate files, including Executive Summary.md.
+### Fixed
 
-- Markdown lint and cross-linking improved across all docs.
-
-## [Earlier]
-
-- Initial documentation structure and templates established.
+### Security

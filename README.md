@@ -17,11 +17,54 @@ For a deep dive into the methodology and guides, please see our
 
 ## 🚀 Getting Started
 
-For a complete guide on setting up your local development environment, please see the
-[Getting Started Guide](./docs/getting_started.md).
+### Prerequisites
 
-For detailed usage guides (running tests, docs, pipelines), please see our
-[full documentation site](./docs/index.md).
+- [Python 3.11+](https://www.python.org/downloads/)
+- [uv](https://github.com/astral-sh/uv)
+- [Docker](https://www.docker.com/get-started)
+- [pre-commit](https://pre-commit.com/#installation)
+
+### Installation
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/your-username/your-repo-name.git
+    cd your-repo-name
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    uv sync
+    ```
+
+3.  **Install pre-commit hooks:**
+
+    ```bash
+    pre-commit install
+    ```
+
+### Running the project
+
+1.  **Run the example flow:**
+
+    ```bash
+    prefect server start &
+    python src/vibe_coding/flows/example_flow.py
+    ```
+
+2.  **Run the tests:**
+
+    ```bash
+    pytest
+    ```
+
+3.  **Build the documentation:**
+
+    ```bash
+    mkdocs serve
+    ```
 
 ---
 
@@ -31,15 +74,17 @@ For detailed usage guides (running tests, docs, pipelines), please see our
 .vibe-coding-template/
 ├── .github/              # GitHub Actions workflows and templates
 ├── data/                 # Raw and processed data (not committed)
-├── docs/                 # Simplified project documentation
+├── docs/                 # Project documentation
 ├── models/               # Trained model artifacts (not committed)
 ├── notebooks/            # Jupyter notebooks for exploration and analysis
 ├── reports/              # Generated reports and figures
 ├── scripts/              # Utility and automation scripts
 ├── session_logs/         # Chronological development session logs
 ├── src/                  # Project source code
-│   ├── flows/            # Prefect orchestration flows
-│   └── utils/            # Shared utility modules
+│   ├── vibe_coding/      # Source code for the project
+│   │   ├── flows/        # Prefect orchestration flows
+│   │   └── utils/        # Shared utility modules
+│   └── tests/            # Unit and integration tests
 ├── .dockerignore         # Files to ignore in Docker builds
 ├── .gitignore            # Files to ignore in Git
 ├── .pre-commit-config.yaml # Configuration for pre-commit hooks
@@ -54,11 +99,7 @@ For detailed usage guides (running tests, docs, pipelines), please see our
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow the guidelines below:
-
-- All contributions must be submitted via a pull request.
-- Please use the [pull request template](./.github/pull_request_template.md).
-- For a detailed guide on our review standards, see the [Development Standards & Workflow](./docs/development_standards.md).
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ---
 

@@ -7,88 +7,94 @@ It should be updated as the project evolves, especially the DECISION LOG.
 
 ## Project Overview
 
-**Project Name:** {{ project_name }}
+**Project Name:** [Enter the project's name here]
 
-**Project Vision:** {{ project_vision }}
+**Project Vision:** [Describe the long-term vision of the project. What is the ultimate goal?]
 
-**Technical Goal:** {{ project_technical_goal }}
+**Technical Goal:** [Describe the specific, measurable technical outcome of this project.]
 
-**Repository:** {{ git_repository_link }}
+**Repository:** [Link to the project's Git repository]
 
 ## Users & User Stories
 
 ### Primary Persona
 
-**Target User:** {{ user_persona_description }}
+**Target User:** [Describe the primary user of this project. Who are they, and what do they do?]
 
-- **Name:** {{ user_persona_name }}
-- **Role:** {{ user_persona_role }}
-- **Pain Points:** {{ user_persona_pain_points }}
-- **Goals:** {{ user_persona_goals }}
+- **Name:** [Give the persona a name]
+- **Role:** [What is their job title or role?]
+- **Pain Points:** [What problems does this persona face that the project will solve?]
+- **Goals:** [What does this persona want to achieve?]
 
 ### Core User Stories
 
-As a {{ user_type }}, I want {{ functionality }} so that {{ benefit_value }}.
+As a [user type], I want [functionality] so that [benefit/value].
 
-**Story 1:** As a {{ primary_persona }}, I want to {{ main_action }} so that {{ primary_benefit }}.
+**Story 1:** As a [primary persona], I want to [main action] so that [primary benefit].
 
 - Priority: Must-have
 
-**Story 2:** As a {{ user_type }}, I want to {{ supporting_action }} so that {{ supporting_benefit }}.
+**Story 2:** As a [user type], I want to [supporting action] so that [supporting benefit].
 
 - Priority: Should-have
 
 ## Features & Scope
 
-**Core Features:** {{ core_features }}
+**Core Features:** [List the core features of the project.]
+
+For detailed documentation on specific features, data contracts, and models, refer to the `docs/api/`, `docs/data/`, and `docs/models/` directories respectively.
+
 
 ### Must-Have (MVP)
 
-**Feature A:** {{ feature_description }}
+**Feature A:** [Describe a core feature for the Minimum Viable Product.]
 
 - User Story: Story 1
-- Implementation: {{ impl_task_id }}
+- Implementation: [Link to the implementation task, e.g., a GitHub issue]
 - User Impact: High
 
-**Feature B:** {{ feature_description }}
+**Feature B:** [Describe another core feature for the MVP.]
 
 - User Story: Story 2
-- Implementation: {{ impl_task_id }}
+- Implementation: [Link to the implementation task]
 - User Impact: Medium
 
 ### Should-Have (Post-MVP)
 
-**Feature C:** {{ feature_description }}
+**Feature C:** [Describe a feature that is important but not essential for the initial launch.]
 
-- Implementation: {{ impl_task_id }}
+- Implementation: [Link to the implementation task]
 
 ### Out of Scope
 
-- {{ out_of_scope_feature }}
-- {{ out_of_scope_integration }}
+- [List any features or integrations that are explicitly out of scope for this project.]
+- [This helps to manage expectations and prevent scope creep.]
 
 ## Architecture
 
 ### High-Level Summary
 
-{{ architecture_summary }}
+[Provide a brief summary of the project's architecture. What are the major components and how do they interact?]
 
 ### System Diagram
 
 ```mermaid
-+------------------+           +------------------+           +------------------+
-| React Frontend   |   <--->   | FastAPI Backend  |   <--->   | PostgreSQL DB    |
-| (Vercel)         |           | (Render)         |           | (Supabase)       |
-+------------------+           +------------------+           +------------------+
+graph TD
+    A[User] --> B(React Frontend);
+    B --> C(FastAPI Backend);
+    C --> D(PostgreSQL DB);
+    C --> E(ML Model);
 ```
+
+*This is an example diagram. Update it to reflect your project's architecture.*
 
 ### Folder Structure
 
-- `/src`: Contains the main source code for the project
-- `/docs`: Contains all project documentation, including planning, guides, and logs
-- `/notebooks`: Contains Jupyter notebooks for experimentation and analysis
-- `/data`: Contains raw, interim, and processed data (not versioned by Git)
-- `/tests`: Contains all unit, integration, and functional tests
+- `/src`: Contains the main source code for the project.
+- `/docs`: Contains all project documentation, including planning, guides, and logs.
+- `/notebooks`: Contains Jupyter notebooks for experimentation and analysis.
+- `/data`: Contains raw, interim, and processed data (not versioned by Git).
+- `/tests`: Contains all unit, integration, and functional tests.
 
 ## Technology Stack
 
@@ -107,23 +113,26 @@ As a {{ user_type }}, I want {{ functionality }} so that {{ benefit_value }}.
 
 ### Key Assumptions
 
-**User Behavior:** We assume users will {{ assumed_user_behavior }}.
+**User Behavior:** We assume users will [describe an assumption about user behavior].
 
-- Validation: Test via user interviews in {{ impl_task_id }}
+- Validation: [How will you validate this assumption? E.g., user interviews, A/B testing]
 
-**Technical:** We assume {{ assumed_technology }}.
+**Technical:** We assume [describe a technical assumption, e.g., about a library or API].
 
-- Validation: Proof of concept in {{ impl_task_id }}
+- Validation: [How will you validate this assumption? E.g., proof of concept, load testing]
 
 ### Technical Risks
 
 | Risk | Probability | Impact | Mitigation |
 |------|-------------|--------|------------|
-| Third-party API failure | {{ risk_probability }} | {{ risk_impact }} | {{ risk_mitigation }} |
+| [Describe a potential technical risk] | [Low, Medium, High] | [Low, Medium, High] | [How will you mitigate this risk?] |
+| Third-party API failure | Medium | High | [Implement a fallback or retry mechanism] |
+
 
 ## Decision Log
 
 *Key architectural and product decisions will be recorded here as the project evolves.*
+
 
 ---
 
