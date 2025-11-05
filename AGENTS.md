@@ -8,7 +8,7 @@
 - **AGENTS.md** → Rules of engagement (guardrails, roles, escalation, quality gates)
 - Read AI_GUIDE first for "how", then AGENTS for "governance"
 
-**Read-First:** `AI_GUIDE.md` → `docs/project_charter.md` → `docs/implementation_schedule.md` → `docs/development_standards.md` → `docs/checklists.md` → `docs/ai_session_templates.md`
+**Read-First:** `AI_GUIDE.md` → `docs/template_starting_guide.md` (when converting from template) → `docs/project_charter.md` → `docs/implementation_schedule.md` → `docs/development_standards.md` → `docs/checklists.md` → `docs/ai_session_templates.md`
 
 **Status Legend:** ☐ Not Started · ▶ In Progress · ✅ Done · ⚠ Risk/Blocked
 
@@ -21,6 +21,7 @@
 ### Do
 
 - Start/End every session with the templates in `docs/ai_session_templates.md` and log to `session_logs/`.
+- When adopting this repo for a new project, run through `docs/template_starting_guide.md` before committing code.
 - Keep changes **small and testable**; 1 schedule task = 1 PR.
 - Run `uv sync` (first time), then `uv run ruff format . && uv run ruff check . && uv run pytest` before pushing.
 - Treat CLI/script output as next-step prompts; follow suggested commands.

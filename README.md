@@ -11,11 +11,18 @@ data science projects by solving common pain points out-of-the-box. It enforces 
 in a lightweight, automated way so you can focus on building, not boilerplate.
 
 For a deep dive into the methodology and guides, please see our
-[full documentation site](./docs/index.md).
+[full documentation site](./docs/index.md).  
+If you're converting this template into a named project, start with the
+[Template Kickoff Guide](./docs/template_starting_guide.md) to capture scope,
+owners, and required doc/code updates.
 
 ---
 
 ## 🚀 Getting Started
+
+If you're adopting this repository for a production project, complete the
+[Template Kickoff Guide](./docs/template_starting_guide.md) to document scope,
+owners, and initial decisions before running the steps below.
 
 ### Prerequisites
 

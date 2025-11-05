@@ -1,32 +1,37 @@
 # Project Brief
 
 ## Project Name:
-[A concise, descriptive name for the project]
+Vibe Coding Data Science Template
 
 ## Overview:
-[A brief, one-paragraph summary of the project's purpose and goals. What problem does it solve? What value does it provide?]
+The Vibe Coding Data Science Template delivers a production-ready starting point for analytics and machine-learning teams, bundling opinionated tooling, documentation, and automation so projects launch with consistent quality, observability, and reproducibility from day one.
 
 ## Key Objectives:
-- [Objective 1]
-- [Objective 2]
-- [Objective 3]
+- Provide a fully configured repository skeleton aligned with the Vibe Coding System.
+- Enable automated quality gates (linting, testing, security scans) that run locally and in CI.
+- Document workflows, checklists, and decision logs that keep AI + human collaborators aligned.
 
 ## Target Audience:
-[Who is this project for?]
+Data science leads and platform teams who need a reusable, automated foundation for new analytics or ML initiatives.
 
 ## Key Features/Deliverables:
-- [Feature/Deliverable 1]
-- [Feature/Deliverable 2]
+- Ready-to-use repo with Prefect flows, data/model stubs, tests, and CI pipeline.
+- Comprehensive documentation site covering standards, playbooks, and templates.
+- Session logging and governance framework to coordinate human and AI contributors.
 
 ## Success Metrics:
-- [How will we measure success?]
+- New projects can adopt the template and run all checks within one working day.
+- CI pipeline remains green across template updates and downstream forks.
+- Documentation stays current (≤1 week lag) with changes recorded in changelog and session logs.
 
 ## Timeline (High-Level):
-- **Start Date:** [Date]
-- **Target Completion:** [Date]
+- **Start Date:** 2025-11-04
+- **Target Completion:** 2026-01-31
 
 ## Stakeholders:
-- [List key stakeholders and their roles]
+- Connor Kitchings — Project Lead & Maintainer
+- DataOps Working Group — Validates ingestion, schemas, and data quality patterns
+- DevEx Guild — Owns CI automation and tooling upgrades
 
 ## Contact:
-[Who to contact for more information]
+Connor Kitchings (GitHub: `connorkitchings`)

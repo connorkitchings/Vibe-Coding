@@ -2,7 +2,7 @@
 
 **Purpose.** This is the shortest path to doing real work in this repo. Read this page first, then jump via the links below. Keep changes small, testable, and linked to the schedule.
 
-Read-first order: [README](./README.md) → [Project Brief](./docs/project_brief.md) → [Project Charter](./docs/project_charter.md) → [Implementation Schedule](./docs/implementation_schedule.md) → [Development Standards](./docs/development_standards.md) → [Runbook](./docs/runbook.md) → [Changelog](./CHANGELOG.md).
+Read-first order: [README](./README.md) → [Template Kickoff Guide](./docs/template_starting_guide.md) → [Project Brief](./docs/project_brief.md) → [Project Charter](./docs/project_charter.md) → [Implementation Schedule](./docs/implementation_schedule.md) → [Development Standards](./docs/development_standards.md) → [Runbook](./docs/runbook.md) → [Changelog](./CHANGELOG.md).
 
 **Status Legend:** ☐ Not Started · ▶ In Progress · ✅ Done · ⚠ Risk/Blocked
 
