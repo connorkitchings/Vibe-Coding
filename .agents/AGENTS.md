@@ -65,7 +65,26 @@ Use these lightweight "hats" to structure tasks. For solo projects, wear multipl
 
 ---
 
-## 3) Routing Rules
+## 3) Handoff Packet (Navigator → Specialist)
+
+When routing a task, the Navigator must provide a **Handoff Packet** to the Specialist agent. This ensures context is preserved without bloating the session.
+
+**Template:**
+```text
+Task: [Outcome-based title, e.g., "Implement song tease tracking endpoint"]
+DoD: [Specific success criteria, e.g., "GET /songs/{id}/teases returns 200 OK"]
+Files: [Relevant file paths with line numbers, e.g., "backend/api/songs.py:45-60"]
+Constraints: [Timebox, scope, e.g., "≤2hr, backend only, no schema changes"]
+Artifacts: [Expected outputs, e.g., "Route handler, tests, API contract update"]
+Rollback: [Plan if failure, e.g., "Revert migration 1234"]
+```
+
+**Context Budget:**
+- **Navigator:** ≤ 2.5k tokens (initial triage)
+- **Specialist:** ≤ 2k tokens (deep dive)
+- **Constraint:** Do not paste full files if >50 lines. Use file paths and read on-demand.
+
+## 4) Routing Rules
 
 1. **Start at the Schedule:** Pick a single task from `docs/implementation_schedule.md`. If missing, create a stub task first.
 2. **Create a branch:** `feature/<slug>` or `fix/<slug>` and link the task in the session log.
@@ -83,7 +102,7 @@ Use these lightweight "hats" to structure tasks. For solo projects, wear multipl
 
 ---
 
-## 4) Session Workflow (Required)
+## 5) Session Workflow (Required)
 
 - **Open:** Use **Session Start** template → capture objective, plan, and inputs.
 - **Execute:** Keep diffs small; narrate major decisions in the log.
@@ -92,7 +111,7 @@ Use these lightweight "hats" to structure tasks. For solo projects, wear multipl
 
 ---
 
-## 5) Escalation Triggers (Stop & Ask)
+## 6) Escalation Triggers (Stop & Ask)
 
 - Schema or API change detected/required
 - Secrets/auth/infra configuration touched
@@ -105,7 +124,7 @@ Use these lightweight "hats" to structure tasks. For solo projects, wear multipl
 
 ---
 
-## 6) Quality Gates (Definition of Done)
+## 7) Quality Gates (Definition of Done)
 
 A task is **Done** only when:
 
@@ -118,7 +137,7 @@ A task is **Done** only when:
 
 ---
 
-## 7) Planning & Victory Tests
+## 8) Planning & Victory Tests
 
 ### Planning Mode
 
@@ -147,7 +166,7 @@ New agents should run this trivial change to validate toolchain end-to-end:
 
 ---
 
-## 8) Minimal Command Palette
+## 9) Minimal Command Palette
 
 ```bash
 # One-time setup
@@ -163,7 +182,7 @@ mkdocs serve  # http://127.0.0.1:8000
 
 ---
 
-## 9) PR Rules (Fast Reviews)
+## 10) PR Rules (Fast Reviews)
 
 - **Scope:** Single task, minimal diff (<300 lines preferred)
 - **Title:** `feat|fix|docs|chore: <scope> [schedule:weekX-taskY]`
@@ -173,7 +192,7 @@ mkdocs serve  # http://127.0.0.1:8000
 
 ---
 
-## 10) Common Failure Paths & Fixes
+## 11) Common Failure Paths & Fixes
 
 ### Code/Test Issues
 
@@ -191,7 +210,7 @@ mkdocs serve  # http://127.0.0.1:8000
 
 ---
 
-## 11) Links (Jump Table)
+## 12) Links (Jump Table)
 
 - **Front Door:** `AI_GUIDE.md`
 - **Project Brief:** `docs/project_brief.md`
@@ -206,7 +225,7 @@ mkdocs serve  # http://127.0.0.1:8000
 
 ---
 
-## 12) When to Update This Doc
+## 13) When to Update This Doc
 
 Update AGENTS.md when:
 

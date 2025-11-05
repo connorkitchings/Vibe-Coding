@@ -15,6 +15,27 @@ workflows into a single reference.
 - **AI as Co-Pilot:** Use AI for generation, review, and ideation, but always validate its output
 - **Continuous Documentation:** Documentation preserves context and decisions
 
+## Idempotence & Data Safety
+
+- **Idempotence is Mandatory:**
+  - Migrations MUST check for existence before creating tables/columns/indexes.
+  - Ingestion scripts MUST be re-runnable without duplicating data (use `upsert` or `merge`).
+- **Data Safety:**
+  - ALWAYS backup before destructive operations.
+  - Never run `drop_all` in production.
+
+## Performance Budgets (Dev Targets)
+
+- **API Response:** < 400ms p95 for list endpoints.
+- **Ingestion:** Hourly/daily jobs must finish within 10% of their frequency window.
+- **Database:** All queries in hot paths must hit an index.
+
+## State Management (Web)
+
+- **Prefer Server State:** Use tools like **TanStack Query** or **SWR** for data fetching.
+- **Avoid Overkill:** Do not reach for Redux or complex global stores unless absolutely necessary.
+- **Principle:** "Server State > Client State" keeps the frontend lean and logic in the API.
+
 ## Development Workflow
 
 ### Branch Strategy

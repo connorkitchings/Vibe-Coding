@@ -3058,19 +3058,19 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "bandit", marker = "extra == 'dev'", specifier = ">=1.8.6" },
-    { name = "jupyter", marker = "extra == 'dev'", specifier = ">=1.1.1" },
-    { name = "mkdocs", marker = "extra == 'dev'", specifier = ">=1.6.1" },
-    { name = "mkdocs-material", marker = "extra == 'dev'", specifier = ">=9.6.23" },
-    { name = "mkdocstrings", extras = ["python"], marker = "extra == 'dev'", specifier = ">=0.30.1" },
-    { name = "mlflow", marker = "extra == 'dev'", specifier = ">=3.5.1" },
+    { name = "bandit", marker = "extra == 'dev'", specifier = ">=1.7.9" },
+    { name = "jupyter", marker = "extra == 'dev'", specifier = ">=1.0" },
+    { name = "mkdocs", marker = "extra == 'dev'", specifier = ">=1.6.0" },
+    { name = "mkdocs-material", marker = "extra == 'dev'", specifier = ">=9.0" },
+    { name = "mkdocstrings", extras = ["python"], marker = "extra == 'dev'", specifier = ">=0.25.0" },
+    { name = "mlflow", marker = "extra == 'dev'", specifier = ">=2.0" },
     { name = "nbformat", marker = "extra == 'dev'", specifier = ">=5.10.4" },
-    { name = "nbstripout", marker = "extra == 'dev'", specifier = ">=0.8.1" },
-    { name = "openlineage-python", marker = "extra == 'dev'", specifier = ">=1.39.0" },
-    { name = "prefect", marker = "extra == 'dev'", specifier = ">=3.5.0" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.4.2" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.14.3" },
-    { name = "safety", marker = "extra == 'dev'", specifier = ">=3.6.2" },
+    { name = "nbstripout", marker = "extra == 'dev'", specifier = ">=0.7.1" },
+    { name = "openlineage-python", marker = "extra == 'dev'", specifier = ">=1.15.0" },
+    { name = "prefect", marker = "extra == 'dev'", specifier = ">=2.19.0" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.5.0" },
+    { name = "safety", marker = "extra == 'dev'", specifier = ">=2.3.5" },
 ]
 provides-extras = ["dev"]
 
