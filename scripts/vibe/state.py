@@ -93,14 +93,31 @@ class VibeState:
         self.save()
 
     def start_sprint(self, objective: str) -> str:
-        """Initialize a new sprint."""
-        sprint_id = f"sprint-{datetime.now().strftime('%Y-%m-%d-%H%M%S')}"
-        session_log = f"session_logs/{datetime.now().strftime('%Y-%m-%d')}_sprint-{sprint_id}.md"
+        """Initialize a new sprint with date-based logging."""
+        now = datetime.now()
+        date_str = now.strftime("%Y-%m-%d")
+        log_dir = self.project_root / "session_logs" / date_str
+        log_dir.mkdir(parents=True, exist_ok=True)
+
+        # Determine sequence number
+        existing_logs = list(log_dir.glob("*.md"))
+        seq = len(existing_logs) + 1
+
+        # Create slug from objective
+        slug = "".join(c if c.isalnum() else "-" for c in objective.lower()).strip("-")
+        slug = "-".join(filter(None, slug.split("-")))[:30]  # Limit length and clean up
+
+        sprint_id = f"{date_str}-{seq:02d}"
+        session_log_name = f"{seq:02d}-{slug}.md"
+        session_log_path = log_dir / session_log_name
+
+        # Store relative path for portability
+        session_log_rel = str(session_log_path.relative_to(self.project_root))
 
         self.set("sprint.id", sprint_id)
         self.set("sprint.status", "planning")
         self.set("sprint.objective", objective)
-        self.set("session_log", session_log)
+        self.set("session_log", session_log_rel)
         self.save()
 
         return sprint_id
@@ -109,44 +126,22 @@ class VibeState:
         """Return default state structure."""
         return {
             "version": "1.0",
-            "sprint": {
-                "id": None,
-                "status": None,
-                "objective": None
-            },
-            "context": {
-                "repo_summary_path": None,
-                "token_budget_used": 0
-            },
-            "plan": {
-                "path": None,
-                "tasks": []
-            },
+            "sprint": {"id": None, "status": None, "objective": None},
+            "context": {"repo_summary_path": None, "token_budget_used": 0},
+            "plan": {"path": None, "tasks": []},
             "session_log": None,
             "blackboard": {
                 "messages": [],
                 "blockers": [],
                 "insights": [],
-                "questions": []
+                "questions": [],
             },
             "metrics": {
-                "token_usage": {
-                    "gemini": 0,
-                    "claude": 0,
-                    "codex": 0
-                },
-                "task_stats": {
-                    "total": 0,
-                    "completed": 0,
-                    "failed": 0
-                },
+                "token_usage": {"gemini": 0, "claude": 0, "codex": 0},
+                "task_stats": {"total": 0, "completed": 0, "failed": 0},
                 "phase_times": {},
-                "agent_invocations": {
-                    "gemini": 0,
-                    "claude": 0,
-                    "codex": 0
-                }
-            }
+                "agent_invocations": {"gemini": 0, "claude": 0, "codex": 0},
+            },
         }
 
     @property
@@ -169,54 +164,66 @@ class VibeState:
         return None
 
     # Blackboard methods
-    def post_message(self, agent: str, message_type: str, content: str, severity: str = "info") -> None:
+    def post_message(
+        self, agent: str, message_type: str, content: str, severity: str = "info"
+    ) -> None:
         """Post a message to the blackboard for other agents to see."""
         messages = self.get("blackboard.messages", [])
-        messages.append({
-            "timestamp": datetime.now().isoformat(),
-            "agent": agent,
-            "type": message_type,
-            "content": content,
-            "severity": severity
-        })
+        messages.append(
+            {
+                "timestamp": datetime.now().isoformat(),
+                "agent": agent,
+                "type": message_type,
+                "content": content,
+                "severity": severity,
+            }
+        )
         self.set("blackboard.messages", messages)
         self.save()
 
-    def post_blocker(self, agent: str, task_id: str, description: str, error: str = None) -> None:
+    def post_blocker(
+        self, agent: str, task_id: str, description: str, error: str = None
+    ) -> None:
         """Post a blocker that needs attention from the architect."""
         blockers = self.get("blackboard.blockers", [])
-        blockers.append({
-            "timestamp": datetime.now().isoformat(),
-            "agent": agent,
-            "task_id": task_id,
-            "description": description,
-            "error": error,
-            "resolved": False
-        })
+        blockers.append(
+            {
+                "timestamp": datetime.now().isoformat(),
+                "agent": agent,
+                "task_id": task_id,
+                "description": description,
+                "error": error,
+                "resolved": False,
+            }
+        )
         self.set("blackboard.blockers", blockers)
         self.save()
 
     def post_insight(self, agent: str, insight: str) -> None:
         """Post an insight or observation for other agents."""
         insights = self.get("blackboard.insights", [])
-        insights.append({
-            "timestamp": datetime.now().isoformat(),
-            "agent": agent,
-            "insight": insight
-        })
+        insights.append(
+            {
+                "timestamp": datetime.now().isoformat(),
+                "agent": agent,
+                "insight": insight,
+            }
+        )
         self.set("blackboard.insights", insights)
         self.save()
 
     def post_question(self, agent: str, question: str, context: str = None) -> None:
         """Post a question for the architect or librarian to address."""
         questions = self.get("blackboard.questions", [])
-        questions.append({
-            "timestamp": datetime.now().isoformat(),
-            "agent": agent,
-            "question": question,
-            "context": context,
-            "answered": False
-        })
+        questions.append(
+            {
+                "timestamp": datetime.now().isoformat(),
+                "agent": agent,
+                "question": question,
+                "context": context,
+                "answered": False,
+            }
+        )
         self.set("blackboard.questions", questions)
         self.save()
 
@@ -268,7 +275,7 @@ class VibeState:
             "completed": len([t for t in tasks if t.get("status") == "completed"]),
             "failed": len([t for t in tasks if t.get("status") == "failed"]),
             "in_progress": len([t for t in tasks if t.get("status") == "in_progress"]),
-            "pending": len([t for t in tasks if t.get("status") == "pending"])
+            "pending": len([t for t in tasks if t.get("status") == "pending"]),
         }
         self.set("metrics.task_stats", stats)
         self.save()
@@ -281,7 +288,7 @@ class VibeState:
             "phase_times": self.get("metrics.phase_times", {}),
             "agent_invocations": self.get("metrics.agent_invocations", {}),
             "total_tokens": sum(self.get("metrics.token_usage", {}).values()),
-            "success_rate": self._calculate_success_rate()
+            "success_rate": self._calculate_success_rate(),
         }
 
     def _calculate_success_rate(self) -> float:

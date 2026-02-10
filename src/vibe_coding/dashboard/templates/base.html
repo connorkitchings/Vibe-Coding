@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gemini: '#8E44AD', # Purple
+                        claude: '#D35400', # Orange
+                        codex: '#27AE60',  # Green
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen">
+    <nav class="bg-gray-800 border-b border-gray-700 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                    Vibe Dashboard
+                </span>
+                <span class="px-2 py-1 rounded text-xs font-mono bg-gray-700 text-gray-300">
+                    v1.0.0
+                </span>
+            </div>
+
+            <!-- Pulse View -->
+            <div id="pulse-indicator" class="flex items-center space-x-2">
+                {% block pulse %}
+                <!-- Pulse content will be injected here -->
+                {% endblock %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="text-center text-gray-500 text-sm p-4 mt-8">
+        MADE Orchestrator Control Center
+    </footer>
+</body>
+</html>
