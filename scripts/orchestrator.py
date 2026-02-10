@@ -25,6 +25,17 @@ COMMANDS = {
     "test": "uv run pytest",
     "lint": "uv run ruff check .",
     "format": "uv run ruff format .",
+    # MADE Orchestrator commands
+    "vibe": "uv run python scripts/vibe/made.py",
+    "vibe-status": "uv run python scripts/vibe/made.py status",
+    "vibe-reset": "uv run python scripts/vibe/made.py reset",
+    "vibe-context": "uv run python scripts/vibe/made.py context",
+    "vibe-plan": "uv run python scripts/vibe/made.py plan",
+    "vibe-exec": "uv run python scripts/vibe/made.py exec",
+    "vibe-verify": "uv run python scripts/vibe/made.py verify",
+    "vibe-sprint": "uv run python scripts/vibe/made.py sprint",
+    "vibe-blackboard": "uv run python scripts/vibe/made.py blackboard",
+    "vibe-metrics": "uv run python scripts/vibe/made.py metrics",
 }
 
 

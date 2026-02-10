@@ -3,7 +3,11 @@ name = "vibe-coding-template"
 version = "0.1.0"
 description = "A template for Vibe Coding data science projects."
 authors = [{ name = "Connor Kitchings", email = "connor.kitchings@gmail.com" }]
-dependencies = []
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+]
 
 [project.optional-dependencies]
 dev = [
@@ -27,9 +31,6 @@ line-length = 88
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "W"]
-
-[tool.uv.scripts]
-docs = "mkdocs serve"
 
 [build-system]
 requires = ["setuptools>=61.0"]
