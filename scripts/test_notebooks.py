@@ -8,6 +8,7 @@ from nbconvert.preprocessors import ExecutePreprocessor
 
 NOTEBOOK_DIR = "notebooks"
 
+
 def main():
     notebook_files = [
         os.path.join(NOTEBOOK_DIR, f)
@@ -41,6 +42,7 @@ def main():
         print(f"--- {notebook_filename} passed ---")
 
     print("\nAll notebooks executed successfully!")
+
 
 if __name__ == "__main__":
     main()

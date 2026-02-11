@@ -1,115 +1,309 @@
-# Vibe Coding Data Science Template
+# Vibe Coding Template
 
-Welcome to the Vibe Coding Data Science Template! This repository provides a
-production-ready, highly automated foundation for data science and machine
-learning projects. It is built on the principles of the Vibe Coding System,
-emphasizing observability, reproducibility, and efficient AI-assisted
-collaboration.
+> **A lean, practical template for AI-assisted development supporting multiple AI coding tools.**
 
-This template is not just another collection of files; it's a **system** designed to accelerate
-data science projects by solving common pain points out-of-the-box. It enforces best practices
-in a lightweight, automated way so you can focus on building, not boilerplate.
+**Version 2.0** — Multi-Tool Template (Claude Code, Gemini CLI, Codex CLI, Antigravity)
 
-For a deep dive into the methodology and guides, please see our
-[full documentation site](./docs/index.md).  
-If you're converting this template into a named project, start with the
-[Template Kickoff Guide](./docs/template_starting_guide.md) to capture scope,
-owners, and required doc/code updates.
+---
+
+## 🎯 What This Template Provides
+
+This is a **Vibe Coding template** designed for "medium sophistication" AI-assisted development. It provides:
+
+- ✅ **Multi-tool AI guidance** — Works with Claude Code, Gemini CLI, Codex CLI, and Antigravity
+- ✅ **Session management** — Structured workflows for starting, working, and closing sessions
+- ✅ **Quality gates** — Pre-commit checks, linting, testing, and health checks
+- ✅ **Development standards** — Coding guidelines, checklists, and best practices
+- ✅ **Documentation structure** — MkDocs-ready documentation with templates
+- ✅ **Working defaults** — Everything works out of the box
+
+**Philosophy**: Practical patterns proven in real-world projects (cfb_model, PanicStats, JamBandNerd).
 
 ---
 
 ## 🚀 Getting Started
 
-If you're adopting this repository for a production project, complete the
-[Template Kickoff Guide](./docs/template_starting_guide.md) to document scope,
-owners, and initial decisions before running the steps below.
-
 ### Prerequisites
 
-- [Python 3.11+](https://www.python.org/downloads/)
-- [uv](https://github.com/astral-sh/uv)
-- [Docker](https://www.docker.com/get-started)
-- [pre-commit](https://pre-commit.com/#installation)
+- **Python 3.10+** ([Download](https://www.python.org/downloads/))
+- **uv** ([Install](https://github.com/astral-sh/uv))
+- **Git** for version control
 
-### Installation
+### Quick Start
 
-1.  **Clone the repository:**
+1. **Use this template:**
+   ```bash
+   # Clone or use as GitHub template
+   git clone https://github.com/your-username/Vibe-Coding.git
+   cd Vibe-Coding
+   ```
 
-    ```bash
-    git clone https://github.com/your-username/your-repo-name.git
-    cd your-repo-name
-    ```
+2. **Install dependencies:**
+   ```bash
+   uv sync
+   ```
 
-2.  **Install dependencies:**
+3. **Read the agent guidance:**
+   ```bash
+   # Start here for AI-assisted development
+   cat AGENTS.md
 
-    ```bash
-    uv sync
-    ```
+   # Or for your specific tool:
+   cat CLAUDE.md    # Claude Code
+   cat GEMINI.md    # Gemini CLI
+   ```
 
-3.  **Install pre-commit hooks:**
+4. **Start a session:**
+   - Check branch: `git branch` (never work on `main`)
+   - Create feature branch: `git checkout -b feat/your-feature`
+   - Read: `.agent/CONTEXT.md`
+   - Follow: `.agent/skills/start-session/SKILL.md`
 
-    ```bash
-    pre-commit install
-    ```
+### For AI Coding Tools
 
-### Running the project
+**All tools read the same files:**
+- `AGENTS.md` — Multi-tool AI guidance (start here)
+- `.agent/CONTEXT.md` — Current project state
+- `.agent/skills/` — Task workflows (start-session, end-session)
+- `.codex/QUICKSTART.md` — Essential commands
 
-1.  **Run the example flow:**
-
-    ```bash
-    prefect server start &
-    python src/vibe_coding/flows/example_flow.py
-    ```
-
-2.  **Run the tests:**
-
-    ```bash
-    pytest
-    ```
-
-3.  **Build the documentation:**
-
-    ```bash
-    mkdocs serve
-    ```
+**Tool-specific entry points:**
+- **Claude Code**: Reads `CLAUDE.md` → redirects to `AGENTS.md`
+- **Gemini CLI**: Reads `GEMINI.md` → redirects to `AGENTS.md`
+- **Codex/Antigravity**: Reads `AGENTS.md` directly
 
 ---
 
 ## 📂 Project Structure
 
-```text
-.vibe-coding-template/
-├── .github/              # GitHub Actions workflows and templates
-├── data/                 # Raw and processed data (not committed)
-├── docs/                 # Project documentation
-├── models/               # Trained model artifacts (not committed)
-├── notebooks/            # Jupyter notebooks for exploration and analysis
-├── reports/              # Generated reports and figures
-├── scripts/              # Utility and automation scripts
-├── session_logs/         # Chronological development session logs
-├── src/                  # Project source code
-│   ├── vibe_coding/      # Source code for the project
-│   │   ├── flows/        # Prefect orchestration flows
-│   │   └── utils/        # Shared utility modules
-│   └── tests/            # Unit and integration tests
-├── .dockerignore         # Files to ignore in Docker builds
-├── .gitignore            # Files to ignore in Git
-├── .pre-commit-config.yaml # Configuration for pre-commit hooks
-├── Dockerfile            # Multi-stage Dockerfile for containerization
-├── mkdocs.yml            # Configuration for MkDocs
-├── prefect.yaml          # Configuration for Prefect deployments
-├── pyproject.toml        # Project metadata and dependencies
-└── README.md             # This file
 ```
+Vibe-Coding/
+├── AGENTS.md                   # Multi-tool AI guidance (READ FIRST)
+├── CLAUDE.md                   # Redirect for Claude Code
+├── GEMINI.md                   # Redirect for Gemini CLI
+├── README.md                   # This file
+│
+├── .agent/                     # Active session management
+│   ├── CONTEXT.md              # Entry point (project snapshot)
+│   ├── skills/                 # Reusable task workflows
+│   │   ├── CATALOG.md          # Skills index
+│   │   ├── start-session/      # Session initialization
+│   │   └── end-session/        # Session closing
+│   └── workflows/              # Automation scripts
+│       └── health-check.sh     # Pre-commit validation
+│
+├── .codex/                     # Read-only context cache
+│   ├── README.md               # Purpose explanation
+│   ├── MAP.md                  # Project tree
+│   └── QUICKSTART.md           # Essential commands
+│
+├── src/                        # Source code
+│   └── vibe_coding/
+│       └── utils/
+│
+├── tests/                      # Test suite
+│   ├── api/
+│   ├── core/
+│   ├── data/
+│   └── models/
+│
+├── docs/                       # Documentation (MkDocs)
+│   ├── index.md
+│   ├── project_charter.md
+│   ├── implementation_schedule.md
+│   ├── development_standards.md
+│   ├── checklists.md
+│   └── architecture/
+│
+├── session_logs/               # Session history
+│   ├── README.md
+│   ├── TEMPLATE.md
+│   └── YYYY-MM-DD/
+│
+├── scripts/                    # Utility scripts
+├── config/                     # Configuration files
+├── pyproject.toml              # Dependencies and tooling
+└── mkdocs.yml                  # Documentation config
+```
+
+---
+
+## 🔧 Essential Commands
+
+### Development Loop
+
+```bash
+# Format and lint
+uv run ruff format . && uv run ruff check .
+
+# Run tests
+uv run pytest
+
+# Run tests quietly
+uv run pytest -q
+
+# Health check (before commits)
+sh .agent/workflows/health-check.sh
+```
+
+### Documentation
+
+```bash
+# Serve docs locally
+mkdocs serve  # http://127.0.0.1:8000
+
+# Build docs
+mkdocs build
+```
+
+### Git Workflow
+
+```bash
+# CRITICAL: Never work on main
+git branch
+
+# Create feature branch
+git checkout -b feat/<feature-name>
+
+# Commit with conventional format
+git commit -m "feat: add new feature"
+git commit -m "fix: resolve bug"
+git commit -m "docs: update documentation"
+```
+
+---
+
+## 🤖 Multi-Tool AI Support
+
+This template works with all major AI coding tools:
+
+### Claude Code (claude.ai/code)
+- Entry: `CLAUDE.md` → `AGENTS.md`
+- Skills: `.agent/skills/`
+- Context: `.agent/CONTEXT.md`
+
+### Gemini CLI
+- Entry: `GEMINI.md` → `AGENTS.md`
+- Quick ref: `.codex/QUICKSTART.md`
+
+### Codex CLI / Antigravity (VS Code fork)
+- Entry: `AGENTS.md`
+- Map: `.codex/MAP.md`
+
+**All tools share:**
+- Same session logging format
+- Same quality gates
+- Same essential commands
+- Same guardrails
+
+---
+
+## 📖 Key Documentation
+
+### For Getting Started
+- `AGENTS.md` — Multi-tool AI guidance (read first)
+- `.agent/CONTEXT.md` — Current project state
+- `.codex/QUICKSTART.md` — Essential commands
+- `docs/template_starting_guide.md` — Adapt template for your project
+
+### For Development
+- `.agent/skills/CATALOG.md` — Available workflows
+- `docs/development_standards.md` — Coding standards
+- `docs/checklists.md` — Quality gates
+- `docs/implementation_schedule.md` — Current priorities
+
+### For Reference
+- `.codex/MAP.md` — Full project tree
+- `docs/architecture/` — Architecture decisions
+- `session_logs/` — Development history
+- `docs/knowledge_base.md` — Solutions and patterns
+
+---
+
+## ✅ Quality Gates
+
+### Pre-Commit Checklist
+- [ ] Code formatted: `uv run ruff format .`
+- [ ] Linting passes: `uv run ruff check .`
+- [ ] Tests pass: `uv run pytest`
+- [ ] No secrets in code
+- [ ] Branch is not `main`
+
+### Pre-Merge Checklist
+- [ ] All pre-commit checks pass
+- [ ] Session log created
+- [ ] Documentation updated
+- [ ] Implementation schedule updated
+- [ ] Tests cover new code
+
+---
+
+## 🎓 Adapting This Template
+
+When starting a new project:
+
+1. **Read the Template Starting Guide**: `docs/template_starting_guide.md`
+2. **Update project metadata**: Edit `pyproject.toml` and `README.md`
+3. **Customize AGENTS.md**: Add project-specific critical rules
+4. **Update .agent/CONTEXT.md**: Replace template notes with your project details
+5. **Configure docs**: Update `mkdocs.yml` navigation
+6. **Create initial tasks**: Populate `docs/implementation_schedule.md`
+
+See `docs/template_starting_guide.md` for detailed instructions.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+Contributions are welcome! Please:
+1. Create a feature branch: `git checkout -b feat/<name>`
+2. Follow development standards: See `docs/development_standards.md`
+3. Run health checks: `sh .agent/workflows/health-check.sh`
+4. Create session log: See `session_logs/TEMPLATE.md`
+5. Open pull request with clear description
+
+---
+
+## 📋 Session Workflow
+
+Every development session should:
+
+**Start:**
+1. Check branch: `git branch` (create feature branch if on `main`)
+2. Read: `.agent/CONTEXT.md`
+3. Load: `.agent/skills/start-session/SKILL.md`
+4. Plan before implementing
+
+**During:**
+- Follow: `.agent/skills/CATALOG.md` for common tasks
+- Track: `docs/implementation_schedule.md` for priorities
+- Document: Decisions and issues as you go
+
+**End:**
+1. Run: `sh .agent/workflows/health-check.sh`
+2. Create: Session log in `session_logs/YYYY-MM-DD/NN.md`
+3. Update: `docs/implementation_schedule.md` if tasks completed
+4. Load: `.agent/skills/end-session/SKILL.md`
 
 ---
 
 ## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🌟 Credits
+
+Template patterns derived from successful projects:
+- **cfb_model** — Comprehensive session management and context loading
+- **PanicStats** — Skill-based workflows and entry points
+- **JamBandNerd** — Boot order, context budget, triage matrix
+
+**Vibe Coding System** — Philosophy and methodology by Connor Kitchings
+
+---
+
+**Version**: 2.0 (Multi-Tool Template)
+**Last Updated**: 2026-02-11
+**Status**: Ready for use

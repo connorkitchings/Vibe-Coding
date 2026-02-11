@@ -21,15 +21,19 @@ def relabel_project(root, old, new):
                     f.write(content)
 
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Relabel all occurrences of the default project name in .md, .py, and .json files. Optionally clean up example/template files."
+        description=(
+            "Relabel all occurrences of the default project name in "
+            ".md, .py, and .json files. Optionally clean up template files."
+        )
     )
     parser.add_argument(
         "--project",
         required=True,
-        help="New project name (will replace all occurrences of 'Vibe Coding Project')",
+        help=(
+            "New project name (will replace all occurrences of 'Vibe Coding Project')"
+        ),
     )
     parser.add_argument(
         "--root",
@@ -44,7 +48,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--clean",
         action="store_true",
-        help="If set, remove example/template files (e.g., README.example.md, sample_*.py)",
+        help=(
+            "If set, remove example/template files "
+            "(e.g., README.example.md, sample_*.py)"
+        ),
     )
     args = parser.parse_args()
     relabel_project(args.root, args.old, args.project)

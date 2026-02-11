@@ -1,0 +1,294 @@
+# Troubleshooting Guide
+
+Quick reference for diagnosing and resolving common issues.
+
+---
+
+## Triage Matrix
+
+| Issue Type | Route To | First Diagnostic | Common Fix |
+|------------|----------|------------------|------------|
+| Install/env errors | DevEx | Python version? UV installed? | `uv sync` |
+| Import errors | DevEx | Check pyproject.toml | `uv sync` |
+| Lint failures | DevEx | Run with --fix? | `uv run ruff check . --fix` |
+| Test failures | Feature/Core | Run with -vv? | `uv run pytest -vv -k <pattern>` |
+| CI-only failures | DevEx | Secrets configured? | Check workflow logs |
+| Data issues | DataOps | Schema changes? | Verify data paths |
+| API errors | Web/UI | Rate limits? Auth? | Check logs and config |
+| Performance | Feature/Core | Profiling done? | Profile before optimizing |
+| Context drift | Any | Session log stale? | Clear + resume from logs |
+| Stuck > 30min | Any | Documented blockers? | Create handoff packet |
+
+---
+
+## Common Issues
+
+### Environment Issues
+
+**Problem: `ModuleNotFoundError`**
+```bash
+# Solution: Sync dependencies
+uv sync
+
+# If still failing, check pyproject.toml dependencies
+cat pyproject.toml | grep -A 10 "dependencies"
+```
+
+**Problem: `uv: command not found`**
+```bash
+# Solution: Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+**Problem: Python version mismatch**
+```bash
+# Solution: Check required version
+python --version
+# Should be >= 3.10
+
+# Install correct version if needed
+uv python install 3.12
+```
+
+---
+
+### Code Quality Issues
+
+**Problem: Linting fails**
+```bash
+# Auto-fix most issues
+uv run ruff check . --fix
+
+# Format code
+uv run ruff format .
+
+# View specific errors
+uv run ruff check . --output-format=full
+```
+
+**Problem: Pre-commit hooks fail**
+```bash
+# Install hooks (first time)
+pre-commit install
+
+# Run all hooks manually
+pre-commit run --all-files
+
+# Skip hooks if necessary (not recommended)
+git commit --no-verify
+```
+
+---
+
+### Test Issues
+
+**Problem: Tests fail locally**
+```bash
+# Run with verbose output
+uv run pytest -vv
+
+# Run specific test file
+uv run pytest tests/test_example.py
+
+# Run tests matching pattern
+uv run pytest -k "test_pattern"
+
+# Re-run last failed tests
+uv run pytest --lf
+
+# Show print statements
+uv run pytest -s
+```
+
+**Problem: Tests pass locally but fail in CI**
+```bash
+# Check for:
+# 1. Missing dependencies in pyproject.toml
+# 2. Environment variables not set in CI
+# 3. Different Python version
+# 4. Timing/race conditions
+
+# Reproduce CI environment locally
+uv sync
+uv run pytest
+```
+
+---
+
+### Git Issues
+
+**Problem: Accidentally on main branch**
+```bash
+# Stash your changes
+git stash
+
+# Create feature branch
+git checkout -b feat/<name>
+
+# Restore your changes
+git stash pop
+```
+
+**Problem: Merge conflicts**
+```bash
+# Check which files have conflicts
+git status
+
+# Open conflicted files and resolve
+# Look for <<<<<<< HEAD markers
+
+# After resolving, mark as resolved
+git add <resolved-files>
+git commit
+```
+
+**Problem: Need to undo last commit**
+```bash
+# Undo commit but keep changes
+git reset --soft HEAD~1
+
+# Undo commit and discard changes (CAREFUL!)
+git reset --hard HEAD~1
+```
+
+---
+
+### Documentation Issues
+
+**Problem: MkDocs build fails**
+```bash
+# Check for syntax errors in markdown
+mkdocs build --strict
+
+# Validate navigation in mkdocs.yml
+cat mkdocs.yml
+
+# Common issues:
+# - Broken internal links
+# - Missing files referenced in nav
+# - YAML syntax errors
+```
+
+**Problem: Broken links in docs**
+```bash
+# Use link checker script
+python scripts/check_links.py
+
+# Manually check specific doc
+cat docs/<file>.md | grep -E "\[.*\]\(.*\)"
+```
+
+---
+
+### Session Issues
+
+**Problem: Context drift during long session**
+1. Pause and create session log documenting progress
+2. Clear chat history
+3. Resume from session log + `.agent/CONTEXT.md`
+4. Load only files needed for current task
+
+**Problem: Lost track of what to do next**
+1. Read last session log in `session_logs/`
+2. Check `docs/implementation_schedule.md`
+3. Review `.agent/CONTEXT.md` for current priorities
+
+**Problem: Stuck for > 30 minutes**
+1. Document blockers in session log
+2. Create handoff packet with context
+3. Flag for human review
+4. Consider alternate approaches or escalate to different role
+
+---
+
+### AI Agent Issues
+
+**Problem: Agent loading too much context**
+- Use tiered loading (see `AGENTS.md`)
+- Load Tier 1 only, fetch Tier 2/3 on-demand
+- Check context budget (aim for ≤10k tokens per session)
+
+**Problem: Agent making changes without approval**
+- Review permission settings
+- Ensure planning phase completes before implementation
+- Use `.agent/skills/start-session/SKILL.md` workflow
+
+**Problem: Agent not following project rules**
+- Verify critical rules in `AGENTS.md` are up-to-date
+- Check `.agent/CONTEXT.md` has current constraints
+- Update project-specific "NEVER" rules section
+
+---
+
+## Escalation Guidelines
+
+### When to Escalate
+
+- Security issues (credentials exposed, vulnerabilities)
+- Data loss or corruption risks
+- Breaking changes to public APIs
+- Production deployment issues
+- Unable to resolve after 2 serious attempts
+- Conflicting requirements or ambiguous specs
+
+### How to Escalate
+
+1. **Document thoroughly** in session log:
+   - What was attempted
+   - Results/errors observed
+   - Debugging steps taken
+   - Current state of work
+
+2. **Create handoff packet**:
+   - Clear problem statement
+   - Relevant file paths and line numbers
+   - Expected vs actual behavior
+   - Proposed solutions considered
+
+3. **Flag for review**:
+   - Tag in session log with `⚠️ ESCALATION`
+   - Update implementation schedule status
+   - Notify team via appropriate channel
+
+---
+
+## Prevention
+
+### Avoid Common Pitfalls
+
+1. **Always run health check before committing**
+   ```bash
+   sh .agent/workflows/health-check.sh
+   ```
+
+2. **Create session logs consistently**
+   - Use `.agent/skills/end-session/SKILL.md`
+   - Document decisions and blockers
+   - Update implementation schedule
+
+3. **Follow boot order when starting sessions**
+   - AGENTS.md → README.md → .agent/CONTEXT.md
+   - Review last 3-5 session logs
+   - Plan before implementing
+
+4. **Respect context budget**
+   - Load Tier 1 first, Tier 2/3 on-demand
+   - Summarize instead of loading full files
+   - Use search/grep instead of reading entire modules
+
+5. **Branch safety**
+   - Check branch before starting: `git branch`
+   - Never work directly on `main`
+   - Create descriptive feature branch names
+
+---
+
+## Getting Help
+
+- **Documentation**: `docs/` directory
+- **Session history**: `session_logs/` (last 3-5 logs)
+- **Project context**: `.agent/CONTEXT.md`
+- **Standards**: `docs/development_standards.md`
+- **Checklists**: `docs/checklists.md`
+
+If you've exhausted these resources and still blocked, document the issue thoroughly and escalate.

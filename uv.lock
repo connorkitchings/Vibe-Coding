@@ -2070,20 +2070,6 @@ wheels = [
 ]
 
 [[package]]
-name = "mkdocs-autorefs"
-version = "1.4.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "markdown" },
-    { name = "markupsafe" },
-    { name = "mkdocs" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/47/0c/c9826f35b99c67fa3a7cddfa094c1a6c43fafde558c309c6e4403e5b37dc/mkdocs_autorefs-1.4.2.tar.gz", hash = "sha256:e2ebe1abd2b67d597ed19378c0fff84d73d1dbce411fce7a7cc6f161888b6749", size = 54961, upload-time = "2025-05-20T13:09:09.886Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/87/dc/fc063b78f4b769d1956319351704e23ebeba1e9e1d6a41b4b602325fd7e4/mkdocs_autorefs-1.4.2-py3-none-any.whl", hash = "sha256:83d6d777b66ec3c372a1aad4ae0cf77c243ba5bcda5bf0c6b8a2c5e7a3d89f13", size = 24969, upload-time = "2025-05-20T13:09:08.237Z" },
-]
-
-[[package]]
 name = "mkdocs-get-deps"
 version = "0.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2126,43 +2112,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/79/9b/9b4c96d6593b2a541e1cb8b34899a6d021d208bb357042823d4d2cabdbe7/mkdocs_material_extensions-1.3.1.tar.gz", hash = "sha256:10c9511cea88f568257f960358a467d12b970e1f7b2c0e5fb2bb48cab1928443", size = 11847, upload-time = "2023-11-22T19:09:45.208Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/5b/54/662a4743aa81d9582ee9339d4ffa3c8fd40a4965e033d77b9da9774d3960/mkdocs_material_extensions-1.3.1-py3-none-any.whl", hash = "sha256:adff8b62700b25cb77b53358dad940f3ef973dd6db797907c49e3c2ef3ab4e31", size = 8728, upload-time = "2023-11-22T19:09:43.465Z" },
-]
-
-[[package]]
-name = "mkdocstrings"
-version = "0.30.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "jinja2" },
-    { name = "markdown" },
-    { name = "markupsafe" },
-    { name = "mkdocs" },
-    { name = "mkdocs-autorefs" },
-    { name = "pymdown-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c5/33/2fa3243439f794e685d3e694590d28469a9b8ea733af4b48c250a3ffc9a0/mkdocstrings-0.30.1.tar.gz", hash = "sha256:84a007aae9b707fb0aebfc9da23db4b26fc9ab562eb56e335e9ec480cb19744f", size = 106350, upload-time = "2025-09-19T10:49:26.446Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/7b/2c/f0dc4e1ee7f618f5bff7e05898d20bf8b6e7fa612038f768bfa295f136a4/mkdocstrings-0.30.1-py3-none-any.whl", hash = "sha256:41bd71f284ca4d44a668816193e4025c950b002252081e387433656ae9a70a82", size = 36704, upload-time = "2025-09-19T10:49:24.805Z" },
-]
-
-[package.optional-dependencies]
-python = [
-    { name = "mkdocstrings-python" },
-]
-
-[[package]]
-name = "mkdocstrings-python"
-version = "1.16.12"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "griffe" },
-    { name = "mkdocs-autorefs" },
-    { name = "mkdocstrings" },
-    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/bf/ed/b886f8c714fd7cccc39b79646b627dbea84cd95c46be43459ef46852caf0/mkdocstrings_python-1.16.12.tar.gz", hash = "sha256:9b9eaa066e0024342d433e332a41095c4e429937024945fea511afe58f63175d", size = 206065, upload-time = "2025-06-03T12:52:49.276Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/3b/dd/a24ee3de56954bfafb6ede7cd63c2413bb842cc48eb45e41c43a05a33074/mkdocstrings_python-1.16.12-py3-none-any.whl", hash = "sha256:22ded3a63b3d823d57457a70ff9860d5a4de9e8b1e482876fc9baabaf6f5f374", size = 124287, upload-time = "2025-06-03T12:52:47.819Z" },
 ]
 
 [[package]]
@@ -4698,41 +4647,45 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
-dev = [
-    { name = "bandit" },
+data-science = [
     { name = "jupyter" },
-    { name = "mkdocs" },
-    { name = "mkdocs-material" },
-    { name = "mkdocstrings", extra = ["python"] },
-    { name = "mlflow" },
     { name = "nbformat" },
     { name = "nbstripout" },
-    { name = "openlineage-python" },
-    { name = "prefect" },
+]
+dev = [
+    { name = "mkdocs" },
+    { name = "mkdocs-material" },
     { name = "pytest" },
     { name = "ruff" },
+]
+mlops = [
+    { name = "mlflow" },
+    { name = "openlineage-python" },
+    { name = "prefect" },
+]
+security = [
+    { name = "bandit" },
     { name = "safety" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "bandit", marker = "extra == 'dev'", specifier = ">=1.7.9" },
-    { name = "jupyter", marker = "extra == 'dev'", specifier = ">=1.0" },
+    { name = "bandit", marker = "extra == 'security'", specifier = ">=1.7.9" },
+    { name = "jupyter", marker = "extra == 'data-science'", specifier = ">=1.0" },
     { name = "mkdocs", marker = "extra == 'dev'", specifier = ">=1.6.0" },
     { name = "mkdocs-material", marker = "extra == 'dev'", specifier = ">=9.0" },
-    { name = "mkdocstrings", extras = ["python"], marker = "extra == 'dev'", specifier = ">=0.25.0" },
-    { name = "mlflow", marker = "extra == 'dev'", specifier = ">=2.0" },
-    { name = "nbformat", marker = "extra == 'dev'", specifier = ">=5.10.4" },
-    { name = "nbstripout", marker = "extra == 'dev'", specifier = ">=0.7.1" },
-    { name = "openlineage-python", marker = "extra == 'dev'", specifier = ">=1.15.0" },
-    { name = "prefect", marker = "extra == 'dev'", specifier = ">=2.19.0" },
+    { name = "mlflow", marker = "extra == 'mlops'", specifier = ">=2.0" },
+    { name = "nbformat", marker = "extra == 'data-science'", specifier = ">=5.10.4" },
+    { name = "nbstripout", marker = "extra == 'data-science'", specifier = ">=0.7.1" },
+    { name = "openlineage-python", marker = "extra == 'mlops'", specifier = ">=1.15.0" },
+    { name = "prefect", marker = "extra == 'mlops'", specifier = ">=2.19.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "rich", specifier = ">=13.0.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.5.0" },
-    { name = "safety", marker = "extra == 'dev'", specifier = ">=2.3.5" },
+    { name = "safety", marker = "extra == 'security'", specifier = ">=2.3.5" },
     { name = "typer", specifier = ">=0.9.0" },
 ]
-provides-extras = ["dev"]
+provides-extras = ["dev", "data-science", "mlops", "security"]
 
 [[package]]
 name = "waitress"

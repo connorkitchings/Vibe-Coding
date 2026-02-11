@@ -212,7 +212,3 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
-
-# MADE Orchestrator state files
-.vibe_state.json
-.vibe_state.json.bak
