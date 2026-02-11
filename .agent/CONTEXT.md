@@ -17,7 +17,8 @@
 - **Version**: 2.0 (Multi-Tool)
 - **Current Focus**: Template ready for new projects
 - **Next Milestone**: Adapt for specific project use
-- **Recent**: MADE system removed, lean multi-tool template created
+- **Recent**: Implemented `vibe-sync` CLI for session automation.
+- **Previous**: MADE system removed, lean multi-tool template created
 
 ### Architecture
 
@@ -60,6 +61,10 @@ uv run pytest
 
 # Health check (before commits)
 sh .agent/workflows/health-check.sh
+
+# Session Management
+uv run scripts/vibe_sync.py start
+uv run scripts/vibe_sync.py end
 ```
 
 ---
