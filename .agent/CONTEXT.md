@@ -17,8 +17,10 @@
 - **Version**: 2.0 (Multi-Tool)
 - **Current Focus**: Template ready for new projects
 - **Next Milestone**: Adapt for specific project use
-- **Recent**: Implemented `vibe-sync` CLI for session automation.
 - **Previous**: MADE system removed, lean multi-tool template created
+
+## Recent Activity
+- Implemented `vibe-sync` CLI for session automation.
 
 ### Architecture
 

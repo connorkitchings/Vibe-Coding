@@ -62,7 +62,7 @@ def get_last_handoff(logs) -> str:
     return "No handoff notes found in last log."
 
 
-class ContextSynthesizer:
+class ContextManager:
     def __init__(self, context_path: Path, logs_dir: Path):
         self.context_path = context_path
         self.logs_dir = logs_dir
@@ -122,33 +122,35 @@ class ContextSynthesizer:
         last_log = self.get_latest_log()
         if last_log:
             log_content = last_log["path"].read_text()
-            momentum = (
-                self.extract_section(log_content, "Work Completed")
-                or "No recent work recorded."
-            )
-            immediate_next = (
+            # Extract Blockers (Crucial)
+            blockers = self.extract_section(log_content, "Blockers")
+            if not blockers or "None" in blockers:
+                blockers = None  # Don't show if empty/none
+
+            next_steps = (
                 self.extract_section(log_content, "Next Steps")
                 or "No next steps defined."
             )
         else:
-            momentum = "No previous session logs found."
-            immediate_next = "Initialize project structure."
+            blockers = None
+            next_steps = "Initialize project structure."
 
         # Skeptical Researcher: Check for stale context
-        # (Simple heuristic implementation for now)
-        if "No next steps defined" in immediate_next:
-            immediate_next = (
-                "REVIEW REQUIRED: Last session ended without clear next steps."
-            )
+        if "No next steps defined" in next_steps:
+            next_steps = "REVIEW REQUIRED: Last session ended without clear next steps."
 
+        # Assemble Directive
         directive = f"""
 VIBE-SYNC HANDOFF
 ---
 MODE: {start_mode}
 SNAPSHOT: {snapshot.splitlines()[0] if snapshot else "N/A"}
-MOMENTUM: {momentum.splitlines()[0] if momentum else "N/A"}... (see log for details)
-IMMEDIATE_NEXT:
-{immediate_next}
+"""
+        if blockers:
+            directive += f"BLOCKERS: {blockers}\n"
+
+        directive += f"""IMMEDIATE_NEXT:
+{next_steps}
 ---
 """
         return directive.strip()
@@ -158,6 +160,41 @@ IMMEDIATE_NEXT:
             pyperclip.copy(text)
             return True
         except Exception:
+            return False
+
+    def update_recent_activity(self, activity: str):
+        """Overwrites '## Recent Activity' in CONTEXT.md."""
+        if not self.context_path.exists():
+            return False
+
+        content = self.context_path.read_text()
+
+        # Regex to find Recent Activity section
+        # Finds start of section and everything until next ## header or end of string
+        pattern = r"(## Recent Activity\n)(.*?)(\n## |\Z)"
+
+        if re.search(pattern, content, re.DOTALL):
+            # Replace logic: content before, match group 1 (header), new activity, match group 3 (next header/end)
+            # We need to construct the replacement string carefully
+            # re.sub calls a function or uses string formatting
+
+            def replacement(match):
+                header = match.group(1)
+                # content = match.group(2) # existing content (ignored)
+                next_part = match.group(3)
+
+                # Format as bullet point
+                new_entry = f"- {activity}"
+                return f"{header}{new_entry}\n{next_part}"
+
+            new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+            self.context_path.write_text(new_content)
+            return True
+        else:
+            # Section doesn't exist, try to append it after Project Snapshot?
+            # Or just fail since we expect the structure from template?
+            # Let's try to append to "Current State" if "Recent Activity" is missing
+            # (Migration)
             return False
 
 
@@ -216,14 +253,14 @@ def start(
     # project_snapshot = get_context_section(context_content, "Project Snapshot")
     # critical_rules = get_context_section(context_content, "Critical Rules")
 
-    # 4. Generate Prime Directive via Synthesizer
-    synthesizer = ContextSynthesizer(CONTEXT_FILE, SESSION_LOGS_DIR)
-    prime_directive = synthesizer.generate_prime_directive(mode)
+    # 4. Generate Prime Directive via Manager
+    manager = ContextManager(CONTEXT_FILE, SESSION_LOGS_DIR)
+    prime_directive = manager.generate_prime_directive(mode)
 
     # 5. Output and Copy
     console.print(Panel(prime_directive, title="Prime Directive", style="bold green"))
 
-    if synthesizer.copy_to_clipboard(prime_directive):
+    if manager.copy_to_clipboard(prime_directive):
         console.print("[bold green]✓ Copied to clipboard![/bold green]")
     else:
         console.print("[yellow]Clipboard copy failed. Please copy manually.[/yellow]")
@@ -298,8 +335,11 @@ def end(
 ### Commands Run
 (Auto-generated placeholder)
 
-## Handoff Notes
-- **For next session**: {next_steps}
+## Blockers
+{blockers}
+
+## Next Steps
+{next_steps}
 """
 
     filepath.write_text(content)
@@ -319,22 +359,17 @@ def update(
     """
     Update the 'Recent' status in CONTEXT.md.
     """
-    if not CONTEXT_FILE.exists():
-        console.print("[red]CONTEXT.md not found![/red]")
-        return
-
-    content = CONTEXT_FILE.read_text()
-
-    # Regex to find the Recent line
-    # Matches: - **Recent**: ...
-    pattern = r"(- \*\*Recent\*\*: ).*"
-
-    if re.search(pattern, content):
-        new_content = re.sub(pattern, f"\\1{recent}", content)
-        CONTEXT_FILE.write_text(new_content)
-        console.print(f"[green]Updated 'Recent' in CONTEXT.md:[/green] {recent}")
+    manager = ContextManager(CONTEXT_FILE, SESSION_LOGS_DIR)
+    if manager.update_recent_activity(recent):
+        console.print(
+            f"[green]Updated 'Recent Activity' in CONTEXT.md:[/green] {recent}"
+        )
     else:
-        console.print("[yellow]Could not find 'Recent' line in CONTEXT.md[/yellow]")
+        # Fallback for migration or missing section
+        console.print(
+            "[yellow]Could not find '## Recent Activity' in CONTEXT.md. "
+            "Please check file structure.[/yellow]"
+        )
 
     # Also touch the file to ensure timestamp update if needed
     CONTEXT_FILE.touch()
