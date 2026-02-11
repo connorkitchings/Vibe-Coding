@@ -24,46 +24,87 @@
 
 ## Development Skills
 
-<!-- ⚠️ TEMPLATE NOTE: Add project-specific skills here -->
-
-### Example: database-migration
+### database-migration
 **Path**: `.agent/skills/database-migration/SKILL.md`
-**Purpose**: Create and apply database migrations safely
-**Triggers**: "migration", "schema change", "database update"
+**Purpose**: Create and apply database migrations safely using Alembic
+**Triggers**: "migration", "schema change", "database update", "alembic"
 **Outputs**: Migration file, rollback plan, test verification
-**Use when**: Modifying database schema
+**Use when**: Modifying database schema, adding tables/columns
 
-### Example: api-endpoint
+### data-ingestion
+**Path**: `.agent/skills/data-ingestion/SKILL.md`
+**Purpose**: Implement data ingestion adapters for external sources
+**Triggers**: "ingestion", "data source", "adapter", "etl", "pipeline"
+**Outputs**: Ingestion adapter, validation logic, CLI script
+**Use when**: Adding new data sources, building ETL pipelines
+
+### api-endpoint
 **Path**: `.agent/skills/api-endpoint/SKILL.md`
-**Purpose**: Create new API endpoint with tests
-**Triggers**: "new endpoint", "API route", "create endpoint"
-**Outputs**: Route handler, tests, API contract documentation
-**Use when**: Adding new API endpoints
+**Purpose**: Create new API endpoint with validation and tests
+**Triggers**: "new endpoint", "API route", "create endpoint", "fastapi", "flask"
+**Outputs**: Route handler, schemas, tests, API documentation
+**Use when**: Adding REST API endpoints
 
-### Example: create-component
-**Path**: `.agent/skills/create-component/SKILL.md`
-**Purpose**: Create new frontend component with tests
-**Triggers**: "new component", "create UI", "add component"
-**Outputs**: Component file, tests, storybook entry
-**Use when**: Adding new UI components
+### doc-writer
+**Path**: `.agent/skills/doc-writer/SKILL.md`
+**Purpose**: Create or update technical documentation
+**Triggers**: "documentation", "docs", "readme", "write docs", "update docs"
+**Outputs**: Documentation file following project standards
+**Use when**: Writing README, ADRs, guides, or API docs
+
+### test-writer
+**Path**: `.agent/skills/test-writer/SKILL.md`
+**Purpose**: Write effective tests following best practices
+**Triggers**: "test", "testing", "pytest", "unit test", "integration test"
+**Outputs**: Test file with fixtures and comprehensive coverage
+**Use when**: Adding tests for features or bug fixes
+
+### mcp-workflow
+**Path**: `.agent/skills/mcp-workflow/SKILL.md`
+**Purpose**: Use MCP servers with fallback CLI commands
+**Triggers**: "mcp", "deployment", "deploy", "railway", "vercel"
+**Outputs**: Deployment commands or MCP operations
+**Use when**: Deploying to cloud platforms, managing infrastructure
 
 ---
 
 ## Utility Skills
 
-### Example: context-audit
+### context-audit
 **Path**: `.agent/skills/context-audit/`
 **Purpose**: Audit and optimize context loading
 **Triggers**: "audit context", "context size", "optimize loading"
 **Outputs**: Context usage report, optimization recommendations
 **Use when**: Context budget is exceeded or session is slow
 
-### Example: health-check
-**Path**: `.agent/workflows/health-check.sh`
-**Purpose**: Run all quality checks before commit
+### web-init
+**Path**: `.agent/skills/web-init/`
+**Purpose**: Initialize web project structure
+**Triggers**: "init web", "create web app", "setup frontend"
+**Outputs**: Web project scaffold
+**Use when**: Starting new web project
+
+---
+
+## Workflow References
+
+### health-check
+**Path**: `.agent/workflows/health-check.md`
+**Purpose**: Run pre-commit quality checks
 **Triggers**: "health check", "validate", "pre-commit"
-**Outputs**: Pass/fail status, detailed error messages
 **Use when**: Before creating commits or PRs
+
+### test-ci
+**Path**: `.agent/workflows/test-ci.md`
+**Purpose**: Run CI tests locally before pushing
+**Triggers**: "test ci", "ci simulation", "pre-push"
+**Use when**: Before pushing to remote, debugging CI failures
+
+### release-checklist
+**Path**: `.agent/workflows/release-checklist.md`
+**Purpose**: Prepare and execute production releases
+**Triggers**: "release", "deploy production", "create release"
+**Use when**: Preparing for production deployment
 
 ---
 

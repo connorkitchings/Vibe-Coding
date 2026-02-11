@@ -174,7 +174,7 @@ SNAPSHOT: {snapshot.splitlines()[0] if snapshot else "N/A"}
         pattern = r"(## Recent Activity\n)(.*?)(\n## |\Z)"
 
         if re.search(pattern, content, re.DOTALL):
-            # Replace logic: content before, match group 1 (header), new activity, match group 3 (next header/end)
+            # Replace logic: group 1 (header), new activity, group 3 (next header/end)
             # We need to construct the replacement string carefully
             # re.sub calls a function or uses string formatting
 

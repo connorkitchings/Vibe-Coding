@@ -40,7 +40,7 @@
 
 1. **NEVER work on `main`**. Check branch: `git branch`. Create feature branch immediately if on main.
 2. **Session logging required**. Every session creates a log in `session_logs/`.
-3. **Health checks before commits**. Run: `.agent/workflows/health-check.sh`
+3. **Health checks before commits**. Run: `.agent/workflows/health-check.md`
 4. **No secrets in code**. Use environment variables and config files.
 5. **Tests required**. Every feature needs tests. Every bug needs regression test.
 
@@ -62,7 +62,7 @@ uv run ruff format . && uv run ruff check .
 uv run pytest
 
 # Health check (before commits)
-sh .agent/workflows/health-check.sh
+# Follow steps in .agent/workflows/health-check.md
 
 # Session Management
 uv run scripts/vibe_sync.py start
@@ -93,7 +93,7 @@ uv run scripts/vibe_sync.py end
 
 | Need | File |
 |------|------|
-| Agent guidance | `AGENTS.md` |
+| Agent guidance | `.agent/AGENTS.md` |
 | Project overview | `README.md` |
 | Full project map | `.codex/MAP.md` |
 | Quick commands | `.codex/QUICKSTART.md` |

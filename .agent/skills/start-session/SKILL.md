@@ -155,11 +155,26 @@ git checkout -b correct/branch-name
 git stash pop  # Restore work
 ```
 
+## Handoff Packet Template
+
+When starting work, use this template to capture initial context:
+
+```text
+Task: [Brief task description]
+DoD: [Definition of done]
+Files: [Key files to examine]
+Constraints: [Timebox, scope, context budget]
+Artifacts: [Expected outputs]
+Rollback: [If applicable]
+```
+
+---
+
 ## Links
 
 - Context: `.agent/CONTEXT.md`
 - Skills catalog: `.agent/skills/CATALOG.md`
-- Agent guidance: `AGENTS.md`
+- Agent guidance: `.agent/AGENTS.md`
 - Implementation schedule: `docs/implementation_schedule.md`
 - End session: `.agent/skills/end-session/SKILL.md`
 - Session logs: `session_logs/`

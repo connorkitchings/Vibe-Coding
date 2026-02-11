@@ -212,14 +212,30 @@ session_logs/
 └── TEMPLATE.md  # Template for new logs
 ```
 
+## Handoff Notes Template
+
+Document these for the next session:
+
+```markdown
+## Handoff Notes
+- **Current state**: [What was accomplished/in-progress/blocked]
+- **Last file edited**: [File path and line number]
+- **Blockers**: [Any issues preventing progress]
+- **Next priority**: [What should happen next]
+- **Open questions**: [Unresolved questions]
+- **Context needed**: [What next agent needs to know]
+```
+
+---
+
 ## Links
 
 - Context: `.agent/CONTEXT.md`
 - Skills catalog: `.agent/skills/CATALOG.md`
-- Agent guidance: `AGENTS.md`
+- Agent guidance: `.agent/AGENTS.md`
 - Implementation schedule: `docs/implementation_schedule.md`
 - Start session: `.agent/skills/start-session/SKILL.md`
-- Health check: `.agent/workflows/health-check.sh`
+- Health check: `.agent/workflows/health-check.md`
 
 ---
 
