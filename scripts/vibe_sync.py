@@ -8,9 +8,9 @@ import re
 import subprocess
 from pathlib import Path
 
+import pyperclip
 import typer
 from rich.console import Console
-from rich.markdown import Markdown
 from rich.panel import Panel
 
 app = typer.Typer(help="Vibe-Coding Session Manager")
@@ -62,6 +62,105 @@ def get_last_handoff(logs) -> str:
     return "No handoff notes found in last log."
 
 
+class ContextSynthesizer:
+    def __init__(self, context_path: Path, logs_dir: Path):
+        self.context_path = context_path
+        self.logs_dir = logs_dir
+        self.context_content = (
+            self.context_path.read_text() if self.context_path.exists() else ""
+        )
+
+    def get_latest_log(self):
+        """Retrieve the most recent session log."""
+        if not self.logs_dir.exists():
+            return None
+
+        all_logs = []
+        for date_dir in self.logs_dir.iterdir():
+            if date_dir.is_dir() and date_dir.name != "telemetry":
+                try:
+                    date_obj = datetime.datetime.strptime(
+                        date_dir.name, "%m-%d-%Y"
+                    ).date()
+                    for log_file in date_dir.glob("*.md"):
+                        all_logs.append(
+                            {"path": log_file, "date": date_obj, "name": log_file.name}
+                        )
+                except ValueError:
+                    continue
+
+        all_logs.sort(key=lambda x: (x["date"], x["name"]), reverse=True)
+        return all_logs[0] if all_logs else None
+
+    def extract_section(self, content: str, header: str) -> str:
+        """Extracts content under a specific markdown header."""
+        lines = content.splitlines()
+        section_content = []
+        in_section = False
+        target_header = f"## {header}"
+
+        for line in lines:
+            if line.strip().startswith("## "):
+                if line.strip().startswith(target_header):
+                    in_section = True
+                    continue
+                elif in_section:
+                    break
+
+            if in_section:
+                section_content.append(line)
+
+        return "\n".join(section_content).strip()
+
+    def generate_prime_directive(self, start_mode: str) -> str:
+        """Assembles the High-Density Handoff string."""
+        snapshot = (
+            self.extract_section(self.context_content, "Project Snapshot")
+            or "No snapshot available."
+        )
+
+        last_log = self.get_latest_log()
+        if last_log:
+            log_content = last_log["path"].read_text()
+            momentum = (
+                self.extract_section(log_content, "Work Completed")
+                or "No recent work recorded."
+            )
+            immediate_next = (
+                self.extract_section(log_content, "Next Steps")
+                or "No next steps defined."
+            )
+        else:
+            momentum = "No previous session logs found."
+            immediate_next = "Initialize project structure."
+
+        # Skeptical Researcher: Check for stale context
+        # (Simple heuristic implementation for now)
+        if "No next steps defined" in immediate_next:
+            immediate_next = (
+                "REVIEW REQUIRED: Last session ended without clear next steps."
+            )
+
+        directive = f"""
+VIBE-SYNC HANDOFF
+---
+MODE: {start_mode}
+SNAPSHOT: {snapshot.splitlines()[0] if snapshot else "N/A"}
+MOMENTUM: {momentum.splitlines()[0] if momentum else "N/A"}... (see log for details)
+IMMEDIATE_NEXT:
+{immediate_next}
+---
+"""
+        return directive.strip()
+
+    def copy_to_clipboard(self, text: str):
+        try:
+            pyperclip.copy(text)
+            return True
+        except Exception:
+            return False
+
+
 def get_session_logs():
     """Retrieve all session logs, sorted by date and sequence."""
     logs = []
@@ -98,10 +197,8 @@ def start(
     console.print(Panel.fit("Vibe-Sync: Initializing Session", style="bold blue"))
 
     # 1. Read Context
-    if CONTEXT_FILE.exists():
-        context_content = CONTEXT_FILE.read_text()
-    else:
-        context_content = "No CONTEXT.md found."
+    if not CONTEXT_FILE.exists():
+        console.print("[yellow]No CONTEXT.md found.[/yellow]")
 
     # 2. Get Recent Logs (Last 3)
     logs = get_session_logs()
@@ -116,37 +213,20 @@ def start(
         log_summaries.append(f"### {log['name']} ({log['name']})\n{summary}")
 
     # 3. Parse Context Sections
-    project_snapshot = get_context_section(context_content, "Project Snapshot")
-    critical_rules = get_context_section(context_content, "Critical Rules")
+    # project_snapshot = get_context_section(context_content, "Project Snapshot")
+    # critical_rules = get_context_section(context_content, "Critical Rules")
 
-    # 4. Get Handoff from Last Session
-    last_handoff = get_last_handoff(logs)
+    # 4. Generate Prime Directive via Synthesizer
+    synthesizer = ContextSynthesizer(CONTEXT_FILE, SESSION_LOGS_DIR)
+    prime_directive = synthesizer.generate_prime_directive(mode)
 
-    # 5. Generate Pruned Context
-    pruned_context = f"""
-# Vibe-Coding Session Context
+    # 5. Output and Copy
+    console.print(Panel(prime_directive, title="Prime Directive", style="bold green"))
 
-## 1. Strategic Intent
-{intent}
-
-## 2. Mode
-{mode}
-
-## 3. Critical Rules (from CONTEXT.md)
-{critical_rules}
-
-## 4. Project Snapshot (from CONTEXT.md)
-{project_snapshot}
-
-## 5. Handoff from Last Session
-{last_handoff}
-
-## 6. Recent History (Last 3 Logs)
-{chr(10).join(log_summaries)}
-    """
-
-    console.print(Markdown(pruned_context))
-    console.print(Panel("Copy the above context to your AI agent.", style="green"))
+    if synthesizer.copy_to_clipboard(prime_directive):
+        console.print("[bold green]✓ Copied to clipboard![/bold green]")
+    else:
+        console.print("[yellow]Clipboard copy failed. Please copy manually.[/yellow]")
 
 
 def get_git_changes():
