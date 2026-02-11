@@ -4,6 +4,8 @@ Vibe-Sync Controller CLI
 """
 
 import datetime
+import re
+import subprocess
 from pathlib import Path
 
 import typer
@@ -17,6 +19,47 @@ console = Console()
 PROJECT_ROOT = Path(__file__).parent.parent
 SESSION_LOGS_DIR = PROJECT_ROOT / "session_logs"
 CONTEXT_FILE = PROJECT_ROOT / ".agent" / "CONTEXT.md"
+
+
+def get_context_section(content: str, section_name: str) -> str:
+    """Extract a specific markdown section from CONTEXT.md."""
+    lines = content.splitlines()
+    section_content = []
+    in_section = False
+
+    # Normalize section name for matching (e.g., "## Recent" -> "Recent")
+    target_header = f"## {section_name}"
+
+    for line in lines:
+        if line.strip().startswith("## "):
+            if line.strip().startswith(target_header):
+                in_section = True
+                continue
+            elif in_section:
+                break  # Reached next section
+
+        if in_section:
+            section_content.append(line)
+
+    return "\n".join(section_content).strip()
+
+
+def get_last_handoff(logs) -> str:
+    """Extract handoff notes from the most recent session log."""
+    if not logs:
+        return "No previous logs found."
+
+    last_log = logs[0]["path"].read_text()
+
+    # Look for "## Handoff Notes"
+    # Simple heuristic parsing
+    if "## Handoff Notes" in last_log:
+        parts = last_log.split("## Handoff Notes")
+        if len(parts) > 1:
+            handoff_section = parts[1].split("## ")[0].strip()
+            return handoff_section
+
+    return "No handoff notes found in last log."
 
 
 def get_session_logs():
@@ -72,25 +115,56 @@ def start(
         summary = "\n".join(lines[:15]) + "\n..."  # Rough heuristic
         log_summaries.append(f"### {log['name']} ({log['name']})\n{summary}")
 
-    # 3. Generate Pruned Context
+    # 3. Parse Context Sections
+    project_snapshot = get_context_section(context_content, "Project Snapshot")
+    critical_rules = get_context_section(context_content, "Critical Rules")
+
+    # 4. Get Handoff from Last Session
+    last_handoff = get_last_handoff(logs)
+
+    # 5. Generate Pruned Context
     pruned_context = f"""
 # Vibe-Coding Session Context
 
-## Strategic Intent
+## 1. Strategic Intent
 {intent}
 
-## Mode
+## 2. Mode
 {mode}
 
-## Active Context (from CONTEXT.md)
-{context_content[:1000]}... (truncated)
+## 3. Critical Rules (from CONTEXT.md)
+{critical_rules}
 
-## Recent History
+## 4. Project Snapshot (from CONTEXT.md)
+{project_snapshot}
+
+## 5. Handoff from Last Session
+{last_handoff}
+
+## 6. Recent History (Last 3 Logs)
 {chr(10).join(log_summaries)}
     """
 
     console.print(Markdown(pruned_context))
     console.print(Panel("Copy the above context to your AI agent.", style="green"))
+
+
+def get_git_changes():
+    """Get list of changed files using git."""
+    try:
+        result = subprocess.run(
+            ["git", "status", "--porcelain"], capture_output=True, text=True
+        )
+        if result.returncode != 0:
+            return []
+
+        changes = []
+        for line in result.stdout.splitlines():
+            if line.strip():
+                changes.append(line.strip())
+        return changes
+    except Exception:
+        return []
 
 
 @app.command()
@@ -102,50 +176,88 @@ def end(
     """
     console.print(Panel.fit("Vibe-Sync: Ending Session", style="bold red"))
 
+    # 1. Gather Intelligence
+    changes = get_git_changes()
+
+    # 2. Prompt for Details
+    goal = typer.prompt("Session Goal (TL;DR)")
+    accomplished = typer.prompt("Accomplished")
+    blockers = typer.prompt("Blockers", default="None")
+    next_steps = typer.prompt("Next Steps")
+
+    # 3. Create Log File
     today = datetime.datetime.now()
-    date_str = today.strftime("%m-%d-%Y")  # Changed to match existing format MM-DD-YYYY
+    date_str = today.strftime("%m-%d-%Y")
     date_dir = SESSION_LOGS_DIR / date_str
     date_dir.mkdir(parents=True, exist_ok=True)
 
-    # Determine sequence number
     existing_logs = list(date_dir.glob("*.md"))
     seq = len(existing_logs) + 1
-
     filename = f"{seq} - {title}.md"
     filepath = date_dir / filename
 
-    # Read Template
-    template_path = SESSION_LOGS_DIR / "TEMPLATE.md"
-    if template_path.exists():
-        content = template_path.read_text()
+    # 4. Generate Content
+    if changes:
+        files_list = "\n".join([f"- `{c.split()[-1]}` - Modified" for c in changes])
     else:
-        content = "# Session Log\n..."
+        files_list = "- No file changes detected via git."
 
-    # Fill basic details
-    content = content.replace("MM-DD-YYYY", date_str)
-    content = content.replace("N - Title", f"{seq} - {title}")
+    content = f"""# Session Log — {date_str} ({seq} - {title})
+
+## TL;DR
+- **Goal**: {goal}
+- **Accomplished**: {accomplished}
+- **Blockers**: {blockers}
+- **Next**: {next_steps}
+
+## Work Completed
+
+### Files Modified
+{files_list}
+
+### Commands Run
+(Auto-generated placeholder)
+
+## Handoff Notes
+- **For next session**: {next_steps}
+"""
 
     filepath.write_text(content)
 
     console.print(f"[green]Created session log:[/green] {filepath}")
-    console.print(
-        "[yellow]Please fill in the details in the generated log file.[/yellow]"
-    )
-
-    # Update CONTEXT.md (Mock implementation)
-    # real implementation would parse and update "Recent" section
     console.print(
         "[dim]Remember to update .agent/CONTEXT.md with recent progress.[/dim]"
     )
 
 
 @app.command()
-def update():
+def update(
+    recent: str = typer.Option(
+        ..., prompt="What is the recent activity/accomplishment?"
+    ),
+):
     """
-    Mid-session synchronization.
+    Update the 'Recent' status in CONTEXT.md.
     """
-    console.print("Updating context... (Placeholder)")
-    # Logic to refresh maps, etc.
+    if not CONTEXT_FILE.exists():
+        console.print("[red]CONTEXT.md not found![/red]")
+        return
+
+    content = CONTEXT_FILE.read_text()
+
+    # Regex to find the Recent line
+    # Matches: - **Recent**: ...
+    pattern = r"(- \*\*Recent\*\*: ).*"
+
+    if re.search(pattern, content):
+        new_content = re.sub(pattern, f"\\1{recent}", content)
+        CONTEXT_FILE.write_text(new_content)
+        console.print(f"[green]Updated 'Recent' in CONTEXT.md:[/green] {recent}")
+    else:
+        console.print("[yellow]Could not find 'Recent' line in CONTEXT.md[/yellow]")
+
+    # Also touch the file to ensure timestamp update if needed
+    CONTEXT_FILE.touch()
 
 
 if __name__ == "__main__":
