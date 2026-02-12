@@ -102,7 +102,7 @@ graph TD
 | Category | Technology | Version | Notes |
 |----------|------------|---------|-------|
 | Package Management | uv | 0.4.x | High-performance Python package manager and resolver |
-| Core Language | Python | 3.11 | Primary programming language |
+| Core Language | Python | 3.10+ | Primary programming language |
 | Linting & Formatting | Ruff | 0.5.x | Combines linting, formatting, and import sorting |
 | Experiment Tracking | MLflow | 2.x | Included as optional dependency for downstream projects |
 | Data Lineage | OpenLineage | 1.15+ | Enables lineage capture when pipelines are extended |

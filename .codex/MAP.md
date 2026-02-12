@@ -33,7 +33,7 @@ Vibe-Coding/
 │   └── end-session/
 │       └── SKILL.md            # Session closing
 └── workflows/                  # Automation scripts
-    └── health-check.sh         # Pre-commit validation
+    └── health-check.md         # Pre-commit validation
 
 .codex/                         # Read-only context cache
 ├── README.md                   # Purpose explanation
@@ -210,7 +210,7 @@ config/
 ### Closing a Session
 1. `.agent/skills/end-session/SKILL.md` - Closing workflow
 2. `session_logs/YYYY-MM-DD/NN.md` - Create log
-3. `.agent/workflows/health-check.sh` - Run checks
+3. `.agent/workflows/health-check.md` - Run checks
 4. `docs/implementation_schedule.md` - Update if needed
 
 ### Documentation

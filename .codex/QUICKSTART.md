@@ -44,7 +44,7 @@ uv run pytest -k "test_pattern"
 
 ```bash
 # Run pre-commit checks (format, lint, test)
-sh .agent/workflows/health-check.sh
+# See .agent/workflows/health-check.md for steps
 ```
 
 ---
@@ -102,7 +102,7 @@ git push origin <branch-name>
 
 # End a session
 # 1. Create log: session_logs/YYYY-MM-DD/NN.md
-# 2. Health check: sh .agent/workflows/health-check.sh
+# 2. Health check: See .agent/workflows/health-check.md
 # 3. Load: .agent/skills/end-session/SKILL.md
 ```
 

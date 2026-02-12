@@ -101,7 +101,8 @@ uv run ruff format .
 Execute the health check workflow:
 
 ```bash
-sh .agent/workflows/health-check.sh
+# Health check workflow
+Follow steps in .agent/workflows/health-check.md
 ```
 
 **If health check fails:**
@@ -178,7 +179,7 @@ Before ending session, confirm:
 
 ## Health Check Failures
 
-If `.agent/workflows/health-check.sh` fails:
+If health check fails:
 
 **Linting failures:**
 ```bash

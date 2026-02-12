@@ -182,7 +182,7 @@ Skills should be:
 - Agent guidance: `AGENTS.md`
 - Start session: `.agent/skills/start-session/SKILL.md`
 - End session: `.agent/skills/end-session/SKILL.md`
-- Health check: `.agent/workflows/health-check.sh`
+- Health check: `.agent/workflows/health-check.md`
 
 ---
 

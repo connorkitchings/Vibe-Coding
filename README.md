@@ -90,7 +90,7 @@ Vibe-Coding/
 │   │   ├── start-session/      # Session initialization
 │   │   └── end-session/        # Session closing
 │   └── workflows/              # Automation scripts
-│       └── health-check.sh     # Pre-commit validation
+│       └── health-check.md     # Pre-commit validation
 │
 ├── .codex/                     # Read-only context cache
 │   ├── README.md               # Purpose explanation
@@ -143,7 +143,7 @@ uv run pytest
 uv run pytest -q
 
 # Health check (before commits)
-sh .agent/workflows/health-check.sh
+# Follow steps in .agent/workflows/health-check.md
 ```
 
 ### Documentation
@@ -258,7 +258,7 @@ See `docs/template_starting_guide.md` for detailed instructions.
 Contributions are welcome! Please:
 1. Create a feature branch: `git checkout -b feat/<name>`
 2. Follow development standards: See `docs/development_standards.md`
-3. Run health checks: `sh .agent/workflows/health-check.sh`
+3. Run health checks: Follow `.agent/workflows/health-check.md`
 4. Create session log: See `session_logs/TEMPLATE.md`
 5. Open pull request with clear description
 
@@ -280,7 +280,7 @@ Every development session should:
 - Document: Decisions and issues as you go
 
 **End:**
-1. Run: `sh .agent/workflows/health-check.sh`
+1. Run: `.agent/workflows/health-check.md`
 2. Create: Session log in `session_logs/YYYY-MM-DD/NN.md`
 3. Update: `docs/implementation_schedule.md` if tasks completed
 4. Load: `.agent/skills/end-session/SKILL.md`

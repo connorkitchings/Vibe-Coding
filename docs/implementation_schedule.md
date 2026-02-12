@@ -1,182 +1,165 @@
-# Implementation Schedule — {{PROJECT_NAME}}
+# Template Improvements - Implementation Schedule
 
-This implementation schedule outlines a structured, week-by-week plan to deliver **{{PROJECT_NAME}}**, a {{TYPE}} project, over approximately **{{DURATION_WEEKS}}**. It assumes a repo-first workflow with AI-assisted development, a small team shaped as **{{TEAM_SIZE_AND_ROLES}}**, and dependencies such as **{{DEPENDENCIES}}** being available on time. Treat this as a living document: update tasks, owners, and dates as the project evolves, and use session logs to capture decisions and deviations from plan.
+This schedule tracks the comprehensive improvements made to the Vibe Coding Template (Feb 2026).
 
 **Status Legend:** ☐ Not Started · ▶ In Progress · ✅ Done · ⚠ Risk/Blocked
 
 ---
 
-## Week-by-Week Schedule
+## Overview
 
-> Adjust weeks, tracks, and owners as needed. Keep each task demo-able by the end of its week.
-
-### Week 1 — Foundation & Direction
-
-| Week   | Track     | Task                                                            | Owner                  | Deliverable                                                   | DoD/Checklist         | Status       | Notes/Dependencies                      |
-|--------|-----------|-----------------------------------------------------------------|------------------------|---------------------------------------------------------------|-----------------------|-------------|------------------------------------------|
-| Week 1 | DevEx/CI  | Initialize repo structure and configure basic branching model    | Connor Kitchings       | Repo with base folders and initial CI config committed       | [DoD: Setup]          | ✅ Done       | Base scaffold in place; branch strategy captured in docs     |
-| Week 1 | Docs      | Create front-door docs (README, [Project Brief](./project_brief.md))             | Connor Kitchings       | `README.md` + `docs/project_brief.md` updated for template    | [DoD: Docs]           | ✅ Done       | Project brief completed 2025-11-05                           |
-| Week 1 | Discovery | Clarify problem statement, scope, and non-goals                 | Connor Kitchings       | Updated project brief & charter capturing scope/non-goals    | [DoD: Scope]          | ✅ Done       | See `docs/project_brief.md` & `docs/project_charter.md`       |
-| Week 1 | DevEx/CI  | Set up dev environment and CI stub (lint/test placeholder)      | DevEx Guild            | CI job that runs basic checks on push                        | [DoD: Testing]        | ▶ In Progress | `.github/workflows/ci.yml` ready; validate on next pipeline   |
-| Week 1 | DataOps   | Validate access to core dependencies (APIs, datasets, secrets)   | DataOps Working Group  | “Access check” notebook/log with pass/fail status            | [DoD: Dependencies]   | ☐ Not Started | Pending dependency inventory from stakeholders               |
-| Week 1 | Docs      | Close loop with session log (capture key setup decisions)       | Connor Kitchings       | Week 1 session log entry linked from project brief           | [DoD: Session Log]    | ✅ Done       | Logged in `session_logs/2025-11-05.md`                        |
+**Project:** Vibe Coding Template v2.0+ Improvements  
+**Type:** Template Enhancement  
+**Duration:** Completed Feb 2026  
+**Team:** Connor Kitchings + AI Assistant  
+**Dependencies:** GitHub Actions, MkDocs, Python 3.10+
 
 ---
 
-### Week 2 — DataOps & Pipeline Skeleton
+## Phase 1: Critical Foundation Fixes ✅ COMPLETE
 
-| Week   | Track     | Task                                                            | Owner                  | Deliverable                                                   | DoD/Checklist         | Status       | Notes/Dependencies                      |
-|--------|-----------|-----------------------------------------------------------------|------------------------|---------------------------------------------------------------|-----------------------|-------------|------------------------------------------|
-| Week 2 | DataOps   | Implement ingestion script v1 for core data/API                 | DataOps                | Ingestion script + config for main source                     | [DoD: Data Quality]   | ☐ Not Started | Requires stable source schema            |
-| Week 2 | DataOps   | Define data schema and storage layout (raw/processed zones)     | DataOps                | Schema doc + directory/table layout                           | [DoD: Schema]         | ☐ Not Started | Align with existing data conventions     |
-| Week 2 | DataOps   | Add basic validation checks (schema, ranges, nulls)             | DataOps                | Validation module and sample run report                       | [DoD: Data Quality]   | ☐ Not Started | Integrate with ingestion script          |
-| Week 2 | DevEx/CI  | Wire ingestion into CI-friendly job or manual run script        | DevEx/CI               | Script or CI job that runs ingestion on demand                | [DoD: Automation]     | ☐ Not Started | Coordinate schedule with infra teams     |
-| Week 2 | DevEx/CI  | Capture logs/metrics for ingestion (basic observability)        | DevEx/CI               | Log/metric fields defined and stored                          | [DoD: Monitoring]     | ☐ Not Started | Minimal overhead to start                |
-| Week 2 | Docs      | Close loop with session log (DataOps decisions, schema tradeoffs) | Docs / PM            | Week 2 session log entry with link to schema & ingestion docs | [DoD: Session Log]    | ☐ Not Started | Reference validation and issues          |
+| Phase | Task | Owner | Deliverable | Status | Notes |
+|-------|------|-------|-------------|--------|-------|
+| 1.1 | Consolidate duplicate AGENTS.md files | AI Assistant | Single source of truth in `.agent/AGENTS.md` | ✅ Done | Root AGENTS.md is now a redirect |
+| 1.2 | Fix health-check path mismatches (.sh → .md) | AI Assistant | All references updated to .md extension | ✅ Done | Updated 10+ files across codebase |
 
 ---
 
-### Week 3 — Features & Core Logic / Modeling
+## Phase 2: Documentation & Consistency ✅ COMPLETE
 
-| Week   | Track        | Task                                                         | Owner                  | Deliverable                                                   | DoD/Checklist         | Status       | Notes/Dependencies                      |
-|--------|--------------|--------------------------------------------------------------|------------------------|---------------------------------------------------------------|-----------------------|-------------|------------------------------------------|
-| Week 3 | Feature Eng  | Build feature table or core transformed dataset v1           | DataOps / Feature Eng  | Reproducible feature table / transformed dataset             | [DoD: Data Quality]   | ☐ Not Started | Inputs: Week 2 ingestion + schema        |
-| Week 3 | Modeling     | Implement baseline model or core business logic v1           | Modeler / Backend      | Baseline implementation with saved outputs                   | [DoD: Modeling]       | ☐ Not Started | Define simple baseline metric            |
-| Week 3 | Modeling     | Run evaluation / QA and capture metrics                      | Modeler / Analyst      | Metrics report (accuracy, latency, or domain metrics)        | [DoD: Evaluation]     | ☐ Not Started | Compare vs naive baseline                |
-| Week 3 | Docs         | Draft model/logic card stub (assumptions, inputs, outputs)   | Docs / PM              | Model/logic card in `docs/models/` or `docs/architecture/`   | [DoD: Docs]           | ☐ Not Started | Include key tradeoffs                    |
-| Week 3 | Docs         | Close loop with session log (baseline results & decisions)   | Docs / PM              | Week 3 session log entry with links to metrics & card        | [DoD: Session Log]    | ☐ Not Started | Note open questions for Week 4           |
-
----
-
-### Week 4 — Productization & Interface
-
-| Week   | Track     | Task                                                            | Owner                  | Deliverable                                                   | DoD/Checklist         | Status       | Notes/Dependencies                      |
-|--------|-----------|-----------------------------------------------------------------|------------------------|---------------------------------------------------------------|-----------------------|-------------|------------------------------------------|
-| Week 4 | App/UI    | Create CLI or UI stub to expose core functionality              | Frontend / App         | Minimal CLI commands or UI screen wired to sample data        | [DoD: UX]             | ☐ Not Started | Focus on clarity over polish             |
-| Week 4 | App/UI    | Wire live pipeline/logic into CLI/UI (happy-path only)          | Frontend / Backend     | End-to-end flow from input to output in dev environment      | [DoD: Integration]    | ☐ Not Started | Uses Week 3 baseline logic               |
-| Week 4 | DevEx/CI  | Externalize configuration (env files, config layer)             | DevEx/CI               | Config pattern documented and used by ingestion & logic      | [DoD: Config]         | ☐ Not Started | Avoid secrets in code                    |
-| Week 4 | DevEx/CI  | Implement basic artifact/versioning approach                    | DevEx/CI               | Strategy for tagging releases/artifacts documented            | [DoD: Release Ready]  | ☐ Not Started | Reuse org standards if available         |
-| Week 4 | Docs      | Close loop with session log (UI/product decisions, UX notes)    | Docs / PM              | Week 4 session log entry with links to UI/CLI screenshots    | [DoD: Session Log]    | ☐ Not Started | Capture feedback from early testers      |
+| Phase | Task | Owner | Deliverable | Status | Notes |
+|-------|------|-------|-------------|--------|-------|
+| 2.1 | Resolve template variables with dual approach | AI Assistant | Customization guide + example values | ✅ Done | Added table of variables to replace |
+| 2.2 | Fix version inconsistencies (3.11+ → 3.10+) | AI Assistant | All docs consistent with pyproject.toml | ✅ Done | Fixed 4 files |
+| 2.3 | Document pre-commit hooks | AI Assistant | `docs/tools/pre_commit_hooks.md` | ✅ Done | Comprehensive guide with examples |
+| 2.4 | Align session log templates | AI Assistant | vibe_sync.py uses template format | ✅ Done | Enhanced session log generation |
 
 ---
 
-### Week 5 — Hardening, Tests, and Operability
+## Phase 3: Example Code & Structure ✅ COMPLETE
 
-| Week   | Track     | Task                                                            | Owner                  | Deliverable                                                   | DoD/Checklist         | Status       | Notes/Dependencies                      |
-|--------|-----------|-----------------------------------------------------------------|------------------------|---------------------------------------------------------------|-----------------------|-------------|------------------------------------------|
-| Week 5 | DevEx/CI  | Expand automated test coverage (unit + key integration paths)   | DevEx/CI               | Test suite covering critical paths with pass/fail indicators | [DoD: Testing]        | ☐ Not Started | Prioritize high-risk code paths          |
-| Week 5 | DevEx/CI  | Add monitoring / alert hooks for critical failures              | DevEx/CI               | Monitoring/alerts defined for key jobs or endpoints          | [DoD: Monitoring]     | ☐ Not Started | Integrate with existing tooling          |
-| Week 5 | Modeling  | Run performance/latency pass and optimize bottlenecks           | Modeler / Backend      | Summary of perf issues + implemented fixes                   | [DoD: Performance]    | ☐ Not Started | Include before/after metrics             |
-| Week 5 | Docs      | Complete security/privacy checklist first pass                  | Docs / PM              | Checklist doc with status of each control                    | [DoD: Security]       | ☐ Not Started | Coordinate with org security guidelines  |
-| Week 5 | Docs      | Define failure playbook / [Runbook](./runbook.md)                              | Docs / PM              | Runbook with common failure modes and recovery steps         | [DoD: Ops]            | ☐ Not Started | Link to monitoring/alert setup           |
-| Week 5 | Docs      | Close loop with session log (hardening decisions, tradeoffs)    | Docs / PM              | Week 5 session log entry with links to tests & runbook       | [DoD: Session Log]    | ☐ Not Started | Note deferred hardening items            |
+| Phase | Task | Owner | Deliverable | Status | Notes |
+|-------|------|-------|-------------|--------|-------|
+| 3.1 | Create minimal module structure | AI Assistant | Working example code in src/vibe_coding/ | ✅ Done | Config + logging utilities |
+| 3.2 | Complete skills library | AI Assistant | web-init and context-audit skills | ✅ Done | Full SKILL.md documentation |
+| 3.3 | Create unit tests | AI Assistant | tests/test_config.py with fixtures | ✅ Done | Comprehensive test coverage |
 
 ---
 
-### Week 6 — Release, Demo, and Next Phase
+## Phase 4: CI/CD & Tooling ✅ COMPLETE
 
-| Week   | Track     | Task                                                            | Owner                  | Deliverable                                                   | DoD/Checklist         | Status       | Notes/Dependencies                      |
-|--------|-----------|-----------------------------------------------------------------|------------------------|---------------------------------------------------------------|-----------------------|-------------|------------------------------------------|
-| Week 6 | Docs      | Polish user-facing docs (quickstart, FAQs, troubleshooting)     | Docs / PM              | Updated docs section ready for external readers              | [DoD: Docs]           | ☐ Not Started | Ensure examples are copy-paste friendly  |
-| Week 6 | App/UI    | Prepare and run internal/external demo                          | Frontend / Project Lead| Demo script + recorded walkthrough or slides                 | [DoD: Demo]           | ☐ Not Started | Invite key stakeholders                  |
-| Week 6 | DevEx/CI  | Cut v1 tagged release and [Changelog](../CHANGELOG.md)                             | DevEx/CI               | Tagged release, changelog entry, and release notes           | [DoD: Release Ready]  | ☐ Not Started | Coordinate with release processes        |
-| Week 6 | Docs      | Capture retro and define next-phase backlog                     | Docs / PM              | Retro notes + prioritized backlog in tracker                 | [DoD: Retro]          | ☐ Not Started | Include “stop/start/continue” insights   |
-| Week 6 | Docs      | Close loop with session log (release, retro, next-phase plan)   | Docs / PM              | Week 6 session log entry with key decisions                  | [DoD: Session Log]    | ☐ Not Started | Link to retro and backlog                |
+| Phase | Task | Owner | Deliverable | Status | Notes |
+|-------|------|-------|-------------|--------|-------|
+| 4.1 | Implement GitHub Actions workflows | AI Assistant | `.github/workflows/ci.yml` + docs.yml | ✅ Done | Full CI pipeline with 5 jobs |
+| 4.2 | Create generic CI validation script | AI Assistant | `scripts/validate_template.py` | ✅ Done | Platform-independent validation |
+| 4.3 | Configure MkDocs navigation | AI Assistant | Updated `mkdocs.yml` with proper nav | ✅ Done | Organized into sections |
 
-> For projects longer than 6 weeks, clone one or more weeks and adapt tasks to your extended scope (e.g., advanced modeling, UX polish, new integrations).
+---
+
+## Phase 5: CLI Enhancements ⏸️ DEFERRED
+
+| Phase | Task | Owner | Deliverable | Status | Notes |
+|-------|------|-------|-------------|--------|-------|
+| 5.1 | Add validation flag to vibe_sync | AI Assistant | `--validate` option for session logs | ⏸️ Deferred | Can be added later if needed |
+| 5.2 | Add git integration features | AI Assistant | `--git-suggestions` for commit messages | ⏸️ Deferred | Nice-to-have feature |
+
+---
+
+## Phase 6: Process & Documentation 🔄 IN PROGRESS
+
+| Phase | Task | Owner | Deliverable | Status | Notes |
+|-------|------|-------|-------------|--------|-------|
+| 6.1 | Update implementation schedule | AI Assistant | This document reflecting template status | ✅ Done | Replaced Week 1-6 with actual work |
+| 6.2 | Create template testing guide | AI Assistant | `docs/template_testing_guide.md` | ▶ In Progress | Testing validation steps |
+| 6.3 | Create template maintenance guide | AI Assistant | `CONTRIBUTING_TEMPLATE.md` | ⏸️ Deferred | Can add if template gets contributors |
+| 6.4 | Fix outdated schedule references | AI Assistant | Update docs referencing old schedule | ▶ In Progress | Check README, CONTEXT.md |
 
 ---
 
 ## Milestones
 
-> Replace or refine targets using **{{MILESTONES}}** if provided.
+- **✅ Phase 1 Complete (Critical Fixes)**  
+  All duplicate files removed, path references fixed
 
-- **Foundation Ready (Target: End of Week 1)**  
-  - **Success:** Repo initialized, docs front-door in place, and CI stub running.  
-  - **Demo:** Walkthrough of repo structure, README, and a passing CI run.
+- **✅ Phase 2 Complete (Documentation)**  
+  Template variables documented, versions consistent, pre-commit hooks explained
 
-- **Data Pipeline v1 (Target: End of Week 2)**  
-  - **Success:** Ingestion script runs on demand, data stored using agreed schema, basic validation in place.  
-  - **Demo:** Run ingestion in front of stakeholders and show validation outputs.
+- **✅ Phase 3 Complete (Code Examples)**  
+  Working config and logging modules with tests
 
-- **Baseline Logic/Model Ready (Target: End of Week 3)**  
-  - **Success:** Baseline algorithm or model runs end-to-end with metrics captured and documented.  
-  - **Demo:** Present metrics report and model/logic card; compare to naive baseline.
+- **✅ Phase 4 Complete (CI/CD)**  
+  GitHub Actions workflows, validation script, MkDocs config
 
-- **Productized Interface Demo (Target: End of Week 4)**  
-  - **Success:** CLI or UI stub triggers real logic on live or realistic data.  
-  - **Demo:** Live walk-through of main user flow in dev environment.
-
-- **Hardening Pass Complete (Target: End of Week 5)**  
-  - **Success:** Core tests, monitoring, and runbook in place; high-risk issues addressed.  
-  - **Demo:** Show test coverage summary, monitoring hooks, and runbook.
-
-- **v1 Release (Target: End of Week 6)**  
-  - **Success:** v1 tagged, docs polished, and retro plus next-phase backlog agreed.  
-  - **Demo:** v1 release notes + final demo of “happy path” scenario.
+- **🔄 Phase 6 In Progress (Process)**  
+  Documentation updates, testing guide
 
 ---
 
-## Risks & Mitigations
+## Risks Encountered
 
-| Risk                                                       | Impact                              | Mitigation / Plan                                                       | Owner          | Trigger to Escalate                                |
-|------------------------------------------------------------|-------------------------------------|--------------------------------------------------------------------------|----------------|----------------------------------------------------|
-| External dependencies ({{DEPENDENCIES}}) delayed or revoked| Slips in ingestion, modeling, or UI | Identify fallback sources; design stubs; timebox waiting before re-plan | Project Lead   | Dependency not available by mid-Week 2            |
-| Data quality issues (missing, inconsistent, drift)         | Poor model/logic performance        | Add validation, profiling, and data contracts early                     | DataOps        | >5% rows failing validation for a full week       |
-| Scope creep from stakeholders                              | Timeline and quality risk           | Maintain explicit non-goals; use change log and milestone gates         | PM / Lead      | More than 2 major scope changes in 2 weeks        |
-| CI or infra instability                                   | Reduced developer velocity          | Keep scripts runnable locally; isolate flaky checks; add retries        | DevEx/CI       | CI red >30% of runs for 3 consecutive days        |
-| Lack of user/UX feedback                                   | Misaligned product experience       | Schedule early demos; use simple feedback form after each milestone     | Frontend / PM  | No UX feedback by end of Week 4                   |
-| Key person risk (solo or thin coverage on core component)  | Blocked progress if unavailable     | Document critical paths; cross-train where possible                     | Project Lead   | Core owner unavailable for >3 working days        |
+| Risk | Impact | Resolution | Status |
+|------|--------|------------|--------|
+| Large number of files to update | Time-intensive | Systematic approach with grep | ✅ Resolved |
+| CI workflow dependencies | May fail initially | Created validation script first | ✅ Resolved |
+| Test dependencies optional | Tests fail on fresh clone | Documented in pyproject.toml | ✅ Resolved |
+| Phase 5 scope creep | Could delay completion | Deferred CLI enhancements | ✅ Resolved |
 
 ---
 
 ## Change Log
 
-| Date       | Change                          | Reason                                  | Owner        |
-|------------|---------------------------------|-----------------------------------------|-------------|
-| 2025-01-01 | Initial implementation schedule | Create baseline plan for the project    | Project Lead |
-
-> Add a new row whenever you significantly shift scope, dates, or milestones.
+| Date | Change | Reason | Owner |
+|------|--------|--------|-------|
+| 2026-02-11 | Initial improvement plan | Review identified 15 improvement opportunities | AI Assistant |
+| 2026-02-11 | Phase 1-4 completed | All critical, documentation, code, and CI work done | AI Assistant |
+| 2026-02-11 | Phase 5 deferred | Nice-to-have features, not blocking | AI Assistant |
+| 2026-02-11 | Schedule updated | Reflect actual template improvements vs generic project plan | AI Assistant |
 
 ---
 
 ## Roll-up Kanban
 
-> Keep these lists short and maintain them weekly.
+### Backlog (Future Enhancements)
 
-### Backlog
-
-- Expand feature engineering / transformation logic.
-- Advanced evaluation or experiment suite.
-- Additional UI/UX polish and accessibility improvements.
-- Integration with downstream systems or consumers.
-- Extended monitoring dashboards and alerts.
+- Add more domain-specific skills (MLOps, web dev)
+- Create video walkthrough of template
+- Add interactive setup script
+- Template versioning and migration guide
+- Multi-language support examples
 
 ### In Progress
 
-- Initialize repo structure and CI stub (Week 1).  
-- Define problem statement, scope, and non-goals.  
-- Validate access to core dependencies (APIs, datasets, secrets).
+- Template testing guide
+- Final documentation sweep
 
-### Done
+### Done ✅
 
-- Implementation schedule drafted and committed to `docs/implementation_schedule.md`.
+- Phase 1: Critical fixes
+- Phase 2: Documentation improvements
+- Phase 3: Example code and tests
+- Phase 4: CI/CD and validation
+- Phase 6.1: Updated this schedule
 
 ---
 
-## How to Use This Schedule
+## Success Metrics
 
-This schedule is a **living artifact**. Treat it as the single place where the project’s week-by-week plan, milestones, and risks are tracked. Update it in the repo as work progresses and reference it in session logs and standups.
+- ✅ All 15 improvement opportunities addressed or deferred
+- ✅ Template validation script passes
+- ✅ All documentation links work
+- ✅ Example code runs and tests pass
+- ✅ CI workflows defined and ready
+- ✅ No duplicate AGENTS.md confusion
+- ✅ All version references consistent
 
-- Update **Status** as work progresses:  
-  - `☐ Not Started` → `▶ In Progress` → `✅ Done`.  
-  - Use `⚠ Risk/Blocked` when a dependency or issue stops progress.
-- Turn each **DoD anchor** (e.g., `[DoD: Testing]`, `[DoD: Data Quality]`) into a link once you create detailed checklists, for example:  
-  - `[DoD: Testing](../checks/dod_testing.md)`
-- After any meaningful change (scope, dates, new milestone), add a row in the **Change Log** and summarize it in the next session log.
-- At least once per week (and at each major milestone), run a short ritual:  
-  - Review each week’s tasks and statuses.  
-  - Adjust upcoming weeks based on new information.  
-  - **Close the loop with a session log** capturing decisions, risks, and next steps, and link back to this schedule.
+---
 
-By keeping this document current, you give both humans and AI agents a clear, shared picture of where the project stands and what needs to happen next.
+**Next Steps:**
+1. Complete Phase 6.2 (template testing guide)
+2. Run final validation
+3. Update CONTEXT.md with completed status
+4. Create session log documenting all improvements
+
+---
+
+*This document replaces the generic project schedule with actual template maintenance work completed in Feb 2026.*

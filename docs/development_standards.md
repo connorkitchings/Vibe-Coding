@@ -58,7 +58,7 @@ workflows into a single reference.
 
 ### Python Standards
 
-- **Version:** Python 3.11+
+- **Version:** Python 3.10+
 - **Formatting:** Use `ruff` for linting, formatting, and import sorting
 - **Type Hints:** All function signatures must include type hints
 - **Docstrings:** Use Google-style docstrings for all public modules, classes, and functions

@@ -313,7 +313,7 @@ def end(
     filename = f"{seq} - {title}.md"
     filepath = date_dir / filename
 
-    # 4. Generate Content
+    # 4. Generate Content (using template format)
     if changes:
         files_list = "\n".join([f"- `{c.split()[-1]}` - Modified" for c in changes])
     else:
@@ -321,25 +321,60 @@ def end(
 
     content = f"""# Session Log — {date_str} ({seq} - {title})
 
-## TL;DR
+> **File naming:** `session_logs/MM-DD-YYYY/N - Title.md`
+
+---
+
+## TL;DR (≤5 lines)
 - **Goal**: {goal}
 - **Accomplished**: {accomplished}
 - **Blockers**: {blockers}
 - **Next**: {next_steps}
+- **Branch**: [Feature branch name]
+
+**Tags**: []
+
+---
+
+## Context
+- **Started**: {today.strftime("%H:%M")}
+- **Ended**: {today.strftime("%H:%M")}
+- **Duration**: ~X hours
+- **User Request**: [Original user request]
+- **AI Tool**: [Claude Code / Gemini CLI / Codex / Antigravity]
 
 ## Work Completed
 
 ### Files Modified
 {files_list}
 
-### Commands Run
-(Auto-generated placeholder)
+### Tests Added/Modified
+- [Add test changes here]
 
-## Blockers
-{blockers}
+### Commands Run
+```bash
+# Commands executed during session
+```
+
+## Decisions Made
+- [Key decision 1 and rationale]
+- [Key decision 2 and rationale]
+
+## Issues Encountered
+{blockers if blockers != "None" else "- No issues encountered"}
 
 ## Next Steps
 {next_steps}
+
+## Handoff Notes
+- **For next session**: [Context needed]
+- **Open questions**: [Unresolved questions]
+- **Dependencies**: [Waiting on what?]
+
+---
+
+**Session Owner**: [AI tool / User name]
+**Related**: [PR #123] [Issue #456] [Schedule Task]
 """
 
     filepath.write_text(content)
@@ -373,6 +408,130 @@ def update(
 
     # Also touch the file to ensure timestamp update if needed
     CONTEXT_FILE.touch()
+
+
+@app.command()
+def suggest():
+    """
+    Generate a commit message suggestion based on the latest session log.
+    """
+    console.print(Panel.fit("Vibe-Sync: Commit Message Suggestion", style="bold blue"))
+
+    # Find the latest session log
+    log_files = []
+    for date_dir in SESSION_LOGS_DIR.iterdir():
+        if date_dir.is_dir() and date_dir.name != "TEMPLATE.md":
+            for log_file in date_dir.glob("*.md"):
+                log_files.append((log_file.stat().st_mtime, log_file))
+
+    if not log_files:
+        console.print(
+            "[yellow]No session logs found.[/yellow] "
+            "Run 'vibe_sync end' first to create a session log."
+        )
+        raise typer.Exit(1)
+
+    # Get most recent log
+    log_files.sort(reverse=True)
+    latest_log = log_files[0][1]
+
+    try:
+        content = latest_log.read_text()
+    except Exception as e:
+        console.print(f"[red]Error reading session log:[/red] {e}")
+        raise typer.Exit(1)
+
+    # Extract information from session log
+    title = "Update"
+    goal = ""
+    accomplished = ""
+    commit_type = "chore"
+
+    # Parse title from first line
+    first_line = content.split("\n")[0]
+    if " - " in first_line:
+        title = first_line.split(" - ", 1)[1].replace(")", "").strip()
+
+    # Parse goal and accomplished from TL;DR section
+    in_tldr = False
+    for line in content.split("\n"):
+        if "## TL;DR" in line:
+            in_tldr = True
+            continue
+        if in_tldr and line.startswith("## "):
+            break
+        if in_tldr:
+            if line.startswith("- **Goal**:"):
+                goal = line.split(":", 1)[1].strip()
+            elif line.startswith("- **Accomplished**:"):
+                accomplished = line.split(":", 1)[1].strip()
+
+    # Determine commit type based on content
+    title_lower = title.lower()
+    if any(word in title_lower for word in ["fix", "bug", "issue", "resolve"]):
+        commit_type = "fix"
+    elif any(word in title_lower for word in ["add", "create", "implement", "feature"]):
+        commit_type = "feat"
+    elif any(word in title_lower for word in ["doc", "readme", "guide"]):
+        commit_type = "docs"
+    elif any(word in title_lower for word in ["test", "testing"]):
+        commit_type = "test"
+    elif any(word in title_lower for word in ["refactor", "clean", "restructure"]):
+        commit_type = "refactor"
+
+    # Get git status
+    try:
+        result = subprocess.run(
+            ["git", "status", "--porcelain"],
+            capture_output=True,
+            text=True,
+            cwd=PROJECT_ROOT,
+        )
+        git_status = result.stdout.strip()
+    except Exception:
+        git_status = ""
+
+    # Format the suggestion
+    commit_message = f"{commit_type}: {title.lower()}"
+
+    # Add body if we have goal/accomplished
+    body_parts = []
+    if goal and goal != "[What was the intended outcome]":
+        body_parts.append(f"Goal: {goal}")
+    if accomplished and accomplished != "[What was completed]":
+        body_parts.append(f"Accomplished: {accomplished}")
+
+    body = "\n".join(body_parts) if body_parts else ""
+
+    # Display suggestion
+    console.print("\n[bold]Suggested Commit Message:[/bold]\n")
+    console.print(f"[green]{commit_message}[/green]")
+    if body:
+        console.print(f"\n{body}")
+
+    # Show changed files
+    if git_status:
+        console.print("\n[bold]Changed Files:[/bold]")
+        for line in git_status.split("\n")[:10]:  # Show first 10
+            if line:
+                status = line[:2]
+                filename = line[3:]
+                console.print(f"  [{status.strip()}] {filename}")
+
+        num_files = len(git_status.split("\n"))
+        if num_files > 10:
+            console.print(f"  ... and {num_files - 10} more files")
+
+    console.print(
+        f"\n[dim]Based on session log:[/dim] {latest_log.relative_to(PROJECT_ROOT)}"
+    )
+    console.print("\n[bold]Suggested commands:[/bold]")
+    console.print("  git add <files>")
+    console.print(f'  git commit -m "{commit_message}"')
+    if body:
+        # Escape quotes for shell
+        escaped_body = body.replace('"', '\\"')
+        console.print(f'  git commit -m "{commit_message}" -m "{escaped_body}"')
 
 
 if __name__ == "__main__":

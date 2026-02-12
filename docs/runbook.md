@@ -23,7 +23,7 @@ This runbook documents how to operate and troubleshoot the **Vibe Coding Data Sc
 - `uv sync` exits with resolution errors or missing interpreter messages.
 
 **Troubleshooting Steps:**
-1. Verify Python 3.11 is installed: `python3 --version`.
+1. Verify Python 3.10+ is installed: `python3 --version`.
 2. Clear the `.venv` (if created) and rerun `uv sync`.
 3. On macOS/Linux, ensure `uv` binary is on the PATH (`which uv`).
 

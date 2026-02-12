@@ -258,7 +258,8 @@ cat docs/<file>.md | grep -E "\[.*\]\(.*\)"
 
 1. **Always run health check before committing**
    ```bash
-   sh .agent/workflows/health-check.sh
+   # Health check workflow
+# See .agent/workflows/health-check.md for steps
    ```
 
 2. **Create session logs consistently**
@@ -280,6 +281,262 @@ cat docs/<file>.md | grep -E "\[.*\]\(.*\)"
    - Check branch before starting: `git branch`
    - Never work directly on `main`
    - Create descriptive feature branch names
+
+---
+
+## Setup Issues
+
+### Problem: setup_project.py fails to update files
+
+**Symptoms:**
+- Script runs but files remain unchanged
+- Permission denied errors
+
+**Solutions:**
+```bash
+# Check file permissions
+ls -la README.md pyproject.toml
+
+# Make files writable
+chmod +w README.md pyproject.toml .agent/CONTEXT.md
+
+# Run setup with verbose output
+python scripts/setup_project.py --verbose
+
+# Manual fallback - edit files directly
+# Template variables are documented in implementation_schedule.md
+```
+
+---
+
+### Problem: Makefile commands not found
+
+**Symptoms:**
+- `make: command not found`
+- `No rule to make target 'test'`
+
+**Solutions:**
+```bash
+# Check if make is installed
+which make
+
+# Install make
+# macOS:
+brew install make
+
+# Ubuntu/Debian:
+sudo apt-get install build-essential
+
+# Alternative: use uv commands directly
+uv run pytest        # instead of make test
+uv run ruff check .  # instead of make lint
+```
+
+---
+
+## Testing Issues
+
+### Problem: Coverage below 75% threshold
+
+**Symptoms:**
+- Tests pass but coverage check fails
+- `Coverage failure: total of 65 is less than fail-under=75`
+
+**Solutions:**
+```bash
+# Check current coverage
+make test
+
+# View HTML report
+open htmlcov/index.html
+
+# Identify uncovered code
+# Look for red lines in HTML report
+
+# Add tests for uncovered code
+# Or adjust target in pyproject.toml:
+[tool.pytest.ini_options]
+addopts = [
+    "--cov-fail-under=70",  # Lower threshold temporarily
+]
+
+# Exclude specific paths from coverage
+[tool.coverage.run]
+omit = [
+    "*/tests/*",
+    "*/experimental/*",
+    "*/legacy/*",
+]
+```
+
+---
+
+### Problem: Integration tests fail
+
+**Symptoms:**
+- `ModuleNotFoundError` for optional dependencies
+- Import errors in test files
+
+**Solutions:**
+```bash
+# Install optional dependencies
+uv sync --extra data-science
+uv sync --extra mlops
+
+# Or run only unit tests
+uv run pytest tests/unit/
+
+# Skip specific test files
+uv run pytest --ignore=tests/integration/
+
+# Check fixtures exist
+ls tests/fixtures/
+
+# Verify test imports work
+uv run python -c "from vibe_coding.config import Config"
+```
+
+---
+
+## Documentation Issues
+
+### Problem: MkDocs build fails
+
+**Symptoms:**
+- `Config value 'plugins': The "mkdocstrings" plugin is not installed`
+- Navigation errors
+- Missing file references
+
+**Solutions:**
+```bash
+# Install docs dependencies
+uv sync --extra docs
+
+# Check mkdocstrings is installed
+uv run pip list | grep mkdocstrings
+
+# Build with verbose output
+uv run mkdocs build --verbose
+
+# Validate YAML syntax
+python -c "import yaml; yaml.safe_load(open('mkdocs.yml'))"
+
+# Check for broken links
+python scripts/validate_template.py
+
+# Check all referenced files exist
+# Look for errors like: "File not found: docs/missing_file.md"
+```
+
+---
+
+### Problem: Template validation shows warnings
+
+**Symptoms:**
+- Yellow ⚠ warnings in validation output
+- "Broken link in docs/..."
+
+**Solutions:**
+```bash
+# Run validation
+python scripts/validate_template.py
+
+# Check which specific files have issues
+# Warnings are often expected for templates:
+# - Placeholder variables are normal (users fill them in)
+# - Some documentation links may be template paths
+
+# Fix broken links if they reference real files
+grep -r "\./docs/missing" docs/
+
+# Update mkdocs.yml navigation if files were moved
+# Remove references to deleted files
+```
+
+---
+
+## VS Code Issues
+
+### Problem: Snippets not appearing
+
+**Symptoms:**
+- Typing prefix doesn't show snippet
+- Snippets don't expand
+
+**Solutions:**
+```bash
+# Verify snippets file exists
+ls .vscode/vibe-coding.code-snippets
+
+# Check JSON syntax
+python -c "import json; json.load(open('.vscode/vibe-coding.code-snippets'))"
+
+# Reload VS Code window
+# Command Palette → "Developer: Reload Window"
+
+# Check VS Code settings
+# File → Preferences → Settings
+# Search "snippets" and ensure enabled
+```
+
+---
+
+## Git Integration Issues
+
+### Problem: vibe_sync suggest shows no session logs
+
+**Symptoms:**
+- "No session logs found" error
+- Empty commit message suggestions
+
+**Solutions:**
+```bash
+# Check if session logs exist
+ls session_logs/
+
+# Create a session log first
+uv run python scripts/vibe_sync.py end
+
+# Check log format matches template
+cat session_logs/TEMPLATE.md
+
+# Verify log was created
+ls -la session_logs/$(date +%m-%d-%Y)/
+
+# Run suggest again
+uv run python scripts/vibe_sync.py suggest
+```
+
+---
+
+### Problem: Git operations fail during setup
+
+**Symptoms:**
+- "Failed to initialize git"
+- "Failed to create branch"
+- Permission denied
+
+**Solutions:**
+```bash
+# Check git is installed
+which git
+git --version
+
+# Check if already a git repo
+ls -la .git
+
+# Manual git initialization
+git init
+git checkout -b feat/initial-setup
+
+# Check git config
+git config user.name
+git config user.email
+
+# Set if missing
+git config user.name "Your Name"
+git config user.email "your@email.com"
+```
 
 ---
 
