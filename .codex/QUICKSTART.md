@@ -127,6 +127,23 @@ uv sync
 uv pip list --outdated
 ```
 
+### Python Examples
+
+```python
+# Fetch web content as Markdown
+from vibe_coding.utils.markdown_fetcher import fetch_markdown, MarkdownFetcherConfig
+
+# Basic usage
+result = fetch_markdown("https://example.com")
+print(result.content)
+
+# With configuration
+config = MarkdownFetcherConfig(method="ai", retain_images=True, timeout=60)
+result = fetch_markdown("https://example.com", config)
+print(f"Tokens: {result.metadata.token_count}")
+print(f"Method: {result.metadata.method_used}")
+```
+
 ---
 
 ## Troubleshooting

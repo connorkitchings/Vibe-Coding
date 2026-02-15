@@ -4784,6 +4784,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "pyperclip" },
+    { name = "requests" },
     { name = "rich" },
     { name = "typer" },
 ]
@@ -4831,6 +4832,7 @@ requires-dist = [
     { name = "pyperclip", specifier = ">=1.8.2" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0.0" },
+    { name = "requests", specifier = ">=2.31.0" },
     { name = "rich", specifier = ">=13.0.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.5.0" },
     { name = "safety", marker = "extra == 'security'", specifier = ">=2.3.5" },

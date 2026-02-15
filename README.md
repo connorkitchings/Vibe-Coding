@@ -15,6 +15,7 @@ This is a **Vibe Coding template** designed for "medium sophistication" AI-assis
 - ✅ **Quality gates** — Pre-commit checks, linting, testing, and health checks
 - ✅ **Development standards** — Coding guidelines, checklists, and best practices
 - ✅ **Documentation structure** — MkDocs-ready documentation with templates
+- ✅ **Markdown fetcher** — Convert web URLs to clean Markdown (80% token reduction)
 - ✅ **Working defaults** — Everything works out of the box
 
 **Philosophy**: Practical patterns proven in real-world projects (cfb_model, PanicStats, JamBandNerd).

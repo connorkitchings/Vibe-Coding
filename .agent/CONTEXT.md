@@ -7,8 +7,8 @@
 ## Project Snapshot
 
 **Vibe Coding Template**: Multi-tool AI-assisted development template
-**Stack**: Python 3.10+ · UV · Ruff · Pytest · MkDocs
-**Status**: 🟢 Template Ready (2026-02-11)
+**Stack**: Python 3.10+ · UV · Ruff · Pytest · MkDocs · Requests
+**Status**: 🟢 Template Ready (2026-02-15)
 
 ### Current State
 
@@ -20,6 +20,7 @@
 - **Previous**: MADE system removed, lean multi-tool template created
 
 ## Recent Activity
+- Added markdown.new URL-to-Markdown integration (Feb 2026).
 - Implemented comprehensive template improvements (Feb 2026).
 - Completed all 15 improvement opportunities across 6 phases.
 - Added GitHub Actions CI workflows, validation scripts, and enhanced documentation.
@@ -35,6 +36,7 @@
 - Development standards
 - Testing framework
 - Documentation structure
+- Markdown fetcher utility (web content → clean Markdown)
 
 ---
 
@@ -102,6 +104,7 @@ uv run scripts/vibe_sync.py end
 | Current priorities | `docs/implementation_schedule.md` |
 | Development standards | `docs/development_standards.md` |
 | Architecture decisions | `docs/architecture/adr/` |
+| Markdown fetcher | `docs/tools/markdown_fetcher.md` |
 | Session logs | `session_logs/` (read last 3-5) |
 
 ---
