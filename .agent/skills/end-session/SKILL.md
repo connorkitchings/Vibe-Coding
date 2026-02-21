@@ -96,7 +96,44 @@ uv run ruff format .
 **User**: [User name if applicable]
 ```
 
-### 2. Run Health Checks
+### 2. Capture Lessons Learned
+
+**If the user corrected you during this session**, capture the lesson:
+
+1. Open `.agent/tasks/lessons.md`
+2. Add a new entry with:
+   - Date
+   - What went wrong (mistake)
+   - Root cause
+   - Rule to prevent recurrence
+
+This is part of the **Self-Improve** principle. The goal is to make each mistake only once.
+
+**If no corrections occurred**, skip this step.
+
+See `.agent/tasks/lessons.md` for the template.
+
+### 3. (Optional) Prepare Session for Handoff
+
+If you may continue in a different AI tool, optionally prepare for handoff:
+
+**With cli-continues:**
+```bash
+# List sessions to verify discovery
+continues list
+# Note: Session will be automatically discoverable
+```
+
+**Without cli-continues:**
+Document context manually in session log:
+- Current work state
+- Files being modified
+- Recent decisions
+- Open questions
+
+See `.agent/workflows/session-handoff.md` for detailed workflow.
+
+### 4. Run Health Checks
 
 Execute the health check workflow:
 
@@ -110,7 +147,7 @@ Follow steps in .agent/workflows/health-check.md
 - Fix issues or note them for next session
 - DO NOT commit broken code
 
-### 3. Update Implementation Schedule
+### 5. Update Implementation Schedule
 
 If tasks were completed:
 - Open `docs/implementation_schedule.md`
@@ -118,7 +155,7 @@ If tasks were completed:
 - Add new tasks if discovered
 - Note any timeline impacts
 
-### 4. Prepare Commit
+### 6. Prepare Commit
 
 **DO NOT commit directly.** Propose a commit message for user review:
 
@@ -143,7 +180,7 @@ Refs: session_logs/YYYY-MM-DD/NN.md
 - `chore:` Maintenance tasks
 - `perf:` Performance improvements
 
-### 5. Document Handoff
+### 7. Document Handoff
 
 Create handoff documentation for the next session:
 
@@ -163,6 +200,8 @@ Create handoff documentation for the next session:
 
 Before ending session, confirm:
 - [ ] Session log created in `session_logs/`
+- [ ] Lessons captured (if user corrected you during session)
+- [ ] (Optional) Session prepared for handoff with cli-continues
 - [ ] Health check passed (or failures documented)
 - [ ] Implementation schedule updated if tasks completed
 - [ ] Commit message proposed (not executed)
@@ -232,11 +271,16 @@ Document these for the next session:
 ## Links
 
 - Context: `.agent/CONTEXT.md`
+- Principles: `.agent/PRINCIPLES.md`
 - Skills catalog: `.agent/skills/CATALOG.md`
 - Agent guidance: `.agent/AGENTS.md`
 - Implementation schedule: `docs/implementation_schedule.md`
+- Lessons learned: `.agent/tasks/lessons.md`
+- Workflow orchestration: `.agent/workflows/workflow-orchestration.md`
 - Start session: `.agent/skills/start-session/SKILL.md`
 - Health check: `.agent/workflows/health-check.md`
+- Session handoff: `.agent/workflows/session-handoff.md`
+- cli-continues docs: `docs/tools/cli-continues.md`
 
 ---
 

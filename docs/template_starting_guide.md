@@ -48,6 +48,17 @@ Answer before coding:
 - `docs/runbook.md` — Record environment setup, monitoring entry points, and escalation contacts.
 - `docs/security.md` (if applicable) — Document initial secrets handling strategy or required approvals.
 
+### (Optional) Node.js & Session Handoff Tools
+
+If you want cross-tool session handoff with cli-continues:
+
+- **Install Node.js 22+**: https://nodejs.org/ (or use nvm)
+- **Optional install**: `npm install -g continues` (or use `npx continues`)
+- **Documentation**: `docs/tools/cli-continues.md`
+- **Workflow**: `.agent/workflows/session-handoff.md`
+
+This is completely optional — the template works fully without Node.js. cli-continues enables seamless context transfer between Claude, Copilot, Gemini, Codex, OpenCode, Factory Droid, and Cursor.
+
 ---
 
 ## 4. Customize Data & Modeling Stubs

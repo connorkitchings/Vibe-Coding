@@ -105,6 +105,7 @@ uv run scripts/vibe_sync.py end
 | Development standards | `docs/development_standards.md` |
 | Architecture decisions | `docs/architecture/adr/` |
 | Markdown fetcher | `docs/tools/markdown_fetcher.md` |
+| Session handoff (optional) | `docs/tools/cli-continues.md` |
 | Session logs | `session_logs/` (read last 3-5) |
 
 ---

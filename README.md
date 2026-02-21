@@ -12,6 +12,7 @@ This is a **Vibe Coding template** designed for "medium sophistication" AI-assis
 
 - ✅ **Multi-tool AI guidance** — Works with Claude Code, Gemini CLI, Codex CLI, and Antigravity
 - ✅ **Session management** — Structured workflows for starting, working, and closing sessions
+- ✅ **Cross-tool handoff** — Optional cli-continues integration for seamless context transfer
 - ✅ **Quality gates** — Pre-commit checks, linting, testing, and health checks
 - ✅ **Development standards** — Coding guidelines, checklists, and best practices
 - ✅ **Documentation structure** — MkDocs-ready documentation with templates
@@ -191,11 +192,17 @@ This template works with all major AI coding tools:
 - Entry: `AGENTS.md`
 - Map: `.codex/MAP.md`
 
+### Session Handoff (cli-continues)
+- Docs: `docs/tools/cli-continues.md`
+- Workflow: `.agent/workflows/session-handoff.md`
+- Optional Node.js 22+ tool for cross-tool session transfer
+
 **All tools share:**
 - Same session logging format
 - Same quality gates
 - Same essential commands
 - Same guardrails
+- Optional cli-continues for context handoff
 
 ---
 

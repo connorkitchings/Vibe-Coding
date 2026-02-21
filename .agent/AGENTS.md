@@ -2,6 +2,8 @@
 
 > **Purpose:** Define AI agent roles, handoff patterns, and operating rules for AI-assisted development.
 
+> **Core Principles**: See `.agent/PRINCIPLES.md` for the 11 operating principles that guide every session.
+
 ---
 
 ## Agent Roster and Mandates
@@ -109,6 +111,27 @@ uv run python scripts/ingest_data.py
 
 ---
 
+## Subagent Strategy
+
+Use subagents to keep the main context window clean and focused.
+
+**When to use subagents:**
+- Research tasks that require deep diving into docs or code
+- Exploration of unfamiliar areas
+- Parallel analysis of multiple options
+- Complex problems that benefit from focused, dedicated attention
+
+**Best practices:**
+- One task per subagent for focused execution
+- Give clear, specific instructions to the subagent
+- Review subagent results carefully before incorporating
+- For complex problems, throw more compute at it via subagents
+
+**Key Files**:
+- `.agent/workflows/workflow-orchestration.md` - Task management patterns
+
+---
+
 ## Handoff Packet Template (Navigator → Specialist)
 
 When routing a task, Navigator provides:
@@ -157,11 +180,19 @@ Keep context minimal when routing tasks:
 
 ## Core Principles
 
-- **Route clearly, ship small**: Focused PRs linked to schedule tasks
-- **Minimize context**: Link to docs instead of pasting large excerpts
-- **Test-driven**: Every feature needs tests; every bug needs regression test
-- **Reversible changes**: Prefer operations that can be rolled back
-- **Audited actions**: Log important operations
+The full set of 11 operating principles are documented in `.agent/PRINCIPLES.md`, including:
+
+- **Plan First** — Plan mode for non-trivial tasks
+- **Ship Small, Stay Simple** — Minimal, focused changes
+- **Test-Driven** — Every feature needs tests
+- **Minimal & Reversible** — Touch only what's necessary
+- **No Lazy Fixes** — Find root causes
+- **Elegant When Non-Trivial** — Consider better solutions
+- **Verify Before Done** — Prove it works
+- **Self-Improve** — Capture lessons from corrections
+- **Autonomous Bug Fixing** — Just fix it
+- **Subagent Strategy** — Keep context clean
+- **Audited Actions** — Log important operations
 
 ---
 
@@ -246,6 +277,8 @@ For detailed checklists, see `.agent/skills/CATALOG.md`:
 **Primary Guides**:
 
 - `.agent/CONTEXT.md` - Entry point: project snapshot, current status, critical rules
+- `.agent/PRINCIPLES.md` - Core operating principles (11 rules for every session)
+- `.agent/tasks/lessons.md` - Self-improvement: capture lessons from corrections
 - `CONTRIBUTING.md` - Start here for workflow
 - `docs/project_charter.md` - Project goals and scope
 - `docs/implementation_schedule.md` - Current priorities
@@ -260,6 +293,7 @@ For detailed checklists, see `.agent/skills/CATALOG.md`:
 
 - `.agent/skills/start-session/SKILL.md` - Session kickoff workflow
 - `.agent/skills/end-session/SKILL.md` - Session closing workflow
+- `.agent/workflows/workflow-orchestration.md` - Task management patterns
 - `docs/development_standards.md` - Code quality standards
 
 ---
