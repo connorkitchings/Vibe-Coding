@@ -23,3 +23,59 @@ This playbook maintains the evolving knowledge, strategic constraints, and execu
 - **Workflow Automation**: Use `uv run scripts/vibe_sync.py start|end` to correctly manage session context and logs.
 - **Incremental Validation**: Run `make validate` locally before triggering CI/CD workflows to prevent noisy pipeline failures.
 - **Human-AI Collaboration Loop**: Prompt → Generate → Review → Feedback → Iterate. Human remains the final arbiter at every phase.
+- **Specialized Review Agents**: Use the 10 specialized review agents for thorough, focused reviews on specific aspects of code, architecture, or process.
+
+## [REVIEW AGENTS]
+
+### Agent Roster (Priority Order)
+
+| # | Agent | Purpose | Trigger |
+|---|-------|---------|---------|
+| 1 | Planning Orchestrator | Scope, requirements, test queries | Start of any new task |
+| 2 | Architecture Reviewer | Design patterns, SOLID, scalability | After planning, before code |
+| 3 | Security Reviewer | Secrets, auth, injection, exposure | Before commits with security impact |
+| 4 | Over-Engineering Detector | Complexity, unnecessary abstraction | During code review |
+| 5 | Edge Case Challenger | Breaking scenarios, failure modes | After architecture design |
+| 6 | Data Quality Reviewer | Data integrity, validation, consistency | Data-related changes |
+| 7 | Testing Reviewer | Coverage, test quality, edge cases | Before any PR |
+| 8 | Performance Reviewer | Bottlenecks, scaling, latency | Before release |
+| 9 | Modularity Reviewer | Separation of concerns, coupling | Code organization concerns |
+| 10 | Abstraction Reviewer | Interface design, encapsulation | Interface design changes |
+
+### How to Invoke a Review Agent
+
+1. **Select the appropriate agent** from the roster above
+2. **Copy the prompt** from `.agent/VIBE_CRITIQUE_PROMPTS.md`
+3. **Fill in the context** with your specific situation
+4. **Submit to AI** for review
+5. **Save output** to `.agent/reviews/YYYY-MM-DD/N - [Agent] Review.md`
+
+### When to Run Reviews
+
+**Always run:**
+- Planning Orchestrator: New features/projects
+- Architecture Reviewer: Significant design decisions
+- Security Reviewer: Before production deployment
+
+**Run as needed:**
+- Edge Case Challenger: After architecture design
+- Over-Engineering Detector: Code that feels complex
+- Testing Reviewer: Before PR if coverage concerns
+- Performance Reviewer: Before release
+- Modularity/Abstraction Reviewers: Refactoring work
+
+### Review Output Location
+
+All review outputs go to:
+```
+.agent/reviews/YYYY-MM-DD/N - [Agent Name] Review.md
+```
+
+See `.agent/reviews/TEMPLATE.md` for output format.
+
+### Review Status Indicators
+
+- ✅ Pass: No issues found
+- ⚠️ Warn: Minor issues, consider fixing
+- ❌ Fail: Blocking issues, must fix
+- ℹ️ Info: Informational, no action required

@@ -129,12 +129,63 @@ During implementation:
 
 ---
 
+## Specialized Review Agents
+
+The repo includes 10 specialized review agents to provide focused expertise on specific aspects of your project.
+
+### Agent Priorities
+
+| Priority | Agent | When to Use |
+|----------|-------|-------------|
+| 1 | **Planning Orchestrator** | Start of any new feature or project |
+| 2 | **Architecture Reviewer** | After planning, before implementation |
+| 3 | **Security Reviewer** | Before commits with security impact |
+| 4 | **Over-Engineering Detector** | When code feels too complex |
+| 5 | **Edge Case Challenger** | After architecture design |
+| 6 | **Data Quality Reviewer** | Data-related changes |
+| 7 | **Testing Reviewer** | Before PRs |
+| 8 | **Performance Reviewer** | Before release |
+| 9 | **Modularity Reviewer** | Code organization concerns |
+| 10 | **Abstraction Reviewer** | Interface design changes |
+
+### How to Use
+
+1. Select the agent from `.agent/VIBE_CRITIQUE_PROMPTS.md`
+2. Fill in your context
+3. Submit to AI
+4. Save output to `.agent/reviews/`
+
+### Quick Invocation Examples
+
+```
+# Planning
+@agent Plan a new user dashboard feature
+
+# Security check
+@agent Review src/api/auth.py for security issues
+
+# Architecture
+@agent Review the proposed RAG architecture
+```
+
+### Review Flow Example
+
+```
+Task → Planning Orchestrator → Architecture Reviewer 
+     → Edge Case Challenger → Over-Engineering Detector 
+     → Implementation → Testing Reviewer → Security Reviewer
+```
+
+---
+
 ## Links
 
 - Principles: `.agent/PRINCIPLES.md`
 - Playbook: `.agent/PLAYBOOK.md`
 - Lessons: `.agent/tasks/lessons.md`
 - Start session: `.agent/skills/start-session/SKILL.md`
+- Critique Prompts: `.agent/VIBE_CRITIQUE_PROMPTS.md`
+- Review Template: `.agent/reviews/TEMPLATE.md`
 
 ---
 
