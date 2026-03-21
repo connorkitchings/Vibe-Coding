@@ -8,6 +8,10 @@ This playbook maintains the evolving knowledge, strategic constraints, and execu
 3. **Mandatory Health Checks**: Code must pass `uv run ruff check .` and `uv run pytest` before any commit.
 4. **Secret Zero**: Never hardcode credentials. Always utilize environment variables.
 5. **Test Coverage Policy**: Every new feature requires tests. Every bug fix requires a regression test.
+6. **Test Queries First**: Define representative test queries before coding to bound scope and clarify requirements.
+7. **Architecture Before Code**: Always produce an architecture document first, even if you have a solution in mind. Use it to challenge and refine the AI's design.
+8. **Challenge Over-Engineering**: Question every complexity addition. Simplicity is a strategic choice, not a limitation.
+9. **Human Validates Before Implementation**: Explicit human checkpoint before proceeding to code generation.
 
 ## [STRATEGIES]
 1. **Template Adaptation & Initialization**: When setting up a new project from this template, first execute setup scripts, adapt the Context Router (`.agent/CONTEXT.md`), and selectively prune boilerplate code (e.g., in `notebooks/` and `models/`).
@@ -18,3 +22,4 @@ This playbook maintains the evolving knowledge, strategic constraints, and execu
 - **Markdown Ingestion**: Leverage the integrated `markdown.new` URL-to-Markdown utility for fetching clean documentation over raw web scraping.
 - **Workflow Automation**: Use `uv run scripts/vibe_sync.py start|end` to correctly manage session context and logs.
 - **Incremental Validation**: Run `make validate` locally before triggering CI/CD workflows to prevent noisy pipeline failures.
+- **Human-AI Collaboration Loop**: Prompt → Generate → Review → Feedback → Iterate. Human remains the final arbiter at every phase.
